@@ -1,6 +1,6 @@
 package org.example.controller;
 
-import javafx.application.Application;
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,25 +8,28 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class HomePageFormController{
     public static Stage primaryStage;
+    public JFXButton btnCreateaccount;
+    public JFXButton btnLogin;
+
     public void createButtonAction(ActionEvent actionEvent) {
 
     }
 
-    public void loginButtonOnAction(ActionEvent actionEvent)  {
+    public void loginButtonOnAction(ActionEvent actionEvent) throws IOException {
         try{
             primaryStage.close();
-            Parent fxmlLoader = new FXMLLoader(getClass().getResource("../../../../resources/view/login_page_form.fxml")).load();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/loginPageForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
             Stage stage = new Stage();
-            stage.setScene(new Scene(fxmlLoader));
+            stage.setScene(new Scene(parent));
             stage.show();
             LoginPageController.primaryStage = stage;
-        }catch (IOException e){
-            System.out.println("JJJJ");
-            throw new RuntimeException(e);
-        }
+        }catch (IOException e){}
     }
 
 }

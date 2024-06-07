@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="792.0" stylesheets="@../asset/loginpage.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="org.example.controller.LoginPageController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="466.0" prefWidth="792.0" stylesheets="@../asset/loginpage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginPageController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.2000244140625" minWidth="10.0" prefWidth="237.39998779296874" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.2000244140625" minWidth="10.0" prefWidth="111.80001220703124" />
@@ -42,7 +42,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <JFXButton prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #0B60B0;" text="🏠 Main Menu" textFill="#f2eeee" GridPane.valignment="TOP">
+      <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #0B60B0;" text="🏠 Main Menu" textFill="#f2eeee" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -52,21 +52,21 @@
       </JFXButton>
       <AnchorPane prefHeight="203.0" prefWidth="445.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
          <children>
-            <JFXTextField layoutX="57.0" layoutY="14.0" prefHeight="29.0" prefWidth="313.0" promptText="Email address" />
-            <JFXPasswordField layoutX="57.0" layoutY="67.0" prefHeight="18.0" prefWidth="314.0" promptText="password" />
-            <JFXButton layoutX="57.0" layoutY="108.0" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #79ADFA;" text="Forget password" textFill="#f2eeee">
+            <JFXTextField fx:id="txtEmailAddress" layoutX="57.0" layoutY="14.0" prefHeight="29.0" prefWidth="313.0" promptText="Email address" />
+            <JFXPasswordField fx:id="txtPasssword" layoutX="57.0" layoutY="67.0" prefHeight="18.0" prefWidth="314.0" promptText="password" />
+            <JFXButton layoutX="57.0" layoutY="108.0" onAction="#btnForgetpwOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #79ADFA;" text="Forget password" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="57.0" layoutY="175.0" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #13B023;" text="📲   Log In" textFill="#f2eeee">
+            <JFXButton layoutX="57.0" layoutY="175.0" onAction="#btnLogInOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #13B023;" text="📲   Log In" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #21A45D;" text="➕  Create new account" textFill="#f2eeee" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+      <JFXButton onAction="#btnCreateNewAccountOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #21A45D;" text="➕  Create new account" textFill="#f2eeee" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="CENTER">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

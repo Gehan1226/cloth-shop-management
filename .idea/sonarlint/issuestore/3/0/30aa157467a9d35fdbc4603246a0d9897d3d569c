@@ -1,15 +1,16 @@
 
-	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8º¾è‹ÿ1J$95d57873-53c2-437a-baa2-9be8b1e0e937
  
-java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8®Ïì‹ÿ1J$864f5dea-451b-4dc0-a03e-00820e2ce732
+java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8Ó±Å–ÿ1J$dca9d19d-c433-4f58-8110-7adb3a86dca9
+¤
+java:S1104"\Make btnCreateaccount a static final constant or non-public and provide accessors if needed.(†¬şŞûÿÿÿÿ8Ô±Å–ÿ1J$a6ce1a53-9a69-4384-8a08-55a8f760b3cd
+—
+java:S1104"TMake btnLogin a static final constant or non-public and provide accessors if needed.(Ş˜ÕÓ8Ô±Å–ÿ1J$9cff9b4d-6568-4afa-ab97-b00496e2ecd8
 z
-java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8¯Ïì‹ÿ1J$a3298422-5962-4916-835c-3f5d017a4797
+java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8Ô±Å–ÿ1J$6165d655-a3cf-43db-9d22-47208bda71d5
 Ä
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï­„8 üÉ‰ÿ1J$8183c46f-4bee-42dc-aa50-3ee2bda92210
-z
-java:S1172"2Remove this unused method parameter "actionEvent".(Œ´Ø¹ûÿÿÿÿ8Ì¾è‹ÿ1J$370fe09f-706f-4371-8548-05104c302812
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï­„8Û±Å–ÿ1J$666bd5cd-2f75-475d-9663-1eaafb5b6218
+u
+java:S1172"2Remove this unused method parameter "actionEvent".(½íŸˆ8à±Å–ÿ1J$87d6400f-d37e-4ed0-b66e-5621ee38cc44
 y
-java:S2696"6Make the enclosing method "static" or remove this set.(¢­Èİ8şÃó‹ÿ1J$66189573-30cf-4a22-ad5e-8680124a787d
-l	java:S106"+Replace this use of System.out by a logger.(çè‘8®–Œÿ1J$54ca4440-5bf6-48de-b89d-248753c6fee9
-}
-java:S1128";Remove this unused import 'javafx.application.Application'.(í™şj8ÿÃó‹ÿ1J$927c814a-5af3-471f-bb32-22030bf4d1c0
+java:S2696"6Make the enclosing method "static" or remove this set.(¢­Èİ8Ğ’œÿ1J$e93e2316-f8d0-4197-8fc3-ad02bdac0d8e
+j	java:S108 ")Either remove or fill this block of code.(Éò§+8Ğ’œÿ1J$a222018b-bc44-4f40-91cc-266560f9a2e7
