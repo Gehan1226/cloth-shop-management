@@ -1,0 +1,7 @@
+
+ 
+java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8Ù‚í‹ÿ1J$49323c6f-7c54-4df9-9542-1dc6fd383039
+z
+java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8Û‚í‹ÿ1J$3825fe3c-037e-45d4-bce0-566bfe14bf4f
+‚
+java:S1118":Add a private constructor to hide the implicit public one.(ÏÙç«ýÿÿÿÿ8ß‚í‹ÿ1J$ce480dd3-7640-4599-9a54-4c3d43377c73

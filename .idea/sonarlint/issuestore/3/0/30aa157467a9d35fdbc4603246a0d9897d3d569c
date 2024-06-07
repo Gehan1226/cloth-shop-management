@@ -1,0 +1,15 @@
+
+	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8º¾è‹ÿ1J$95d57873-53c2-437a-baa2-9be8b1e0e937
+ 
+java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8®Ïì‹ÿ1J$864f5dea-451b-4dc0-a03e-00820e2ce732
+z
+java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8¯Ïì‹ÿ1J$a3298422-5962-4916-835c-3f5d017a4797
+Ä
+java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï­„8 üÉ‰ÿ1J$8183c46f-4bee-42dc-aa50-3ee2bda92210
+z
+java:S1172"2Remove this unused method parameter "actionEvent".(Œ´Ø¹ûÿÿÿÿ8Ì¾è‹ÿ1J$370fe09f-706f-4371-8548-05104c302812
+y
+java:S2696"6Make the enclosing method "static" or remove this set.(¢­Èİ8şÃó‹ÿ1J$66189573-30cf-4a22-ad5e-8680124a787d
+l	java:S106"+Replace this use of System.out by a logger.(çè‘8®–Œÿ1J$54ca4440-5bf6-48de-b89d-248753c6fee9
+}
+java:S1128";Remove this unused import 'javafx.application.Application'.(í™şj8ÿÃó‹ÿ1J$927c814a-5af3-471f-bb32-22030bf4d1c0
