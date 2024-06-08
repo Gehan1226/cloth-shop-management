@@ -11,3 +11,7 @@ W
 'src/main/java/org/example/dto/User.java,6\0\601197a5b4099754ee1f3d98bf124746b74b1b11
 [
 +src/main/java/org/example/dto/Employee.java,0\3\033334ef902df51640e4aae76eb5ad4c539df9a6
+`
+0src/main/java/org/example/entity/UserEntity.java,0\9\09e5e049b79ee66b951c0fb13d9b90f260ced08d
+d
+4src/main/java/org/example/entity/EmployeeEntity.java,9\1\91c4badf1f181705b4b310a3efde23b1893065a6
