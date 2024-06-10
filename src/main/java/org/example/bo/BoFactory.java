@@ -1,5 +1,6 @@
 package org.example.bo;
 
+import org.example.bo.custom.impl.UserBoImpl;
 import org.example.util.BoType;
 
 public class BoFactory {
@@ -12,7 +13,7 @@ public class BoFactory {
     public <T extends SuperBo>T getBo(BoType type){
         switch (type){
             case EMPLOYEE:return null;
-            case USER:return null;
+            case USER:return (T) new UserBoImpl();
         }
         return null;
     }

@@ -5,8 +5,6 @@ G
 src/main/java/Main.java,e\4\e44a8606ce010ad9b89aafdfcee2ab49afbf6d10
 p
 @src/main/java/org/example/controller/HomePageFormController.java,3\0\30aa157467a9d35fdbc4603246a0d9897d3d569c
-m
-=src/main/java/org/example/controller/LoginPageController.java,4\b\4b78b5c05cb27a8d7b0a44e225c721b55fb827b1
 W
 'src/main/java/org/example/dto/User.java,6\0\601197a5b4099754ee1f3d98bf124746b74b1b11
 [
@@ -37,3 +35,9 @@ Z
 *src/main/java/org/example/dao/CrudDao.java,0\c\0c86038feff71bb82d6abd646990279c42e74fa1
 a
 1src/main/java/org/example/util/HibernateUtil.java,d\2\d220e415002e683af285f12a089f3139d7e179cb
+[
++src/main/java/org/example/util/DaoType.java,2\f\2f7a41117e65e8a1f3172fb69c1040156c2061ee
+q
+Asrc/main/java/org/example/controller/LoginPageFormController.java,d\a\da17e82c6ccbbbf291dd85622e668eb038d32806
+u
+Esrc/main/java/org/example/controller/CreateAccountFormController.java,9\7\9790c1f51d42e132fb0ed5b91bad66279498db47

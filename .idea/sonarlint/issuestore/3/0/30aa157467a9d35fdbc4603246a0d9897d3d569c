@@ -1,16 +1,19 @@
 
  
-java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8Ó±Å–ÿ1J$dca9d19d-c433-4f58-8110-7adb3a86dca9
+java:S1104"XMake primaryStage a static final constant or non-public and provide accessors if needed.(¢Ñû¦ûÿÿÿÿ8Ó±Å–ÿ1J$829e2bf4-ebf8-48a5-8fde-4533642caa82
 ¤
-java:S1104"\Make btnCreateaccount a static final constant or non-public and provide accessors if needed.(†¬şŞûÿÿÿÿ8Ô±Å–ÿ1J$a6ce1a53-9a69-4384-8a08-55a8f760b3cd
+java:S1104"\Make btnCreateaccount a static final constant or non-public and provide accessors if needed.(†¬şŞûÿÿÿÿ8Ô±Å–ÿ1J$3ee4a8a5-e684-4182-b8fb-7adc5daecb66
 —
-java:S1104"TMake btnLogin a static final constant or non-public and provide accessors if needed.(Ş˜ÕÓ8Ô±Å–ÿ1J$9cff9b4d-6568-4afa-ab97-b00496e2ecd8
+java:S1104"TMake btnLogin a static final constant or non-public and provide accessors if needed.(Ş˜ÕÓ8Ô±Å–ÿ1J$981f6ea0-77a7-4806-9ab7-ef4138747042
 z
-java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8Ô±Å–ÿ1J$6165d655-a3cf-43db-9d22-47208bda71d5
-Ä
-java:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ï­„8Û±Å–ÿ1J$666bd5cd-2f75-475d-9663-1eaafb5b6218
+java:S1444"2Make this "public static primaryStage" field final(¢Ñû¦ûÿÿÿÿ8Ô±Å–ÿ1J$dff0591b-6a7d-4927-b78f-2e757f091161
 u
-java:S1172"2Remove this unused method parameter "actionEvent".(½íŸˆ8à±Å–ÿ1J$87d6400f-d37e-4ed0-b66e-5621ee38cc44
+java:S1172"2Remove this unused method parameter "actionEvent".(ï­„8à±Å–ÿ1J$47d00703-9638-47e4-8b83-76d9f8eaa1b8
 y
-java:S2696"6Make the enclosing method "static" or remove this set.(¢­Èİ8Ğ’œÿ1J$e93e2316-f8d0-4197-8fc3-ad02bdac0d8e
-j	java:S108 ")Either remove or fill this block of code.(Éò§+8Ğ’œÿ1J$a222018b-bc44-4f40-91cc-266560f9a2e7
+java:S2696"6Make the enclosing method "static" or remove this set.(ù’¸İ8ù®«ÿÿ1J$0a8b8ce8-66f0-4b97-8661-8c498849f4e9
+j	java:S108")Either remove or fill this block of code.(Éò§+8Ğ’œÿ1J$5c837456-7709-4f77-9193-933f435a3479
+u
+java:S1172"2Remove this unused method parameter "actionEvent".(½íŸˆ8‚ä¡ÿÿ1J$225e12af-a54c-42d7-9913-ddfd8955ee6a
+y
+java:S2696("6Make the enclosing method "static" or remove this set.(ÇşíÛ8ş®«ÿÿ1J$0789b3dc-6d54-4400-a052-e22635049d72
+j	java:S108)")Either remove or fill this block of code.(Éò§+8…ä¡ÿÿ1J$c70896fa-a768-4e44-b163-c430a4127e2d

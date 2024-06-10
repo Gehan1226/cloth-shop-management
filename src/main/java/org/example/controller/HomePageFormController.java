@@ -16,7 +16,16 @@ public class HomePageFormController{
     public JFXButton btnLogin;
 
     public void createButtonAction(ActionEvent actionEvent) {
-
+        try{
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/createAccountForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            CreateAccountFormController.primaryStage = stage;
+        }catch (IOException e){}
     }
 
     public void loginButtonOnAction(ActionEvent actionEvent) throws IOException {
@@ -28,7 +37,7 @@ public class HomePageFormController{
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-            LoginPageController.primaryStage = stage;
+            LoginPageFormController.primaryStage = stage;
         }catch (IOException e){}
     }
 
