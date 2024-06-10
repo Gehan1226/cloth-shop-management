@@ -4,6 +4,7 @@ import org.example.bo.SuperBo;
 import org.example.dto.User;
 
 public interface UserBo extends SuperBo {
-    boolean saveUser(User dto);
+    String saveUser(User dto) ;
     boolean hasAdmin();
+
 }

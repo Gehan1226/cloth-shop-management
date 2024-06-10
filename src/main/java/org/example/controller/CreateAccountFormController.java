@@ -54,43 +54,15 @@ public class CreateAccountFormController implements Initializable {
     }
 
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
-        if (btnIsAdmin.isSelected()) {
-            if (userBo.hasAdmin()) {
-                new Alert(Alert.AlertType.ERROR, "Admin User already exist!").show();
-                return;
+        if (!txtEmailAddress.getText().isEmpty() && !txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
+            if(txtPassword.getText().equals(txtConfirmPassword.getText())){
+                userBo.saveUser(new User(txtEmailAddress.getText(),txtPassword.getText(),(btnIsAdmin.isSelected())));
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
             }
         }
-        if (employeeBo.isEmployee(txtEmailAddress.getText()) &&  btnIsEmployee.isSelected()) {
-            if (txtPassword.getText().equals(txtConfirmPassword.getText())) {
-                User user = new User(
-                        txtEmailAddress.getText(),
-                        txtPassword.getText(),
-                        false
-                );
-                if (userBo.saveUser(user)) {
-                    new Alert(Alert.AlertType.INFORMATION, "User Account Created Successfully!").show();
-                    return;
-                }
-                new Alert(Alert.AlertType.INFORMATION, "User Account Create Failed !").show();
-                return;
-            }
-            new Alert(Alert.AlertType.INFORMATION, "Please Enter Same Password !").show();
-            return;
-        }
-        else if(btnIsAdmin.isSelected()){
-            User user = new User(
-                    txtEmailAddress.getText(),
-                    txtPassword.getText(),
-                    true
-            );
-            if (userBo.saveUser(user)) {
-                new Alert(Alert.AlertType.INFORMATION, "Admin Account Created Successfully!").show();
-                return;
-            }
-            new Alert(Alert.AlertType.INFORMATION, "Admin Account Create Failed !").show();
-            return;
-        }
-        new Alert(Alert.AlertType.ERROR, txtEmailAddress.getText()+"is not a register email").show();
+
     }
 
 

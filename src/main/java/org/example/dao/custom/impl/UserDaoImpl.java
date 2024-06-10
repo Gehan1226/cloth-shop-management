@@ -6,6 +6,7 @@ import org.example.dto.User;
 import org.example.entity.EmployeeEntity;
 import org.example.entity.UserEntity;
 import org.example.util.HibernateUtil;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -18,21 +19,26 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @Override
     public List<User> hasAdmin() {
-        SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.getCurrentSession();
-        Transaction transaction = session.beginTransaction();
+        try{
+            SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction transaction = session.beginTransaction();
 
-        Query<UserEntity> query = session.createQuery("from UserEntity where isAdmin = :boolean", UserEntity.class);
-        query.setParameter("boolean", true);
-        List<UserEntity> userEntities = query.getResultList();
-        transaction.commit();
-        session.close();
+            Query<UserEntity> query = session.createQuery("from UserEntity where isAdmin = :boolean", UserEntity.class);
+            query.setParameter("boolean", true);
+            List<UserEntity> userEntities = query.getResultList();
+            transaction.commit();
+            session.close();
 
-        List<User> userList = new ArrayList<>();
-        for (int i=0;i< userEntities.size();i++){
-            userList.add(new ModelMapper().map(userEntities.get(i), User.class));
+            List<User> userList = new ArrayList<>();
+            for (int i=0;i< userEntities.size();i++){
+                userList.add(new ModelMapper().map(userEntities.get(i), User.class));
+            }
+            return userList;
+        }catch (HibernateException e){
+            throw new RuntimeException("Error executing Hibernate query", e);
         }
-        return userList;
+
     }
 
     @Override
@@ -43,8 +49,8 @@ public class UserDaoImpl implements UserDao {
             session.persist(entity);
             transaction.commit();
             session.close();
-        }catch (RuntimeException e){
-            return false;
+        }catch (HibernateException e){
+            throw new RuntimeException("Error executing Hibernate query", e);
         }
         return true;
     }

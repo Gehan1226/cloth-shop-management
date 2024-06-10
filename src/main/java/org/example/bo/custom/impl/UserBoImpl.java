@@ -2,6 +2,7 @@ package org.example.bo.custom.impl;
 
 import org.example.bo.custom.UserBo;
 import org.example.dao.Daofactory;
+import org.example.dao.custom.EmployeeDao;
 import org.example.dao.custom.UserDao;
 import org.example.dto.User;
 import org.example.entity.UserEntity;
@@ -10,10 +11,12 @@ import org.modelmapper.ModelMapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserBoImpl implements UserBo {
     private UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+    private EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
     @Override
     public boolean hasAdmin() {
         List<User> users = userDao.hasAdmin();
@@ -21,9 +24,25 @@ public class UserBoImpl implements UserBo {
     }
 
     @Override
-    public boolean saveUser(User dto) {
+    public String saveUser(User dto) {
+        if(!isValidEmail(dto.getEmail())){
+            return "Wrong Email Pattern !";
+        }
+        if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()){
+            return dto.getEmail()+" is not a register email";
+        }
         dto.setPassword(passwordEncryption(dto.getPassword()));
-        return userDao.save(new ModelMapper().map(dto, UserEntity.class));
+        if (dto.getIsAdmin()) {
+            if(userDao.hasAdmin().isEmpty()){
+                boolean value = userDao.save(new ModelMapper().map(dto, UserEntity.class));
+                return value ? "Admin Account Created Successfully!":"Admin Account Create Failed !";
+            }
+            return "Admin User already exist!";
+        }
+        if(!userDao.save(new ModelMapper().map(dto, UserEntity.class))){
+            return  "User Account Creation Failed";
+        }
+        return "User Account Creation Successfully !";
     }
 
     private String passwordEncryption(String password) {
@@ -41,5 +60,9 @@ public class UserBoImpl implements UserBo {
             e.printStackTrace();
         }
         return encryptedpassword;
+    }
+    private boolean isValidEmail(String email){
+        String regex = "^[A-Za-z0-9+_.-]+@gmail(.+)$";
+        return email.matches(regex);
     }
 }

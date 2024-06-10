@@ -22,7 +22,7 @@ public class LoginPageFormController {
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
-        try{
+        try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
@@ -31,7 +31,8 @@ public class LoginPageFormController {
             stage.setScene(new Scene(parent));
             stage.show();
             HomePageFormController.primaryStage = stage;
-        }catch (IOException e){}
+        } catch (IOException e) {
+        }
 
     }
 
@@ -39,20 +40,13 @@ public class LoginPageFormController {
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) {
-        if (isValidEmail(txtEmailAddress.getText())){
-            User user = new User(txtEmailAddress.getText(),txtPasssword.getText(),false);
-            boolean b = userBo.saveUser(user);
-            System.out.println(b);
-        }
-
-
+        User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), false);
+        String b = userBo.saveUser(user);
+        System.out.println(b);
     }
 
     public void btnCreateNewAccountOnAction(ActionEvent actionEvent) {
     }
 
-    public boolean isValidEmail(String email){
-        String regex = "^[A-Za-z0-9+_.-]+@gmail(.+)$";
-        return email.matches(regex);
-    }
+
 }
