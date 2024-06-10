@@ -9,11 +9,10 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "employee")
 public class EmployeeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     private String firstName;
     private String lastName;
     private Integer nic;

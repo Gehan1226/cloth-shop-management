@@ -21,7 +21,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         Session session = sessionFactory.getCurrentSession();
         Transaction transaction = session.beginTransaction();
 
-        Query<EmployeeEntity> query = session.createQuery("from employee where email = :email", EmployeeEntity.class);
+        Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity where email = :email", EmployeeEntity.class);
         query.setParameter("email", email);
         List<EmployeeEntity> employeeEntityList = query.getResultList();
         transaction.commit();

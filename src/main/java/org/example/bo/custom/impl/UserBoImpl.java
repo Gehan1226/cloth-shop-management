@@ -10,10 +10,15 @@ import org.modelmapper.ModelMapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 public class UserBoImpl implements UserBo {
-
     private UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+    @Override
+    public boolean hasAdmin() {
+        List<User> users = userDao.hasAdmin();
+        return users.size() != 0 ? true:false;
+    }
 
     @Override
     public boolean saveUser(User dto) {
