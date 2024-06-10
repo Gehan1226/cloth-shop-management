@@ -16,7 +16,7 @@ public class UserDaoImpl implements UserDao {
             transaction.commit();
             session.close();
         }catch (RuntimeException e){
-            System.out.println("eror gehan");
+
         }
         return true;
     }

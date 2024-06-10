@@ -21,7 +21,7 @@ public class UserBoImpl implements UserBo {
         return userDao.save(new ModelMapper().map(dto, UserEntity.class));
     }
 
-    public String passwordEncryption(String password) {
+    private String passwordEncryption(String password) {
         String encryptedpassword = null;
         try {
             MessageDigest m = MessageDigest.getInstance("MD5");

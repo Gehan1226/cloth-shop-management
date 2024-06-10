@@ -8,6 +8,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.RadioButton;
 import javafx.stage.Stage;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.EmployeeBo;
+import org.example.bo.custom.UserBo;
+import org.example.dao.custom.EmployeeDao;
+import org.example.dto.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +25,8 @@ public class CreateAccountFormController {
     public RadioButton btnIsAdmin;
     public RadioButton btnIsEmployee;
     public static Stage primaryStage;
+    private static EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
+    private static UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try{
@@ -34,5 +42,18 @@ public class CreateAccountFormController {
     }
 
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
+        if (btnIsAdmin.isSelected()){
+            System.out.println("Hwwww");
+        }
+//        if (employeeBo.isEmployee(txtEmailAddress.getText())){
+//
+//            if (txtPassword.getText().equals(txtConfirmPassword.getText())){
+//                User user = new User(
+//                        txtEmailAddress.getText(),
+//                        txtPassword.getText()
+//                );
+//            }
+//        }
+
     }
 }
