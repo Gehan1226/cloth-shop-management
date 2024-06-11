@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.UserBo;
@@ -43,8 +44,12 @@ public class LoginPageFormController {
 
     public void btnLogInOnAction(ActionEvent actionEvent) {
         User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
-        boolean b = userBo.loginRequest(user);
-        System.out.println(b);
+        if(userBo.loginRequest(user)){
+
+        }else {
+            new Alert(Alert.AlertType.ERROR, "❌ Login Failed!\n Please Select correct data!").show();
+        }
+
     }
 
 

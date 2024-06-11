@@ -55,8 +55,13 @@ public class CreateAccountFormController implements Initializable {
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
         if (!txtEmailAddress.getText().isEmpty() && !txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
             if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-                String s = userBo.saveUser(new User(txtEmailAddress.getText(),txtPassword.getText(),(btnIsAdmin.isSelected())));
-                System.out.println(s);
+                String result = userBo.saveUser(new User(txtEmailAddress.getText(),txtPassword.getText(),(btnIsAdmin.isSelected())));
+                if (result.equals("Admin Account Created Successfully!")){
+                    new Alert(Alert.AlertType.INFORMATION, "✅ "+result).show();
+                }
+                else {
+                    new Alert(Alert.AlertType.ERROR, "❌ "+result).show();
+                }
             }
             else {
                 new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();

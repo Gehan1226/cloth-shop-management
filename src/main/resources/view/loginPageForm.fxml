@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="862.0" stylesheets="@../asset/loginpage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginPageFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="862.0" stylesheets="@../asset/loginpage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.LoginPageFormController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.2000244140625" minWidth="10.0" prefWidth="237.39998779296874" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.2000244140625" minWidth="10.0" prefWidth="111.80001220703124" />
@@ -23,11 +23,12 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="260.0" minWidth="10.0" prefWidth="233.20000000000005" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="146.4" minHeight="10.0" prefHeight="76.19999694824219" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="146.4" minHeight="3.999981689453122" prefHeight="74.60000305175782" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="348.8" minHeight="10.0" prefHeight="340.8" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="303.1999877929687" minHeight="10.0" prefHeight="25.200000000000045" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="303.1999877929687" minHeight="10.0" prefHeight="51.00002441406252" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="146.4" minHeight="10.0" prefHeight="69.8" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="146.4" minHeight="3.999981689453122" prefHeight="80.00001678466796" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="348.8" minHeight="10.0" prefHeight="214.39998321533204" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="303.1999877929687" minHeight="10.0" prefHeight="40.00002441406252" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="303.1999877929687" minHeight="10.0" prefHeight="40.00002441406252" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="303.1999877929687" minHeight="10.0" prefHeight="93.40001220703124" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
@@ -69,13 +70,14 @@
             <JFXToggleButton fx:id="btnUserType" layoutX="43.0" layoutY="120.0" onAction="#btnToogleUserType" text="Employee" toggleColor="#1145b7" />
          </children>
       </AnchorPane>
-      <JFXButton onAction="#btnCreateAccountOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #253A5A;" text="+  Create Account" textFill="#f2eeee" GridPane.rowIndex="1" GridPane.valignment="TOP">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-         <GridPane.margin>
-            <Insets left="15.0" />
-         </GridPane.margin>
-      </JFXButton>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
+         <children>
+            <JFXButton layoutX="14.0" layoutY="7.0" onAction="#btnCreateAccountOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #253A5A;" text="+  Create Account" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </GridPane>
