@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserBoImpl implements UserBo {
-    private UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
-    private EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+    private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+    private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
     @Override
     public boolean hasAdmin() {
         List<User> users = userDao.hasAdmin();
-        return users.size() != 0 ? true:false;
+        return !users.isEmpty();
     }
 
     @Override
@@ -28,21 +28,28 @@ public class UserBoImpl implements UserBo {
         if(!isValidEmail(dto.getEmail())){
             return "Wrong Email Pattern !";
         }
-        if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()){
-            return dto.getEmail()+" is not a register email";
+
+        if(!isValidPassword(dto.getPassword())){
+            return "Wrong Password pattern";
         }
         dto.setPassword(passwordEncryption(dto.getPassword()));
-        if (dto.getIsAdmin()) {
+
+        if (Boolean.TRUE.equals(dto.getIsAdmin())) {
             if(userDao.hasAdmin().isEmpty()){
                 boolean value = userDao.save(new ModelMapper().map(dto, UserEntity.class));
                 return value ? "Admin Account Created Successfully!":"Admin Account Create Failed !";
             }
             return "Admin User already exist!";
+        }else {
+            if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()){
+                return dto.getEmail()+" is not a register email";
+            }
+            if (userDao.retrieveUser(dto.getEmail()).isEmpty()) {
+                userDao.save(new ModelMapper().map(dto, UserEntity.class));
+                return "User Account Created Successfully!";
+            }
+            return  "User Account Alrady Exist !";
         }
-        if(!userDao.save(new ModelMapper().map(dto, UserEntity.class))){
-            return  "User Account Creation Failed";
-        }
-        return "User Account Creation Successfully !";
     }
 
     private String passwordEncryption(String password) {
@@ -65,4 +72,9 @@ public class UserBoImpl implements UserBo {
         String regex = "^[A-Za-z0-9+_.-]+@gmail(.+)$";
         return email.matches(regex);
     }
+    private boolean isValidPassword(String password) {
+        String regex = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=]).{8,}$";
+        return password.matches(regex);
+    }
+
 }

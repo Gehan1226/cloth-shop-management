@@ -54,4 +54,29 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
+
+    public List<User> retrieveUser(String email) {
+        try{
+            SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.getCurrentSession();
+            Transaction transaction = session.beginTransaction();
+
+            Query<UserEntity> query = session.createQuery("from UserEntity where email = :email", UserEntity.class);
+            query.setParameter("email", email);
+            List<UserEntity> userEntityList = query.getResultList();
+            transaction.commit();
+            session.close();
+
+            List<User> userList = new ArrayList<>();
+            for (int i=0;i< userEntityList.size();i++){
+                userList.add(new ModelMapper().map(userEntityList.get(i), User.class));
+            }
+            return userList;
+        }catch (HibernateException e){
+            throw new RuntimeException("Error executing Hibernate query", e);
+        }
+
+    }
+
+
 }
