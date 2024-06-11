@@ -54,6 +54,17 @@ public class LoginPageFormController {
 
 
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/createAccountForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            CreateAccountFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
     public void btnToogleUserType(ActionEvent actionEvent) {

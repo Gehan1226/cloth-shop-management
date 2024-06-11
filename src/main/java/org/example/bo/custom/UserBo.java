@@ -7,4 +7,5 @@ public interface UserBo extends SuperBo {
     String saveUser(User dto) ;
     boolean hasAdmin();
     boolean loginRequest(User dto);
+    boolean sendOTPTo(String email);
 }

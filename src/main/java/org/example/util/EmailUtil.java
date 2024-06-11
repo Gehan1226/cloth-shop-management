@@ -1,39 +1,45 @@
 package org.example.util;
 
 
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.util.Date;
+import java.util.Properties;
 
 public class EmailUtil {
-    public static void sendEmail(Session session, String toEmail, String subject, String body) {
+    public static Boolean sendEmail(String toEmail, String body) {
+        String from = "example1226custom@gmail.com";
+        String host = "smtp.gmail.com";
+
+        Properties properties = System.getProperties();
+
+        properties.put("mail.smtp.host", host);
+        properties.put("mail.smtp.port", "465");
+        properties.put("mail.smtp.ssl.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("example1226custom@gmail.com", "xyemufskzmfcnlkk");
+
+            }
+
+        });
+        session.setDebug(true);
         try {
-            MimeMessage msg = new MimeMessage(session);
-            //set message headers
-            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
-            msg.addHeader("format", "flowed");
-            msg.addHeader("Content-Transfer-Encoding", "8bit");
-
-            msg.setFrom(new InternetAddress("no_reply@example.com", "NoReply-JD"));
-
-            msg.setReplyTo(InternetAddress.parse("no_reply@example.com", false));
-
-            msg.setSubject(subject, "UTF-8");
-
-            msg.setText(body, "UTF-8");
-
-            msg.setSentDate(new Date());
-
-            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
-            System.out.println("Message is ready");
-            Transport.send(msg);
-
-            System.out.println("EMail Sent Successfully!!");
-        } catch (Exception e) {
-            e.printStackTrace();
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
+            message.setSubject("Clothify Shop OTP Verification !");
+            message.setText(body);
+            System.out.println("sending...");
+            Transport.send(message);
+            System.out.println("Sent message successfully....");
+            return true;
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
         }
+        return false;
     }
 }

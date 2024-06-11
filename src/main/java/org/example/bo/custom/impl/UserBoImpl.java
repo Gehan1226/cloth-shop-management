@@ -7,13 +7,23 @@ import org.example.dao.custom.UserDao;
 import org.example.dto.User;
 import org.example.entity.UserEntity;
 import org.example.util.DaoType;
+import org.example.util.EmailUtil;
 import org.modelmapper.ModelMapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Random;
 
 public class UserBoImpl implements UserBo {
+    private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+    private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+    @Override
+    public boolean sendOTPTo(String email) {
+        String body = "Your OTP Code - "+genarateOTP();
+        return EmailUtil.sendEmail(email,body);
+    }
+
     @Override
     public boolean loginRequest(User dto) {
         dto.setPassword(passwordEncryption(dto.getPassword()));
@@ -23,9 +33,6 @@ public class UserBoImpl implements UserBo {
         }
         return false;
     }
-
-    private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
-    private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
 
     @Override
     public boolean hasAdmin() {
@@ -85,6 +92,11 @@ public class UserBoImpl implements UserBo {
     private boolean isValidPassword(String password) {
         String regex = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=]).{8,}$";
         return password.matches(regex);
+    }
+
+    private Integer genarateOTP(){
+        Random random = new Random(System.currentTimeMillis());
+        return  10000 + random.nextInt(50000);
     }
 
 
