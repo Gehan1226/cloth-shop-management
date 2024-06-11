@@ -29,8 +29,7 @@ public class CreateAccountFormController implements Initializable {
     public RadioButton btnIsAdmin;
     public RadioButton btnIsEmployee;
     public static Stage primaryStage;
-    private static EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
-    private static UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private static final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -63,8 +62,17 @@ public class CreateAccountFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
             }
         }
-
     }
-
-
+    public void btnLoginOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/loginPageForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            LoginPageFormController.primaryStage = stage;
+        } catch (IOException e) {}
+    }
 }

@@ -26,8 +26,8 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="90.40001220703125" minHeight="10.0" prefHeight="90.40001220703125" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="72.19998016357421" minHeight="10.0" prefHeight="33.59998779296875" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="277.8000198364258" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="72.19998016357421" minHeight="10.0" prefHeight="50.39998779296876" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="223.20001220703125" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="277.4000305175781" minHeight="10.0" prefHeight="88.20003662109377" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="53.39996948242191" vgrow="SOMETIMES" />
   </rowConstraints>
@@ -90,5 +90,13 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <JFXButton onAction="#btnLoginOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="📲  LogIn" textFill="#f2eeee" GridPane.rowIndex="1">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="11.0" />
+         </GridPane.margin>
+      </JFXButton>
    </children>
 </GridPane>

@@ -2,6 +2,7 @@ package org.example.controller;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,8 +20,9 @@ public class LoginPageFormController {
     public static Stage primaryStage;
     public JFXTextField txtEmailAddress;
     public JFXPasswordField txtPasssword;
+    public JFXToggleButton btnUserType;
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
-
+    private Boolean type = false;
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();
@@ -40,13 +42,17 @@ public class LoginPageFormController {
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) {
-        User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), false);
-        String b = userBo.saveUser(user);
+        User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
+        boolean b = userBo.loginRequest(user);
         System.out.println(b);
     }
 
-    public void btnCreateNewAccountOnAction(ActionEvent actionEvent) {
+
+    public void btnCreateAccountOnAction(ActionEvent actionEvent) {
     }
 
-
+    public void btnToogleUserType(ActionEvent actionEvent) {
+        type = !type;
+        btnUserType.setText(type?"Admin":"Employee");
+    }
 }

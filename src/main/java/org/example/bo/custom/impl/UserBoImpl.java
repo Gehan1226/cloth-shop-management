@@ -11,12 +11,22 @@ import org.modelmapper.ModelMapper;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserBoImpl implements UserBo {
+    @Override
+    public boolean loginRequest(User dto) {
+        dto.setPassword(passwordEncryption(dto.getPassword()));
+        List<User> users = userDao.retrieveUser(dto.getEmail());
+        if(!users.isEmpty()){
+            return users.get(0).equals(dto);
+        }
+        return false;
+    }
+
     private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+
     @Override
     public boolean hasAdmin() {
         List<User> users = userDao.hasAdmin();
@@ -35,7 +45,7 @@ public class UserBoImpl implements UserBo {
         dto.setPassword(passwordEncryption(dto.getPassword()));
 
         if (Boolean.TRUE.equals(dto.getIsAdmin())) {
-            if(userDao.hasAdmin().isEmpty()){
+            if(!hasAdmin()){
                 boolean value = userDao.save(new ModelMapper().map(dto, UserEntity.class));
                 return value ? "Admin Account Created Successfully!":"Admin Account Create Failed !";
             }
@@ -76,5 +86,7 @@ public class UserBoImpl implements UserBo {
         String regex = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=]).{8,}$";
         return password.matches(regex);
     }
+
+
 
 }
