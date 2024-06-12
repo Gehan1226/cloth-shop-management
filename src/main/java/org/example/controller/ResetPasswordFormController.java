@@ -13,6 +13,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.UserBo;
+import org.example.dto.User;
 import org.example.util.BoType;
 import java.io.IOException;
 import java.net.URL;
@@ -32,7 +33,7 @@ public class ResetPasswordFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtEmail.setText("Email : "+currentEmail);
+        txtEmail.setText(currentEmail);
 
     }
 
@@ -65,6 +66,15 @@ public class ResetPasswordFormController implements Initializable {
     }
 
     public void btnResetPasswordOnAction(ActionEvent actionEvent) {
+        if (!txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
+            if(txtPassword.getText().equals(txtConfirmPassword.getText())){
+                new Alert(Alert.AlertType.INFORMATION, userBo.updatePassword(txtEmail.getText(), txtPassword.getText())).show();
+                txtPassword.setText("");
+                txtConfirmPassword.setText("");
+            }else {
+                new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
+            }
+        }
     }
 
     public void btnConfirmOnAction(ActionEvent actionEvent) {
@@ -72,6 +82,8 @@ public class ResetPasswordFormController implements Initializable {
             btnConfirmOtp.setDisable(true);
             btnSendOtp.setDisable(true);
             txtOTPCode.setDisable(true);
+            txtPassword.setDisable(false);
+            txtConfirmPassword.setDisable(false);
             btnResetPassword.setDisable(false);
             new Alert(Alert.AlertType.INFORMATION, "✅ OTP Verified ! \n Now you can change the passsword.").show();
             return;

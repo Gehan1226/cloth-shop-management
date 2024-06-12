@@ -9,5 +9,5 @@ import java.util.List;
 public interface UserDao extends CrudDao<UserEntity> {
     List<User> hasAdmin();
     List<User> retrieveUser(String email);
-
+    boolean updateUserPassword(String email, String password);
 }

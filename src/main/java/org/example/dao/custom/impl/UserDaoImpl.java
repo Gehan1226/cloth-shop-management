@@ -1,15 +1,14 @@
 package org.example.dao.custom.impl;
 
 import org.example.dao.custom.UserDao;
-import org.example.dto.Employee;
 import org.example.dto.User;
-import org.example.entity.EmployeeEntity;
 import org.example.entity.UserEntity;
 import org.example.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
 import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
 
@@ -17,65 +16,90 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDaoImpl implements UserDao {
-    @Override
-    public List<User> hasAdmin() {
-        try{
-            SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
-            Transaction transaction = session.beginTransaction();
+    private Session session;
+    private Transaction transaction;
 
-            Query<UserEntity> query = session.createQuery("from UserEntity where isAdmin = :boolean", UserEntity.class);
-            query.setParameter("boolean", true);
-            List<UserEntity> userEntities = query.getResultList();
+    private void beginSession() {
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        transaction = session.beginTransaction();
+    }
+
+    private void closeSession() {
+        if (transaction != null && transaction.isActive()) {
             transaction.commit();
-            session.close();
-
-            List<User> userList = new ArrayList<>();
-            for (int i=0;i< userEntities.size();i++){
-                userList.add(new ModelMapper().map(userEntities.get(i), User.class));
-            }
-            return userList;
-        }catch (HibernateException e){
-            throw new RuntimeException("Error executing Hibernate query", e);
         }
-
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
     }
 
     @Override
-    public boolean save(UserEntity entity){
-        try{
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            Transaction transaction = session.beginTransaction();
-            session.persist(entity);
-            transaction.commit();
-            session.close();
-        }catch (HibernateException e){
+    public List<User> hasAdmin() {
+        List<User> userList = new ArrayList<>();
+        try {
+            beginSession();
+            Query<UserEntity> query = session.createQuery("from UserEntity where isAdmin = :boolean", UserEntity.class);
+            query.setParameter("boolean", true);
+            List<UserEntity> userEntities = query.getResultList();
+
+            for (int i = 0; i < userEntities.size(); i++) {
+                userList.add(new ModelMapper().map(userEntities.get(i), User.class));
+            }
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return userList;
+    }
+
+    @Override
+    public boolean save(UserEntity entity) {
+        try {
+            beginSession();
+            session.persist(entity);
+        } catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
         }
         return true;
     }
 
     public List<User> retrieveUser(String email) {
-        try{
-            SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
-            Transaction transaction = session.beginTransaction();
-
+        List<User> userList = new ArrayList<>();
+        try {
+            beginSession();
             Query<UserEntity> query = session.createQuery("from UserEntity where email = :email", UserEntity.class);
             query.setParameter("email", email);
             List<UserEntity> userEntityList = query.getResultList();
-            transaction.commit();
-            session.close();
 
-            List<User> userList = new ArrayList<>();
-            for (int i=0;i< userEntityList.size();i++){
+            for (int i = 0; i < userEntityList.size(); i++) {
                 userList.add(new ModelMapper().map(userEntityList.get(i), User.class));
             }
-            return userList;
-        }catch (HibernateException e){
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
+        }finally {
+            closeSession();
         }
+        return userList;
+    }
 
+    public boolean updateUserPassword(String email, String password) {
+        try {
+            beginSession();
+            MutationQuery mutationQuery = session.createMutationQuery("update UserEntity set password=:password where email=:email");
+            System.out.println(password);
+            System.out.println(email);
+            mutationQuery.setParameter("password", password);
+            mutationQuery.setParameter("email", email);
+            mutationQuery.executeUpdate();
+        }catch (HibernateException e) {
+            return false;
+        }finally {
+            closeSession();
+        }
+        return true;
     }
 
 

@@ -63,7 +63,7 @@ public class LoginPageFormController {
     public void btnLogInOnAction(ActionEvent actionEvent) {
         User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
         if(userBo.loginRequest(user)){
-
+            System.out.println("LOG");
         }else {
             new Alert(Alert.AlertType.ERROR, "❌ Login Failed!\n Please Select correct data!").show();
         }

@@ -21,6 +21,17 @@ public class UserBoImpl implements UserBo {
     private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
     @Override
+    public String updatePassword(String email,String password) {
+        if (isValidPassword(password)){
+            if (userDao.updateUserPassword(email, passwordEncryption(password))){
+                return "✅ Password Change Successfully !";
+            }
+            return "❌ Password Change Failed !";
+        }
+        return "❌ Wrong Password Pattern retry another password !";
+    }
+
+    @Override
     public boolean isEqualsOTP(Integer otpByUser) {
         return Objects.equals(lastOTP, otpByUser);
     }
@@ -35,6 +46,7 @@ public class UserBoImpl implements UserBo {
         dto.setPassword(passwordEncryption(dto.getPassword()));
         List<User> users = userDao.retrieveUser(dto.getEmail());
         if(!users.isEmpty()){
+            System.out.println(users.get(0).equals(dto.getPassword()));
             return users.get(0).equals(dto);
         }
         return false;
@@ -42,8 +54,7 @@ public class UserBoImpl implements UserBo {
 
     @Override
     public boolean hasAdmin() {
-        List<User> users = userDao.hasAdmin();
-        return !users.isEmpty();
+        return !userDao.hasAdmin().isEmpty();
     }
 
     @Override
@@ -51,7 +62,6 @@ public class UserBoImpl implements UserBo {
         if(!isValidEmail(dto.getEmail())){
             return "Wrong Email Pattern !";
         }
-
         if(!isValidPassword(dto.getPassword())){
             return "Wrong Password pattern";
         }
@@ -97,6 +107,7 @@ public class UserBoImpl implements UserBo {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
+        System.out.println(encryptedpassword);
         return encryptedpassword;
     }
     private boolean isValidEmail(String email){
