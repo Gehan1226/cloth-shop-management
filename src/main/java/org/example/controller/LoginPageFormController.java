@@ -32,14 +32,32 @@ public class LoginPageFormController {
             Parent parent = loader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
-            stage.show();
             HomePageFormController.primaryStage = stage;
+            stage.show();
         } catch (IOException e) {
         }
-
     }
 
     public void btnForgetpwOnAction(ActionEvent actionEvent) {
+        if(!txtEmailAddress.getText().isEmpty()){
+            if (userBo.isUser(txtEmailAddress.getText())){
+                try {
+                    primaryStage.close();
+                    ResetPasswordFormController.currentEmail = txtEmailAddress.getText();
+                    URL fxmlLocation = getClass().getClassLoader().getResource("view/resetPasswordForm.fxml");
+                    FXMLLoader loader = new FXMLLoader(fxmlLocation);
+                    Parent parent = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(parent));
+                    stage.show();
+                    ResetPasswordFormController.primaryStage = stage;
+                } catch (IOException e) {
+                }
+            }
+            else {
+                new Alert(Alert.AlertType.ERROR, "❌ This Email is Not Registered !").show();
+            }
+        }
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) {

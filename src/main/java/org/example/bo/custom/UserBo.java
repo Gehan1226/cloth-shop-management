@@ -8,4 +8,5 @@ public interface UserBo extends SuperBo {
     boolean hasAdmin();
     boolean loginRequest(User dto);
     boolean sendOTPTo(String email);
+    boolean isUser(String email);
 }

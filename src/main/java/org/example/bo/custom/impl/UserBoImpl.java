@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 public class UserBoImpl implements UserBo {
-    private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+        private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
     @Override
     public boolean sendOTPTo(String email) {
@@ -67,6 +67,14 @@ public class UserBoImpl implements UserBo {
             }
             return  "User Account Alrady Exist !";
         }
+    }
+
+    @Override
+    public boolean isUser(String email) {
+        if (isValidEmail(email)){
+            return !userDao.retrieveUser(email).isEmpty();
+        }
+        return false;
     }
 
     private String passwordEncryption(String password) {

@@ -38,6 +38,7 @@ public class EmailUtil {
             System.out.println("Sent message successfully....");
             return true;
         } catch (MessagingException mex) {
+            System.out.println("Error");
             mex.printStackTrace();
         }
         return false;
