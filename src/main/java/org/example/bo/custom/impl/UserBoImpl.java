@@ -13,11 +13,17 @@ import org.modelmapper.ModelMapper;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class UserBoImpl implements UserBo {
-        private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
+    private Integer lastOTP;
+    private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+    @Override
+    public boolean isEqualsOTP(Integer otpByUser) {
+        return Objects.equals(lastOTP, otpByUser);
+    }
     @Override
     public boolean sendOTPTo(String email) {
         String body = "Your OTP Code - "+genarateOTP();
@@ -104,7 +110,7 @@ public class UserBoImpl implements UserBo {
 
     private Integer genarateOTP(){
         Random random = new Random(System.currentTimeMillis());
-        return  10000 + random.nextInt(50000);
+        return  (lastOTP = 10000 + random.nextInt(50000));
     }
 
 

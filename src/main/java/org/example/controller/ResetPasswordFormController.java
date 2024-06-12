@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -7,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
@@ -23,13 +25,15 @@ public class ResetPasswordFormController implements Initializable {
     public JFXTextField txtOTPCode;
     public JFXPasswordField txtPassword;
     public Text txtEmail;
+    public JFXButton btnConfirmOtp;
+    public JFXButton btnSendOtp;
+    public JFXButton btnResetPassword;
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtEmail.setText("Email : "+currentEmail);
-        sendOTP();
+
     }
 
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
@@ -64,11 +68,26 @@ public class ResetPasswordFormController implements Initializable {
     }
 
     public void btnConfirmOnAction(ActionEvent actionEvent) {
-
+        if (userBo.isEqualsOTP(Integer.parseInt(txtOTPCode.getText()))){
+            btnConfirmOtp.setDisable(true);
+            btnSendOtp.setDisable(true);
+            txtOTPCode.setDisable(true);
+            btnResetPassword.setDisable(false);
+            new Alert(Alert.AlertType.INFORMATION, "✅ OTP Verified ! \n Now you can change the passsword.").show();
+            return;
+        }
+        new Alert(Alert.AlertType.ERROR, "❌ OTP Verification Failed !").show();
     }
-    private void sendOTP(){
-        userBo.sendOTPTo(currentEmail);
+    private boolean sendOTP(){
+        return userBo.sendOTPTo(currentEmail);
     }
 
 
+    public void btnSendOTPOnAction(ActionEvent actionEvent) {
+        if(sendOTP()){
+            new Alert(Alert.AlertType.INFORMATION, "✅ OTP Send Successfully ! Check your email address").show();
+            return;
+        }
+        new Alert(Alert.AlertType.ERROR, "❌ OTP Send Failed ! Retry after countdown.").show();
+    }
 }
