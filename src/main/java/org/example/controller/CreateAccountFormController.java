@@ -56,7 +56,7 @@ public class CreateAccountFormController implements Initializable {
         if (!txtEmailAddress.getText().isEmpty() && !txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
             if(txtPassword.getText().equals(txtConfirmPassword.getText())){
                 String result = userBo.saveUser(new User(txtEmailAddress.getText(),txtPassword.getText(),(btnIsAdmin.isSelected())));
-                if (result.equals("Admin Account Created Successfully!")){
+                if (result.endsWith("Successfully!")){
                     txtEmailAddress.setText("");
                     txtPassword.setText("");
                     txtConfirmPassword.setText("");

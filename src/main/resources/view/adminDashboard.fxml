@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="969.0" stylesheets="@../asset/dashboard.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AdminDashboardFormController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.4000244140625" minWidth="10.0" prefWidth="112.80001220703124" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.4000244140625" minWidth="0.0" prefWidth="0.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="791.2000244140625" minWidth="10.0" prefWidth="791.2000244140625" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="561.6000213623047" minWidth="0.0" prefWidth="16.399975585937455" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="843.9999877929688" minWidth="10.0" prefWidth="42.599926757812455" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="154.79999389648438" minHeight="10.0" prefHeight="128.4" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="341.6" minHeight="10.0" prefHeight="341.6" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="68.5999755859375" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="48.60001220703123" minHeight="7.800024414062477" prefHeight="13.399999999999977" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <AnchorPane prefHeight="161.0" prefWidth="278.0">
+         <children>
+            <JFXButton layoutX="9.0" layoutY="20.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #1873FB;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="🏠 Main Menu" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="161.0" prefWidth="101.0" GridPane.columnIndex="3" />
+      <AnchorPane prefHeight="161.0" prefWidth="278.0" GridPane.columnIndex="2">
+         <children>
+            <Text layoutX="260.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Dashboard" wrappingWidth="313.8175735473633">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="76.0" fitWidth="70.0" layoutX="179.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/OIP__3_-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Separator layoutX="225.0" layoutY="100.0" prefHeight="2.0" prefWidth="314.0" style="-fx-background-color: #31363F;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="206.0" prefWidth="554.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <Text layoutX="-58.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee Management" wrappingWidth="169.630859375">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="161.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Management" wrappingWidth="169.630859375">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="377.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Management" wrappingWidth="169.630859375">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="584.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier Management" wrappingWidth="169.630859375">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <JFXButton layoutX="-58.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        User Registration" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="34.0" fitWidth="41.0" layoutX="-56.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/203-2035339_register-user-register-online-icon-png-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="-58.0" layoutY="127.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="     Search User" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="-48.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/search-user-icon-vector-5053894-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="-58.0" layoutY="189.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="   User List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="26.0" layoutX="-48.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(3).png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="-58.0" layoutY="248.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or Remove User" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="161.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Product" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="34.0" fitWidth="41.0" layoutX="174.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/Add-item-icon.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="161.0" layoutY="189.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Product List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="34.0" fitWidth="41.0" layoutX="174.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/OIP__5_-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="161.0" layoutY="246.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or Remove Product" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+            <Separator layoutX="127.0" layoutY="68.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Separator layoutX="345.0" layoutY="71.0" orientation="VERTICAL" prefHeight="200.0" />
+            <JFXButton layoutX="377.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Place Order" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="43.0" fitWidth="41.0" layoutX="386.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(5).png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="377.0" layoutY="127.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Search Order" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="43.0" fitWidth="41.0" layoutX="383.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/OIP__7_-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="377.0" layoutY="189.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Order List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="32.0" fitWidth="40.0" layoutX="383.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(8).png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="377.0" layoutY="248.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or Cancel Order" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="589.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="601.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(7).png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="589.0" layoutY="127.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="601.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/search-user-icon-vector-5053894-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="589.0" layoutY="188.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Supplier List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="601.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(3).png" />
+               </image>
+            </ImageView>
+            <JFXButton layoutX="589.0" layoutY="249.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or Remove Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+            <Separator layoutX="558.0" layoutY="74.0" orientation="VERTICAL" prefHeight="200.0" />
+            <JFXButton layoutX="161.0" layoutY="127.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Product" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <ImageView fitHeight="29.0" fitWidth="32.0" layoutX="173.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/548-5489482_download-icons-checklist-computer-black-text-white-checklist-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
