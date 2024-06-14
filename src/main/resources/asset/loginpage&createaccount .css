@@ -7,3 +7,6 @@
 .my-image-view {
     -fx-effect: dropshadow(three-pass-box, rgba(241, 14, 6, 0.8), 40, 0, 0, 0);
 }
+.employee-img{
+    -fx-effect: dropshadow(three-pass-box, rgba(19, 131, 236, 0.8), 40, 0, 0, 0);
+}
