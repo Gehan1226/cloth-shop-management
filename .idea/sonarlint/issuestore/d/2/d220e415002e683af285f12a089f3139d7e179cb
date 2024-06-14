@@ -1,0 +1,10 @@
+
+	java:S112"FDefine and throw a dedicated exception instead of using a generic one.(­Š—ÿÿÿÿÿ8×³±æ€2J$29f6340d-db35-4e74-aebc-20c67d16beb8
+€
+java:S1128"=Remove this unused import 'org.hibernate.HibernateException'.(™òı²8ææ±æ€2J$c7348764-a43c-4869-9cf6-fcd867f2883a
+z
+java:S1128"2Remove this unused import 'org.hibernate.Session'.(È¹›§ùÿÿÿÿ8½¿ºæ€2J$581c5845-8f02-48fe-8704-a49f7e18d11f
+y
+java:S1128"6Remove this unused import 'org.hibernate.Transaction'.(ìÌè³8½¿ºæ€2J$e40cfd3f-6e8a-4679-9c62-1d96e405a424
+s
+java:S1128	"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ææ±æ€2J$9ba202ac-a0fa-4182-9805-f7787167e872
