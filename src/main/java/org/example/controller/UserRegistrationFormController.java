@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
@@ -18,8 +19,11 @@ import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class UserRegistrationFormController {
+public class UserRegistrationFormController implements Initializable {
     public static Stage primaryStage;
     public JFXTextField txtFirstName;
     public JFXPasswordField txtLastName;
@@ -36,7 +40,22 @@ public class UserRegistrationFormController {
     private boolean isValidEmail;
     private boolean isValidMobileNo;
 
-    public void btnMainmenuOnAction(ActionEvent actionEvent) {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        String[] provinceArr = {"Central","Eastern","North Central","Northern","North West","Sabaragamuwa","Southern","Uva","Western"};
+        String[] districtArr = {
+                "Ampara","Anuradhapura","Badulla","Batticaloa","Colombo",
+                "Galle","Gampaha","Hambantota","Jaffna","Kalutara",
+                "Kandy","Kegalle","Kilinochchi","Kurunegala","Mannar",
+                "Matale","Matara","Monaragala","Mullaitivu","Nuwara Eliya",
+                "Polonnaruwa","Puttalam","Ratnapura","Trincomalee","Vavuniya"
+        };
+        cmbProvince.getItems().addAll(provinceArr);
+        cmbDistrict.getItems().addAll(districtArr);
+    }
+
+
+        public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
@@ -90,5 +109,6 @@ public class UserRegistrationFormController {
         txtMobileNumberValidation.setVisible(false);
         isValidMobileNo=true;
     }
+
 
 }
