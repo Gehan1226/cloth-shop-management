@@ -20,32 +20,31 @@ public class UserBoImpl implements UserBo {
     private Integer lastOTP;
     private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+
     @Override
-    public String updatePassword(String email,String password) {
-        if (isValidPassword(password)){
-            if (userDao.updateUserPassword(email, passwordEncryption(password))){
-                return "✅ Password Change Successfully !";
-            }
-            return "❌ Password Change Failed !";
+    public String updatePassword(String email, String password) {
+        if (userDao.updateUserPassword(email, passwordEncryption(password))) {
+            return "✅ Password Change Successfully !";
         }
-        return "❌ Wrong Password Pattern retry another password !";
+        return "❌ Password Change Failed !";
     }
 
     @Override
     public boolean isEqualsOTP(Integer otpByUser) {
         return Objects.equals(lastOTP, otpByUser);
     }
+
     @Override
     public boolean sendOTPTo(String email) {
-        String body = "Your OTP Code - "+genarateOTP();
-        return EmailUtil.sendEmail(email,body);
+        String body = "Your OTP Code - " + genarateOTP();
+        return EmailUtil.sendEmail(email, body);
     }
 
     @Override
     public boolean loginRequest(User dto) {
         dto.setPassword(passwordEncryption(dto.getPassword()));
         List<User> users = userDao.retrieveUser(dto.getEmail());
-        if(!users.isEmpty()){
+        if (!users.isEmpty()) {
             System.out.println(users.get(0).equals(dto.getPassword()));
             return users.get(0).equals(dto);
         }
@@ -59,38 +58,29 @@ public class UserBoImpl implements UserBo {
 
     @Override
     public String saveUser(User dto) {
-        if(!isValidEmail(dto.getEmail())){
-            return "Wrong Email Pattern !";
-        }
-        if(!isValidPassword(dto.getPassword())){
-            return "Wrong Password pattern";
-        }
         dto.setPassword(passwordEncryption(dto.getPassword()));
-
         if (Boolean.TRUE.equals(dto.getIsAdmin())) {
-            if(!hasAdmin()){
+            if (!hasAdmin()) {
                 boolean value = userDao.save(new ModelMapper().map(dto, UserEntity.class));
-                return value ? "Admin Account Created Successfully!":"Admin Account Create Failed !";
+                return value ? "Admin Account Created Successfully!" : "Admin Account Create Failed !";
             }
             return "Admin User already exist!";
-        }else {
-            if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()){
-                return dto.getEmail()+" is not a register email";
+        } else {
+            if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()) {
+                return dto.getEmail() + " is not a register email";
             }
             if (userDao.retrieveUser(dto.getEmail()).isEmpty()) {
                 userDao.save(new ModelMapper().map(dto, UserEntity.class));
                 return "User Account Created Successfully!";
             }
-            return  "User Account Alrady Exist !";
+            return "User Account Alrady Exist !";
         }
     }
 
     @Override
     public boolean isUser(String email) {
-        if (isValidEmail(email)){
-            return !userDao.retrieveUser(email).isEmpty();
-        }
-        return false;
+        return !userDao.retrieveUser(email).isEmpty();
+
     }
 
     private String passwordEncryption(String password) {
@@ -110,20 +100,11 @@ public class UserBoImpl implements UserBo {
         System.out.println(encryptedpassword);
         return encryptedpassword;
     }
-    private boolean isValidEmail(String email){
-        String regex = "^[A-Za-z0-9+_.-]+@gmail(.+)$";
-        return email.matches(regex);
-    }
-    private boolean isValidPassword(String password) {
-        String regex = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[@#$%^&+=]).{8,}$";
-        return password.matches(regex);
-    }
 
-    private Integer genarateOTP(){
+    private Integer genarateOTP() {
         Random random = new Random(System.currentTimeMillis());
-        return  (lastOTP = 10000 + random.nextInt(50000));
+        return (lastOTP = 10000 + random.nextInt(50000));
     }
-
 
 
 }

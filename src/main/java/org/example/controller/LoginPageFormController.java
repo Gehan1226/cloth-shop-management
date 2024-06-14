@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.UserBo;
 import org.example.dto.User;
 import org.example.util.BoType;
@@ -23,6 +24,8 @@ public class LoginPageFormController {
     public JFXPasswordField txtPasssword;
     public JFXToggleButton btnUserType;
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
+
     private Boolean type = false;
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try {
@@ -61,12 +64,23 @@ public class LoginPageFormController {
     }
 
     public void btnLogInOnAction(ActionEvent actionEvent) {
-        User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
-        if(userBo.loginRequest(user)){
-            System.out.println("LOG");
+        boolean allFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(txtEmailAddress.getText(),txtPasssword.getText());
+        boolean isValidPassword = dataValidationBo.isValidPassword(txtPasssword.getText());
+        boolean isValidEmail = dataValidationBo.isValidEmail(txtEmailAddress.getText());
+
+        if (allFieldsNotEmpty && isValidPassword && isValidEmail){
+            User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
+            if(userBo.loginRequest(user)){
+                System.out.println("LOG");
+            }else {
+                new Alert(Alert.AlertType.ERROR, "❌ Login Failed !").show();
+            }
         }else {
             new Alert(Alert.AlertType.ERROR, "❌ Login Failed!\n Please Select correct data!").show();
         }
+
+
+
 
     }
 

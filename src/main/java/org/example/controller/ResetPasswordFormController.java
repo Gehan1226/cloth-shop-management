@@ -12,9 +12,11 @@ import javafx.scene.control.Alert;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.UserBo;
 import org.example.dto.User;
 import org.example.util.BoType;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,6 +32,7 @@ public class ResetPasswordFormController implements Initializable {
     public JFXButton btnSendOtp;
     public JFXButton btnResetPassword;
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -47,7 +50,8 @@ public class ResetPasswordFormController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.show();
             HomePageFormController.primaryStage = stage;
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
     }
 
@@ -62,23 +66,26 @@ public class ResetPasswordFormController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.show();
             LoginPageFormController.primaryStage = stage;
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
     }
 
     public void btnResetPasswordOnAction(ActionEvent actionEvent) {
-        if (!txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
-            if(txtPassword.getText().equals(txtConfirmPassword.getText())){
-                new Alert(Alert.AlertType.INFORMATION, userBo.updatePassword(txtEmail.getText(), txtPassword.getText())).show();
-                txtPassword.setText("");
-                txtConfirmPassword.setText("");
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
-            }
+        boolean allFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(txtConfirmPassword.getText(), txtPassword.getText());
+        boolean isSamePassword = txtPassword.getText().equals(txtConfirmPassword.getText());
+        boolean isValidPassword = dataValidationBo.isValidPassword(txtPassword.getText());
+
+        if (allFieldsNotEmpty && isSamePassword && isValidPassword) {
+            new Alert(Alert.AlertType.INFORMATION, userBo.updatePassword(txtEmail.getText(), txtPassword.getText())).show();
+            txtPassword.setText("");
+            txtConfirmPassword.setText("");
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
         }
     }
 
     public void btnConfirmOnAction(ActionEvent actionEvent) {
-        if (userBo.isEqualsOTP(Integer.parseInt(txtOTPCode.getText()))){
+        if (userBo.isEqualsOTP(Integer.parseInt(txtOTPCode.getText()))) {
             btnConfirmOtp.setDisable(true);
             btnSendOtp.setDisable(true);
             txtOTPCode.setDisable(true);
@@ -90,13 +97,13 @@ public class ResetPasswordFormController implements Initializable {
         }
         new Alert(Alert.AlertType.ERROR, "❌ OTP Verification Failed !").show();
     }
-    private boolean sendOTP(){
+
+    private boolean sendOTP() {
         return userBo.sendOTPTo(currentEmail);
     }
 
-
     public void btnSendOTPOnAction(ActionEvent actionEvent) {
-        if(sendOTP()){
+        if (sendOTP()) {
             new Alert(Alert.AlertType.INFORMATION, "✅ OTP Send Successfully ! Check your email address").show();
             return;
         }

@@ -12,6 +12,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.EmployeeBo;
 import org.example.bo.custom.UserBo;
 import org.example.dao.custom.EmployeeDao;
@@ -30,6 +31,8 @@ public class CreateAccountFormController implements Initializable {
     public RadioButton btnIsEmployee;
     public static Stage primaryStage;
     private static final UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,8 +56,15 @@ public class CreateAccountFormController implements Initializable {
     }
 
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
-        if (!txtEmailAddress.getText().isEmpty() && !txtPassword.getText().isEmpty() && !txtConfirmPassword.getText().isEmpty()){
-            if(txtPassword.getText().equals(txtConfirmPassword.getText())){
+        boolean allFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
+                txtConfirmPassword.getText(),
+                txtPassword.getText(),
+                txtEmailAddress.getText());
+        boolean isSamePassword = txtPassword.getText().equals(txtConfirmPassword.getText());
+        boolean isValidPassword = dataValidationBo.isValidPassword(txtPassword.getText());
+
+        if (allFieldsNotEmpty){
+            if(isSamePassword && isValidPassword){
                 String result = userBo.saveUser(new User(txtEmailAddress.getText(),txtPassword.getText(),(btnIsAdmin.isSelected())));
                 if (result.endsWith("Successfully!")){
                     txtEmailAddress.setText("");
@@ -67,7 +77,7 @@ public class CreateAccountFormController implements Initializable {
                 }
             }
             else {
-                new Alert(Alert.AlertType.ERROR, "Please Enter Same password !").show();
+                new Alert(Alert.AlertType.ERROR, "Please Enter Correct password !").show();
             }
         }
     }
