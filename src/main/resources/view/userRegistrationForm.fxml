@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="978.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ResetPasswordFormController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="680.7999633789063" minWidth="10.0" prefWidth="419.19999999999993" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="546.0000213623048" minWidth="10.0" prefWidth="199.99995117187495" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.2000732421875" minWidth="10.0" prefWidth="36.800048828125" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="100.79999084472657" minHeight="10.0" prefHeight="94.39999694824219" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="86.39999389648438" minHeight="10.0" prefHeight="64.6" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="276.7999755859375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="43.20002441406251" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="18.199975585937523" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="🏠 Main Menu" textFill="#f2eeee" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="13.0" top="22.0" />
+         </GridPane.margin>
+      </JFXButton>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <Text layoutX="105.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User registration" wrappingWidth="271.20000000000005">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="79.0" fitWidth="89.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/203-2035339_register-user-register-online-icon-png-removebg-preview.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <JFXTextField fx:id="txtFirstName" layoutX="34.0" prefHeight="34.0" prefWidth="342.0" promptText="First Name" />
+            <JFXPasswordField fx:id="txtLastName" layoutX="34.0" layoutY="55.0" prefHeight="26.0" prefWidth="342.0" promptText="Last Name" />
+            <JFXPasswordField fx:id="txtNicNo" layoutX="34.0" layoutY="152.0" prefHeight="26.0" prefWidth="342.0" promptText="Nic Number" />
+            <JFXPasswordField fx:id="txtMobileNumber" layoutX="34.0" layoutY="195.0" prefHeight="26.0" prefWidth="342.0" promptText="Mobile Number" />
+            <JFXComboBox fx:id="cmbProvince" layoutX="34.0" layoutY="246.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Province" />
+            <JFXComboBox fx:id="cmbDistrict" layoutX="225.0" layoutY="246.0" prefHeight="26.0" prefWidth="153.0" promptText="Select District" />
+            <JFXTextField fx:id="txtEmail" layoutX="34.0" layoutY="99.0" prefHeight="34.0" prefWidth="342.0" promptText="Email " />
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <children>
+            <JFXButton fx:id="btnResetPassword" disable="true" layoutX="94.0" layoutY="14.0" onAction="#btnResetPasswordOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="📌 Register" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="📅  Dashboard" textFill="#f2eeee" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="13.0" />
+         </GridPane.margin>
+      </JFXButton>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <Text layoutX="83.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Id :">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtUserId" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <children>
+            <JFXButton layoutX="11.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search user" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="User List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove User" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="293.0" prefWidth="176.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+         <children>
+            <ImageView fitHeight="307.0" fitWidth="332.0" layoutX="-54.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/man-delivery-service-job-objects-equipment-png.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>
