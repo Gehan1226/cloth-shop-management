@@ -18,5 +18,6 @@ public class EmployeeEntity {
     private Integer nic;
     private Integer mobileNumber;
     private String city;
+    private String district;
     private String email;
 }

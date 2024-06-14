@@ -79,14 +79,16 @@ public class UserRegistrationFormController implements Initializable {
         );
         boolean isSelectedcmbBoxes = !cmbProvince.getSelectionModel().isEmpty() && !cmbDistrict.getSelectionModel().isEmpty();
         if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && isSelectedcmbBoxes){
-//            Employee employee = new Employee(
-//                    txtFirstName.getText(),
-//                    txtLastName.getText(),
-//                    txtNicNo.getText(),
-//                    txtMobileNumber.getText(),
-//                    cmbProvince.getSelectionModel().getSelectedItem()
-//            )
-//            employeeBo.save()
+            Employee employee = new Employee(
+                    txtFirstName.getText(),
+                    txtLastName.getText(),
+                    txtNicNo.getText(),
+                    txtMobileNumber.getText(),
+                    cmbProvince.getSelectionModel().getSelectedItem().toString(),
+                    cmbDistrict.getSelectionModel().getSelectedItem().toString(),
+                    txtEmail.getText()
+            );
+            employeeBo.save(employee);
         }
 
     }
