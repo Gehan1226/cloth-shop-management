@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.SuperBo;
 import org.example.bo.custom.DataValidationBo;
+import org.example.bo.custom.EmployeeBo;
+import org.example.dto.Employee;
 import org.example.util.BoType;
 
 import java.io.IOException;
@@ -26,9 +28,9 @@ import java.util.ResourceBundle;
 public class UserRegistrationFormController implements Initializable {
     public static Stage primaryStage;
     public JFXTextField txtFirstName;
-    public JFXPasswordField txtLastName;
-    public JFXPasswordField txtNicNo;
-    public JFXPasswordField txtMobileNumber;
+    public JFXTextField txtLastName;
+    public JFXTextField txtNicNo;
+    public JFXTextField txtMobileNumber;
     public JFXComboBox cmbProvince;
     public JFXComboBox cmbDistrict;
     public JFXTextField txtEmail;
@@ -39,6 +41,7 @@ public class UserRegistrationFormController implements Initializable {
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private boolean isValidEmail;
     private boolean isValidMobileNo;
+    private EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -53,7 +56,6 @@ public class UserRegistrationFormController implements Initializable {
         cmbProvince.getItems().addAll(provinceArr);
         cmbDistrict.getItems().addAll(districtArr);
     }
-
 
         public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try {
@@ -75,6 +77,17 @@ public class UserRegistrationFormController implements Initializable {
                 txtLastName.getText(),
                 txtNicNo.getText()
         );
+        boolean isSelectedcmbBoxes = !cmbProvince.getSelectionModel().isEmpty() && !cmbDistrict.getSelectionModel().isEmpty();
+        if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && isSelectedcmbBoxes){
+//            Employee employee = new Employee(
+//                    txtFirstName.getText(),
+//                    txtLastName.getText(),
+//                    txtNicNo.getText(),
+//                    txtMobileNumber.getText(),
+//                    cmbProvince.getSelectionModel().getSelectedItem()
+//            )
+//            employeeBo.save()
+        }
 
     }
 

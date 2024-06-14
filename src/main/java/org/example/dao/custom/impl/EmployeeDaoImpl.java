@@ -16,6 +16,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+    private Session session;
+    private Transaction transaction;
+
+    private void beginSession() {
+        session = HibernateUtil.getSessionFactory().getCurrentSession();
+        transaction = session.beginTransaction();
+    }
+    private void closeSession() {
+        if (transaction != null && transaction.isActive()) {
+            transaction.commit();
+        }
+        if (session != null && session.isOpen()) {
+            session.close();
+        }
+    }
+
     @Override
     public List<Employee> retrieveEmployee(String email) {
         try{
@@ -37,7 +53,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
         }catch (HibernateException e){
             throw new RuntimeException("Error executing Hibernate query", e);
         }
-
     }
 
+    @Override
+    public boolean save(EmployeeEntity dto) {
+        try {
+            beginSession();
+            session.persist(dto);
+        } catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
+
+    }
 }
