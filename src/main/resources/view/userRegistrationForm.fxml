@@ -96,7 +96,7 @@
                   <Font name="System Bold" size="17.0" />
                </font>
             </Text>
-            <Text fx:id="txtUserId" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
+            <Text fx:id="txtEmpID" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

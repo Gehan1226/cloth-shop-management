@@ -24,8 +24,12 @@ public class EmployeeBoImpl implements EmployeeBo {
     @Override
     public String genarateEmployeeID() {
         Employee employee = employeeDao.retrieveLastRow();
-        System.out.println(employee);
-        return null;
+        if (employee != null){
+            String empID = employee.getEmpID();
+            int empNumber = Integer.parseInt(empID.substring(1)) + 1;
+            return "E"+empNumber;
+        }
+        return "E1";
     }
 
 

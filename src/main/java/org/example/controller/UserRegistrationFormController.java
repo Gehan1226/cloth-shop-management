@@ -35,9 +35,9 @@ public class UserRegistrationFormController implements Initializable {
     public JFXComboBox cmbDistrict;
     public JFXTextField txtEmail;
     public JFXButton btnResetPassword;
-    public Text txtUserId;
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;
+    public Text txtEmpID;
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private boolean isValidEmail;
     private boolean isValidMobileNo;
@@ -45,6 +45,7 @@ public class UserRegistrationFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtEmpID.setText(employeeBo.genarateEmployeeID());
         String[] provinceArr = {"Central","Eastern","North Central","Northern","North West","Sabaragamuwa","Southern","Uva","Western"};
         String[] districtArr = {
                 "Ampara","Anuradhapura","Badulla","Batticaloa","Colombo",
@@ -80,7 +81,7 @@ public class UserRegistrationFormController implements Initializable {
         boolean isSelectedcmbBoxes = !cmbProvince.getSelectionModel().isEmpty() && !cmbDistrict.getSelectionModel().isEmpty();
         if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && isSelectedcmbBoxes){
             Employee employee = new Employee(
-                    txtUserId.getText(),
+                    txtEmpID.getText(),
                     txtFirstName.getText(),
                     txtLastName.getText(),
                     txtNicNo.getText(),

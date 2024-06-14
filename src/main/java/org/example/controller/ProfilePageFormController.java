@@ -34,7 +34,7 @@ public class ProfilePageFormController implements Initializable {
 //        txtProvince.setText(employee.getProvince());
 //        txtDistrict.setText(employee.getDistrict());
 //        txtMobileNo.setText(employee.getMobileNumber());
-        employeeBo.genarateEmployeeID();
+        txtEmpId.setText(employeeBo.genarateEmployeeID());
     }
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
     }

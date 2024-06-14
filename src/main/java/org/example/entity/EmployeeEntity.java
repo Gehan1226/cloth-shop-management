@@ -13,8 +13,7 @@ import org.example.dto.User;
 @Entity
 public class EmployeeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private String empID;
     private String firstName;
     private String lastName;
     private String nic;

@@ -89,7 +89,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } finally {
             closeSession();
         }
-        return new ModelMapper().map(employeeEntity,Employee.class);
+
+        return employeeEntity != null ? (new ModelMapper().map(employeeEntity,Employee.class)) : null;
     }
 
 
