@@ -57,22 +57,32 @@
             <JFXTextField fx:id="txtFirstName" layoutX="34.0" prefHeight="34.0" prefWidth="342.0" promptText="First Name" />
             <JFXPasswordField fx:id="txtLastName" layoutX="34.0" layoutY="55.0" prefHeight="26.0" prefWidth="342.0" promptText="Last Name" />
             <JFXPasswordField fx:id="txtNicNo" layoutX="34.0" layoutY="152.0" prefHeight="26.0" prefWidth="342.0" promptText="Nic Number" />
-            <JFXPasswordField fx:id="txtMobileNumber" layoutX="34.0" layoutY="195.0" prefHeight="26.0" prefWidth="342.0" promptText="Mobile Number" />
+            <JFXPasswordField fx:id="txtMobileNumber" layoutX="34.0" layoutY="195.0" onKeyReleased="#txtMobileNoOnKeyReleased" prefHeight="26.0" prefWidth="342.0" promptText="Mobile Number" />
             <JFXComboBox fx:id="cmbProvince" layoutX="34.0" layoutY="246.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Province" />
             <JFXComboBox fx:id="cmbDistrict" layoutX="225.0" layoutY="246.0" prefHeight="26.0" prefWidth="153.0" promptText="Select District" />
-            <JFXTextField fx:id="txtEmail" layoutX="34.0" layoutY="99.0" prefHeight="34.0" prefWidth="342.0" promptText="Email " />
+            <JFXTextField fx:id="txtEmail" layoutX="34.0" layoutY="99.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Email " />
+            <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtMobileNumberValidation" fill="#e40a0a" layoutX="262.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Mobile Number" visible="false" wrappingWidth="152.834228515625">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton fx:id="btnResetPassword" disable="true" layoutX="94.0" layoutY="14.0" onAction="#btnResetPasswordOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="📌 Register" textFill="#f2eeee">
+            <JFXButton fx:id="btnResetPassword" layoutX="94.0" layoutY="14.0" onAction="#btnRegisterOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="📌 Register" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
          </children>
       </AnchorPane>
-      <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="📅  Dashboard" textFill="#f2eeee" GridPane.rowIndex="1" GridPane.valignment="TOP">
+      <JFXButton onAction="#btnDashboardOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="📅  Dashboard" textFill="#f2eeee" GridPane.rowIndex="1" GridPane.valignment="TOP">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -96,17 +106,17 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <JFXButton layoutX="11.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search user" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" onAction="#btnSearchUserOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search user" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="User List" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnUserListOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="User List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove User" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnUpdateRemoveOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove User" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -115,7 +125,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="293.0" prefWidth="176.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <children>
-            <ImageView fitHeight="307.0" fitWidth="332.0" layoutX="-54.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="307.0" fitWidth="332.0" layoutX="-54.0" layoutY="-48.0" pickOnBounds="true" preserveRatio="true" styleClass="my-image-view">
                <image>
                   <Image url="@../asset/images/man-delivery-service-job-objects-equipment-png.png" />
                </image>
