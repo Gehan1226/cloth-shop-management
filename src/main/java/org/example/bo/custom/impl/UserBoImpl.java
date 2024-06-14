@@ -66,7 +66,7 @@ public class UserBoImpl implements UserBo {
             }
             return "Admin User already exist!";
         } else {
-            if (employeeDao.retrieveEmployee(dto.getEmail()).isEmpty()) {
+            if (employeeDao.retrieveByEmail(dto.getEmail()).isEmpty()) {
                 return dto.getEmail() + " is not a register email";
             }
             if (userDao.retrieveUser(dto.getEmail()).isEmpty()) {

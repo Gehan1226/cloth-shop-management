@@ -2,6 +2,8 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.dto.Employee;
+import org.example.dto.User;
 
 @Getter
 @Setter
@@ -15,9 +17,9 @@ public class EmployeeEntity {
     private Integer id;
     private String firstName;
     private String lastName;
-    private Integer nic;
-    private Integer mobileNumber;
-    private String city;
+    private String nic;
+    private String mobileNumber;
+    private String province;
     private String district;
     private String email;
 }

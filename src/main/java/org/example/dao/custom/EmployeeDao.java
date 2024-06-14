@@ -8,5 +8,7 @@ import org.example.entity.EmployeeEntity;
 import java.util.List;
 
 public interface EmployeeDao extends CrudDao<EmployeeEntity> {
-    List<Employee> retrieveEmployee(String email);
+    List<Employee> retrieveByEmail(String email);
+    Employee retrieveById(String empId);
+    Employee retrieveLastRow();
 }

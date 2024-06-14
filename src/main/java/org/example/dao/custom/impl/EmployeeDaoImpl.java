@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
+
     private Session session;
     private Transaction transaction;
 
@@ -33,18 +34,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> retrieveEmployee(String email) {
+    public List<Employee> retrieveByEmail(String email) {
         try{
-            SessionFactory sessionFactory= HibernateUtil.getSessionFactory();
-            Session session = sessionFactory.getCurrentSession();
-            Transaction transaction = session.beginTransaction();
-
+            beginSession();
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity where email = :email", EmployeeEntity.class);
             query.setParameter("email", email);
             List<EmployeeEntity> employeeEntityList = query.getResultList();
-            transaction.commit();
-            session.close();
-
             List<Employee> employeeList = new ArrayList<>();
             for (int i=0;i< employeeList.size();i++){
                 employeeList.add(new ModelMapper().map(employeeEntityList.get(i), Employee.class));
@@ -52,9 +47,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
             return employeeList;
         }catch (HibernateException e){
             throw new RuntimeException("Error executing Hibernate query", e);
+        }finally {
+            closeSession();
         }
     }
-
     @Override
     public boolean save(EmployeeEntity dto) {
         try {
@@ -66,6 +62,35 @@ public class EmployeeDaoImpl implements EmployeeDao {
             closeSession();
         }
         return true;
-
     }
+    @Override
+    public Employee retrieveById(String id){
+        EmployeeEntity employeeEntity;
+        try {
+            beginSession();
+            employeeEntity = session.get(EmployeeEntity.class, id);
+        }catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return new ModelMapper().map(employeeEntity, Employee.class);
+    }
+    @Override
+    public Employee retrieveLastRow() {
+        EmployeeEntity employeeEntity;
+        try {
+            beginSession();
+            Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity order by id DESC", EmployeeEntity.class);
+            query.setMaxResults(1);
+            employeeEntity= (EmployeeEntity) query.uniqueResult();
+        }catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return new ModelMapper().map(employeeEntity,Employee.class);
+    }
+
+
 }
