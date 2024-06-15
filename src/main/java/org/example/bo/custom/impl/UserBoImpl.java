@@ -22,8 +22,12 @@ import java.util.Random;
 public class UserBoImpl implements UserBo {
     private Integer lastOTP;
     private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
-    private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
     private  final EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
+    @Override
+    public boolean confirmPassword(String email,String password ){
+        List<User> users = userDao.retrieveUser(email);
+        return  users.get(0).getPassword().equals(passwordEncryption(password));
+    }
 
     @Override
     public String updatePassword(String email, String password) {
@@ -80,12 +84,11 @@ public class UserBoImpl implements UserBo {
             return "User Account Alrady Exist !";
         }
     }
-
     @Override
     public boolean isUser(String email) {
         return !userDao.retrieveUser(email).isEmpty();
-
     }
+
 
     private String passwordEncryption(String password) {
         String encryptedpassword = null;
@@ -101,7 +104,6 @@ public class UserBoImpl implements UserBo {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        System.out.println(encryptedpassword);
         return encryptedpassword;
     }
 

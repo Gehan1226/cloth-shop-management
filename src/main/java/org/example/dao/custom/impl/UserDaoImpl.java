@@ -51,7 +51,6 @@ public class UserDaoImpl implements UserDao {
         }
         return userList;
     }
-
     @Override
     public boolean save(UserEntity entity) {
         try {
@@ -64,7 +63,6 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
-
     public List<User> retrieveUser(String email) {
         List<User> userList = new ArrayList<>();
         try {
@@ -83,7 +81,6 @@ public class UserDaoImpl implements UserDao {
         }
         return userList;
     }
-
     public boolean updateUserPassword(String email, String password) {
         try {
             beginSession();
@@ -100,6 +97,5 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
-
 
 }
