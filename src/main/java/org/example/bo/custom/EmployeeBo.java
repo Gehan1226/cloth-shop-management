@@ -7,6 +7,7 @@ public interface EmployeeBo extends SuperBo {
      boolean isEmployee(String email);
      boolean save(Employee employee);
      String genarateEmployeeID();
+     Employee retrieveByEmail(String email);
 
 
 }

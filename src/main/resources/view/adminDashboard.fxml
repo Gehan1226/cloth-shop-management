@@ -73,7 +73,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
-            <JFXButton layoutX="-58.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        User Registration" textFill="#f2eeee">
+            <JFXButton layoutX="-58.0" layoutY="66.0" onAction="#btnUserRegistrationOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        User Registration" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

@@ -41,9 +41,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
             query.setParameter("email", email);
             List<EmployeeEntity> employeeEntityList = query.getResultList();
             List<Employee> employeeList = new ArrayList<>();
-            for (int i=0;i< employeeList.size();i++){
-                employeeList.add(new ModelMapper().map(employeeEntityList.get(i), Employee.class));
-            }
+            employeeList.add(new ModelMapper().map(employeeEntityList.get(0), Employee.class));
             return employeeList;
         }catch (HibernateException e){
             throw new RuntimeException("Error executing Hibernate query", e);

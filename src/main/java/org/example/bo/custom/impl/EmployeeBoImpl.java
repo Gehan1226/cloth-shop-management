@@ -31,7 +31,11 @@ public class EmployeeBoImpl implements EmployeeBo {
         }
         return "E1";
     }
+    @Override
+    public Employee retrieveByEmail(String email) {
+        return employeeDao.retrieveByEmail(email).get(0);
 
+    }
 
 
 }

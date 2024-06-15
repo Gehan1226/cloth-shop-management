@@ -1,11 +1,14 @@
 package org.example.bo.custom.impl;
 
+import org.example.bo.BoFactory;
+import org.example.bo.custom.EmployeeBo;
 import org.example.bo.custom.UserBo;
 import org.example.dao.Daofactory;
 import org.example.dao.custom.EmployeeDao;
 import org.example.dao.custom.UserDao;
 import org.example.dto.User;
 import org.example.entity.UserEntity;
+import org.example.util.BoType;
 import org.example.util.DaoType;
 import org.example.util.EmailUtil;
 import org.modelmapper.ModelMapper;
@@ -20,6 +23,7 @@ public class UserBoImpl implements UserBo {
     private Integer lastOTP;
     private final UserDao userDao = Daofactory.getInstance().getDao(DaoType.USER);
     private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+    private  final EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
 
     @Override
     public String updatePassword(String email, String password) {
@@ -66,7 +70,7 @@ public class UserBoImpl implements UserBo {
             }
             return "Admin User already exist!";
         } else {
-            if (employeeDao.retrieveByEmail(dto.getEmail()).isEmpty()) {
+            if (!employeeBo.isEmployee(dto.getEmail())) {
                 return dto.getEmail() + " is not a register email";
             }
             if (userDao.retrieveUser(dto.getEmail()).isEmpty()) {
