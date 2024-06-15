@@ -69,3 +69,5 @@ Fsrc/main/java/org/example/controller/ChangePasswordFormController.java,2\6\26a
 Ksrc/main/java/org/example/controller/EmployeeProfilePageFormController.java,a\c\ac0a5a1877a02c0b7e935cac4ff95e60c1dcb0a6
 x
 Hsrc/main/java/org/example/controller/AdminProfilePageFormcontroller.java,1\b\1b572205d52a36b6966842fcde900cd8aa905dea
+|
+Lsrc/main/java/org/example/controller/EmployeeUpdateRemoveFormController.java,3\5\355dbfccca0ef62b2eec4128d66b2b49df7bb61f
