@@ -70,21 +70,43 @@ public class LoginPageFormController {
 
         if (allFieldsNotEmpty && isValidPassword && isValidEmail){
             User user = new User(txtEmailAddress.getText(), txtPasssword.getText(), type);
-            if(userBo.loginRequest(user)){
-                System.out.println("LOG");
+            boolean result = userBo.loginRequest(user);
+            
+            if(result && Boolean.TRUE.equals(type)){
+                try {
+                    primaryStage.close();
+                    AdminDashboardFormController.adminUserEmail = txtEmailAddress.getText();
+                    URL fxmlLocation = getClass().getClassLoader().getResource("view/adminDashboard.fxml");
+                    FXMLLoader loader = new FXMLLoader(fxmlLocation);
+                    Parent parent = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(parent));
+                    stage.show();
+                    AdminDashboardFormController.primaryStage = stage;
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR, ""+e).show();
+                }
+            }else if (result){
+                try {
+                    primaryStage.close();
+                    UserDashboardFormController.employeeUserEmail = txtEmailAddress.getText();
+                    URL fxmlLocation = getClass().getClassLoader().getResource("view/userDashboardForm.fxml");
+                    FXMLLoader loader = new FXMLLoader(fxmlLocation);
+                    Parent parent = loader.load();
+                    Stage stage = new Stage();
+                    stage.setScene(new Scene(parent));
+                    stage.show();
+                    UserDashboardFormController.primaryStage = stage;
+                } catch (IOException e) {
+                    new Alert(Alert.AlertType.ERROR, ""+e).show();
+                }
             }else {
-                new Alert(Alert.AlertType.ERROR, "❌ Login Failed !").show();
+                new Alert(Alert.AlertType.ERROR, "Login Failed !").show();
             }
         }else {
             new Alert(Alert.AlertType.ERROR, "❌ Login Failed!\n Please Select correct data!").show();
         }
-
-
-
-
     }
-
-
     public void btnCreateAccountOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();
