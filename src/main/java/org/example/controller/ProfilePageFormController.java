@@ -32,7 +32,6 @@ public class ProfilePageFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("s");
         Employee employee = employeeBo.retrieveByEmail(employeeUserEmail);
         txtEmpId.setText(employee.getEmpID());
         txtName.setText(employee.getFirstName()+" "+employee.getLastName());
@@ -60,6 +59,17 @@ public class ProfilePageFormController implements Initializable {
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/userDashboardForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            UserDashboardFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
 

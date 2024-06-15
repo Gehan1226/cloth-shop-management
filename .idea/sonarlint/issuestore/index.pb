@@ -65,3 +65,5 @@ s
 Csrc/main/java/org/example/controller/ProfilePageFormController.java,4\b\4b83aa7fbb260307cf87dfb160807d66faf6c8c8
 u
 Esrc/main/java/org/example/controller/UserDashboardFormController.java,c\6\c6b94473f6898110f56f2e750a6195a37734b08a
+v
+Fsrc/main/java/org/example/controller/ChangePasswordFormController.java,2\6\26aa7739328cedea59645df7dda3077fd6301911
