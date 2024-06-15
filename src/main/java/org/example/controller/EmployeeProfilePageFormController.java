@@ -1,6 +1,5 @@
 package org.example.controller;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ProfilePageFormController implements Initializable {
+public class EmployeeProfilePageFormController implements Initializable {
     public static Stage primaryStage;
     public JFXTextField txtName;
     public JFXTextField txtNic;
@@ -56,6 +55,18 @@ public class ProfilePageFormController implements Initializable {
     }
 
     public void btnChangePasswordOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            ChangePasswordFormController.employeeUserEmail = employeeUserEmail;
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/changePasswordForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            ChangePasswordFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {

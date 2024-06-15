@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="978.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.ProfilePageFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="978.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AdminProfilePageFormcontroller">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
@@ -52,71 +52,26 @@
       </AnchorPane>
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name :" wrappingWidth="56.83428955078125">
+            <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="65.63427734375">
                <font>
                   <Font name="System Bold Italic" size="16.0" />
                </font>
             </Text>
-            <JFXTextField fx:id="txtName" editable="false" layoutX="94.0" layoutY="11.0" prefHeight="30.0" prefWidth="325.0">
+            <JFXTextField fx:id="txtEmail" layoutX="87.0" layoutY="9.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="30.0" prefWidth="338.0">
                <font>
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <Text layoutX="14.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nic No :" wrappingWidth="65.63427734375">
+            <JFXButton fx:id="btnSaveChanges" layoutX="121.0" layoutY="102.0" onAction="#btnSaveChangesOnAction" prefHeight="43.0" prefWidth="182.0" style="-fx-background-color: #232D3F;" text="Save Changes" textFill="#f2eeee">
                <font>
-                  <Font name="System Bold Italic" size="16.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
-            </Text>
-            <JFXTextField fx:id="txtNic" editable="false" layoutX="93.0" layoutY="63.0" prefHeight="30.0" prefWidth="326.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
-            <Text layoutX="16.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mobile Number :" wrappingWidth="138.4000000000001">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Text>
-            <JFXTextField fx:id="txtMobileNo" editable="false" layoutX="163.0" layoutY="115.0" prefHeight="30.0" prefWidth="254.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
-            <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Email :" wrappingWidth="65.63427734375">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Text>
-            <JFXTextField fx:id="txtEmail" editable="false" layoutX="88.0" layoutY="159.0" prefHeight="30.0" prefWidth="338.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
-            <Text layoutX="14.0" layoutY="234.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Province :" wrappingWidth="79.0">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Text>
-            <JFXTextField fx:id="txtProvince" editable="false" layoutX="100.0" layoutY="213.0" prefHeight="30.0" prefWidth="108.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
-            <Text layoutX="233.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="District :" wrappingWidth="71.79998779296875">
-               <font>
-                  <Font name="System Bold Italic" size="16.0" />
-               </font>
-            </Text>
-            <JFXTextField fx:id="txtDistrict" editable="false" layoutX="312.0" layoutY="215.0" prefHeight="30.0" prefWidth="108.0">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </JFXTextField>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton layoutX="117.0" layoutY="8.0" onAction="#btnChangePasswordOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="🔑  Change Passsword" textFill="#f2eeee">
+            <JFXButton layoutX="120.0" layoutY="9.0" onAction="#btnChangePasswordOnAction" prefHeight="43.0" prefWidth="182.0" style="-fx-background-color: #03c04A;" text="🔑  Change Passsword" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -131,20 +86,7 @@
             <Insets left="13.0" />
          </GridPane.margin>
       </JFXButton>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <children>
-            <Text fill="#e13535" layoutX="93.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Employee ID :">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtEmpId" fill="#ae1c1c" layoutX="211.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2" />
       <AnchorPane prefHeight="293.0" prefWidth="176.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <children>
@@ -155,5 +97,10 @@
             </ImageView>
          </children>
       </AnchorPane>
+      <Text fill="#ff0909" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin Profile" wrappingWidth="111.23425370454788" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold Italic" size="16.0" />
+         </font>
+      </Text>
    </children>
 </GridPane>

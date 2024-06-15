@@ -35,6 +35,7 @@ public class AdminDashboardFormController {
     }
 
     public void btnProfileOnAction(ActionEvent actionEvent) {
-
+        AdminProfilePageFormcontroller.adminEmail = adminUserEmail;
+        AdminProfilePageFormcontroller.primaryStage = loadScreen("view/adminProfilePageForm.fxml");
     }
 }

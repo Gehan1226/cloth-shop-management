@@ -63,6 +63,7 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
+    @Override
     public List<User> retrieveUser(String email) {
         List<User> userList = new ArrayList<>();
         try {
@@ -81,14 +82,28 @@ public class UserDaoImpl implements UserDao {
         }
         return userList;
     }
+    @Override
     public boolean updateUserPassword(String email, String password) {
         try {
             beginSession();
             MutationQuery mutationQuery = session.createMutationQuery("update UserEntity set password=:password where email=:email");
-            System.out.println(password);
-            System.out.println(email);
             mutationQuery.setParameter("password", password);
             mutationQuery.setParameter("email", email);
+            mutationQuery.executeUpdate();
+        }catch (HibernateException e) {
+            return false;
+        }finally {
+            closeSession();
+        }
+        return true;
+    }
+    @Override
+    public boolean updateuserEmail(String oldEmail, String newEmail) {
+        try {
+            beginSession();
+            MutationQuery mutationQuery = session.createMutationQuery("update UserEntity set email=:newEmail where email=:oldEmail");
+            mutationQuery.setParameter("newEmail", newEmail);
+            mutationQuery.setParameter("oldEmail", oldEmail);
             mutationQuery.executeUpdate();
         }catch (HibernateException e) {
             return false;

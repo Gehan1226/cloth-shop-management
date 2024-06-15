@@ -12,4 +12,5 @@ public interface UserBo extends SuperBo {
     boolean isEqualsOTP(Integer otpByUser);
     String updatePassword(String email, String password);
     boolean confirmPassword(String email,String password);
+    public String updateEmail(String oldEmail, String newEmail);
 }

@@ -28,6 +28,13 @@ public class UserBoImpl implements UserBo {
         List<User> users = userDao.retrieveUser(email);
         return  users.get(0).getPassword().equals(passwordEncryption(password));
     }
+    @Override
+    public String updateEmail(String oldEmail, String newEmail) {
+        if (userDao.updateuserEmail(oldEmail, newEmail)) {
+            return "✅ Email Change Successfully !";
+        }
+        return "❌ Email Change Failed !";
+    }
 
     @Override
     public String updatePassword(String email, String password) {

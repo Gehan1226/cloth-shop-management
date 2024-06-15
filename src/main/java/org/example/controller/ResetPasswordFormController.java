@@ -37,7 +37,6 @@ public class ResetPasswordFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtEmail.setText(currentEmail);
-
     }
 
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
@@ -52,10 +51,7 @@ public class ResetPasswordFormController implements Initializable {
             HomePageFormController.primaryStage = stage;
         } catch (IOException e) {
         }
-
     }
-
-
     public void btnLoginOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();

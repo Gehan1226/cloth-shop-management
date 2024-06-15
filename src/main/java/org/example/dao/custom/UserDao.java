@@ -10,4 +10,5 @@ public interface UserDao extends CrudDao<UserEntity> {
     List<User> hasAdmin();
     List<User> retrieveUser(String email);
     boolean updateUserPassword(String email, String password);
+    boolean updateuserEmail(String oldEmail, String newEmail);
 }

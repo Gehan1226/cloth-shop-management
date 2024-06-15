@@ -36,7 +36,6 @@ public class ChangePasswordFormController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtEmail.setText(employeeUserEmail);
-
     }
     public void btnConfirmOnAction(ActionEvent actionEvent) {
         boolean isValidPassword = dataValidationBo.isValidPassword(txtCurrentPassword.getText());

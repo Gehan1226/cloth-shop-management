@@ -2,7 +2,6 @@ package org.example.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +12,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
-import org.example.bo.SuperBo;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.EmployeeBo;
 import org.example.dto.Employee;

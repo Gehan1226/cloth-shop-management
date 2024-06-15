@@ -30,8 +30,7 @@ public class UserDashboardFormController {
     }
 
     public void btnProfileOnAction(ActionEvent actionEvent) {
-        ProfilePageFormController.employeeUserEmail = employeeUserEmail;
-        ProfilePageFormController.primaryStage = loadScreen("view/profilePageForm.fxml");;
-
+        EmployeeProfilePageFormController.employeeUserEmail = employeeUserEmail;
+        EmployeeProfilePageFormController.primaryStage = loadScreen("view/employeeProfilePageForm.fxml");
     }
 }
