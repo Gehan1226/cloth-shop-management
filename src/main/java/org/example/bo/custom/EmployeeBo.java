@@ -10,6 +10,7 @@ public interface EmployeeBo extends SuperBo {
      Employee retrieveByEmail(String email);
      Employee retrieveById(String empID);
      boolean replace(Employee employee);
+     boolean deleteEmployee(Employee employee);
 
 
 }

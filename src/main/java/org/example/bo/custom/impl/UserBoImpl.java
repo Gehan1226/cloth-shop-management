@@ -6,6 +6,7 @@ import org.example.bo.custom.UserBo;
 import org.example.dao.Daofactory;
 import org.example.dao.custom.EmployeeDao;
 import org.example.dao.custom.UserDao;
+import org.example.dto.Employee;
 import org.example.dto.User;
 import org.example.entity.UserEntity;
 import org.example.util.BoType;
@@ -113,11 +114,15 @@ public class UserBoImpl implements UserBo {
         }
         return encryptedpassword;
     }
-
     private Integer genarateOTP() {
         Random random = new Random(System.currentTimeMillis());
         return (lastOTP = 10000 + random.nextInt(50000));
     }
+    @Override
+    public boolean deleteUserAccount(Employee employee){
+        return userDao.delete(employee.getEmail());
+    }
+
 
 
 }

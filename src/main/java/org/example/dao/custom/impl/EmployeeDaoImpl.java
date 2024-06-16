@@ -73,7 +73,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } finally {
             closeSession();
         }
-        return new ModelMapper().map(employeeEntity, Employee.class);
+        return employeeEntity != null ? new ModelMapper().map(employeeEntity, Employee.class):null;
     }
     @Override
     public Employee retrieveLastRow() {
@@ -92,15 +92,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
     @Override
     public boolean replace(EmployeeEntity employeeEntity){
+        System.out.println(employeeEntity);
         String hql = "update EmployeeEntity " +
                      "set firstName = :value1," +
                         " lastName = :value2," +
                         " nic = :value3," +
-                        " mobileNumber = :value4 ," +
+                        " mobileNumber = :value4," +
                          "province = :value5," +
-                        ",district = :value6 ," +
-                        "email = :value7" +
-                     "WHERE primaryKey = :primaryKeyValue";
+                        "district = :value6 ," +
+                        "email = :value7 " +
+                     "where empID = :primaryKeyValue";
         try {
             beginSession();
             MutationQuery mutationQuery = session.createMutationQuery(hql);
@@ -112,6 +113,20 @@ public class EmployeeDaoImpl implements EmployeeDao {
             mutationQuery.setParameter("value6",employeeEntity.getDistrict());
             mutationQuery.setParameter("value7",employeeEntity.getEmail());
             mutationQuery.setParameter("primaryKeyValue",employeeEntity.getEmpID());
+            mutationQuery.executeUpdate();
+        }catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
+    }
+    @Override
+    public boolean delete(String empID) {
+        try {
+            beginSession();
+            MutationQuery mutationQuery = session.createMutationQuery("delete from EmployeeEntity where empID = :primaryKeyValue");
+            mutationQuery.setParameter("primaryKeyValue",empID);
             mutationQuery.executeUpdate();
         }catch (HibernateException e) {
             return false;

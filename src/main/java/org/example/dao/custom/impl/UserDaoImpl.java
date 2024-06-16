@@ -112,5 +112,19 @@ public class UserDaoImpl implements UserDao {
         }
         return true;
     }
+    @Override
+    public boolean delete(String email) {
+        try {
+            beginSession();
+            MutationQuery mutationQuery = session.createMutationQuery("delete from UserEntity where email = :email");
+            mutationQuery.setParameter("email",email);
+            mutationQuery.executeUpdate();
+        }catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
+    }
 
 }

@@ -1,6 +1,7 @@
 package org.example.bo.custom.impl;
 
 import org.example.bo.custom.EmployeeBo;
+import org.example.bo.custom.UserBo;
 import org.example.dao.Daofactory;
 import org.example.dao.custom.EmployeeDao;
 import org.example.dto.Employee;
@@ -11,7 +12,8 @@ import org.modelmapper.ModelMapper;
 import java.util.List;
 
 public class EmployeeBoImpl implements EmployeeBo {
-    private static final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+    private final EmployeeDao employeeDao = Daofactory.getInstance().getDao(DaoType.EMPLOYEE);
+
     @Override
     public boolean isEmployee(String email) {
         List<Employee> employeeEntities = employeeDao.retrieveByEmail(email);
@@ -43,6 +45,10 @@ public class EmployeeBoImpl implements EmployeeBo {
     @Override
     public boolean replace(Employee employee){
         return employeeDao.replace(new ModelMapper().map(employee, EmployeeEntity.class));
+    }
+    @Override
+    public boolean deleteEmployee(Employee employee) {
+        return employeeDao.delete(employee.getEmpID());
     }
 
 }

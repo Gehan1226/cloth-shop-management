@@ -38,4 +38,10 @@ public class AdminDashboardFormController {
         AdminProfilePageFormcontroller.adminEmail = adminUserEmail;
         AdminProfilePageFormcontroller.primaryStage = loadScreen("view/adminProfilePageForm.fxml");
     }
+
+    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/employeeUpdateRemovePageForm.fxml");
+        HomePageFormController.primaryStage = stage;
+    }
+
 }

@@ -8,14 +8,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.EmployeeBo;
+import org.example.bo.custom.UserBo;
 import org.example.dto.Employee;
 import org.example.util.BoType;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +31,7 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
     public JFXComboBox cmbDistrict;
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
+    private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
     public static Stage primaryStage;
     private String empId;
 
@@ -62,7 +62,6 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
         } catch (IOException e) {
         }
     }
-
     public void btnSaveOnAction(ActionEvent actionEvent) {
         boolean allFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
                 empId,
@@ -77,11 +76,11 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
                     empId,
                     txtFirstName.getText(),
                     txtLastName.getText(),
-                    txtEmail.getText(),
                     txtNicNo.getText(),
                     txtMobileNumber.getText(),
                     cmbProvince.getSelectionModel().getSelectedItem().toString(),
-                    cmbDistrict.getSelectionModel().getSelectedItem().toString()
+                    cmbDistrict.getSelectionModel().getSelectedItem().toString(),
+                    txtEmail.getText()
             );
             if (employeeBo.replace(employee)){
                 new Alert(Alert.AlertType.INFORMATION, "✅ Data Saved!").show();
@@ -95,6 +94,31 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        Employee employee = new Employee(
+                empId,
+                txtFirstName.getText(),
+                txtLastName.getText(),
+                txtNicNo.getText(),
+                txtMobileNumber.getText(),
+                cmbProvince.getSelectionModel().getSelectedItem().toString(),
+                cmbDistrict.getSelectionModel().getSelectedItem().toString(),
+                txtEmail.getText()
+        );
+        boolean isDeletedEmployee = employeeBo.deleteEmployee(employee);
+        boolean isDeletedUserAccount  = userBo.deleteUserAccount(employee);
+        if (isDeletedEmployee && isDeletedUserAccount){
+            txtEmpID.setText("");
+            txtFirstName.setText("");
+            txtLastName.setText("");
+            txtEmail.setText("");
+            txtNicNo.setText("");
+            txtMobileNumber.setText("");
+            cmbProvince.getSelectionModel().clearSelection();
+            cmbDistrict.getSelectionModel().clearSelection();
+            new Alert(Alert.AlertType.INFORMATION, "✅ Employee Deleted!").show();
+        }else {
+            new Alert(Alert.AlertType.ERROR, "❌ Employee Delete Failed!").show();
+        }
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
