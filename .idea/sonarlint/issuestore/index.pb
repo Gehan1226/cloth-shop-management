@@ -71,3 +71,11 @@ x
 Hsrc/main/java/org/example/controller/AdminProfilePageFormcontroller.java,1\b\1b572205d52a36b6966842fcde900cd8aa905dea
 |
 Lsrc/main/java/org/example/controller/EmployeeUpdateRemoveFormController.java,3\5\355dbfccca0ef62b2eec4128d66b2b49df7bb61f
+[
++src/main/java/org/example/dto/Supplier.java,6\e\6e9befbd0c80c9eeb5b4a4afd77460304fd4a5c3
+W
+'src/main/java/org/example/dto/Item.java,6\a\6a098eae3337c7b494d648a0400f121f2f66de4b
+d
+4src/main/java/org/example/entity/SupplierEntity.java,9\0\901ea8d2d3be826ff9e0020a2366406cc670ef57
+`
+0src/main/java/org/example/entity/ItemEntity.java,d\b\db6c6a3e0183c3770cbc7eedc97141b9847b3181
