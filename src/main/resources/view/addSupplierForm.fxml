@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="1034.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserRegistrationFormController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="680.7999633789063" minWidth="10.0" prefWidth="419.19999999999993" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="546.0000213623048" minWidth="10.0" prefWidth="199.99995117187495" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="99.2000732421875" minWidth="10.0" prefWidth="36.800048828125" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="100.79999084472657" minHeight="10.0" prefHeight="94.39999694824219" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="86.39999389648438" minHeight="10.0" prefHeight="64.6" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="276.7999755859375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="43.20002441406251" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="18.199975585937523" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="🏠 Main Menu" textFill="#f2eeee" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="13.0" top="22.0" />
+         </GridPane.margin>
+      </JFXButton>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
+         <children>
+            <Text layoutX="105.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Supplier" wrappingWidth="271.20000000000005">
+               <font>
+                  <Font name="System Bold" size="34.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="67.0" fitWidth="78.0" layoutX="25.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../asset/images/R%20(7).png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <JFXTextField fx:id="txtFirstName" layoutX="34.0" prefHeight="34.0" prefWidth="342.0" promptText="First Name" />
+            <JFXTextField fx:id="txtCompany" layoutX="34.0" layoutY="99.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Company" />
+            <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtMobileNumberValidation" fill="#e40a0a" layoutX="262.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Mobile Number" visible="false" wrappingWidth="152.834228515625">
+               <font>
+                  <Font name="System Bold Italic" size="13.0" />
+               </font>
+            </Text>
+            <JFXTextField fx:id="txtLastName" layoutX="34.0" layoutY="49.0" prefHeight="34.0" prefWidth="342.0" promptText="Last Name" />
+            <JFXTextField fx:id="txtEmail" layoutX="34.0" layoutY="146.0" prefHeight="34.0" prefWidth="342.0" promptText="Email" />
+            <JFXTextField fx:id="txtMobileNumber" layoutX="34.0" layoutY="195.0" onKeyReleased="#txtMobileNoOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Mobile Number" />
+            <JFXComboBox layoutX="34.0" layoutY="248.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Item" />
+            <JFXButton layoutX="191.0" layoutY="248.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+         <children>
+            <JFXButton fx:id="btnResetPassword" layoutX="94.0" layoutY="14.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Save Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <JFXButton onAction="#btnDashboardOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="📅  Dashboard" textFill="#f2eeee" GridPane.rowIndex="1" GridPane.valignment="TOP">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <GridPane.margin>
+            <Insets left="13.0" />
+         </GridPane.margin>
+      </JFXButton>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <Text layoutX="53.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supplier ID :">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtSupplierID" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <children>
+            <JFXButton layoutX="11.0" onAction="#btnSearchSupplierOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnSupplierListOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Supplier List" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnUpdateRemoveOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove Supplier" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+         <children>
+            <TableView fx:id="tblItems" editable="true" layoutX="-37.0" layoutY="39.0" prefHeight="234.0" prefWidth="282.0">
+              <columns>
+                <TableColumn fx:id="colItemId" editable="false" minWidth="7.200012385845184" prefWidth="76.79999160766602" resizable="false" text="Item Id" />
+                  <TableColumn fx:id="colItemName" prefWidth="202.40000915527344" resizable="false" text="Item Name" />
+              </columns>
+            </TableView>
+            <Text fill="#2a587b" layoutX="54.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Provided Items" wrappingWidth="123.2342529296875">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</GridPane>

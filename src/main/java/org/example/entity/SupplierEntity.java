@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.dto.Item;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -23,5 +25,5 @@ public class SupplierEntity {
     private String email;
     private String mobileNumber;
     @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
 }

@@ -20,5 +20,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
         <mapping class="org.example.entity.UserEntity" />
         <mapping class="org.example.entity.EmployeeEntity"/>
+        <mapping class="org.example.entity.ItemEntity"/>
+        <mapping class="org.example.entity.SupplierEntity"/>
     </session-factory>
 </hibernate-configuration>

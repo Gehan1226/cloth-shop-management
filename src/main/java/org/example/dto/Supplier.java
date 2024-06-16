@@ -17,5 +17,5 @@ public class Supplier {
     private String company;
     private String email;
     private String mobileNumber;
-    private List<Item> itemList;
+    private List<Item> itemList = new ArrayList<>();
 }

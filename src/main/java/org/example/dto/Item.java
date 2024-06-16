@@ -14,5 +14,4 @@ public class Item {
     private Double price;
     private Integer qty;
     private Supplier supplier;
-
 }
