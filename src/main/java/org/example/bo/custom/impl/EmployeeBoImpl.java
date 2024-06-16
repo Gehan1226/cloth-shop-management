@@ -36,6 +36,13 @@ public class EmployeeBoImpl implements EmployeeBo {
         return employeeDao.retrieveByEmail(email).get(0);
 
     }
-
+    @Override
+    public Employee retrieveById(String empID){
+        return employeeDao.retrieveById(empID);
+    }
+    @Override
+    public boolean replace(Employee employee){
+        return employeeDao.replace(new ModelMapper().map(employee, EmployeeEntity.class));
+    }
 
 }

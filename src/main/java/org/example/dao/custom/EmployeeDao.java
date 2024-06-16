@@ -11,4 +11,5 @@ public interface EmployeeDao extends CrudDao<EmployeeEntity> {
     List<Employee> retrieveByEmail(String email);
     Employee retrieveById(String empId);
     Employee retrieveLastRow();
+    boolean replace(EmployeeEntity employeeEntity);
 }

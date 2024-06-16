@@ -7,4 +7,5 @@ public interface DataValidationBo extends SuperBo {
     boolean isValidPassword(String password);
     boolean isValidMobileNumber(String mobileNo);
     boolean isAllFieldsNotEmpty(String ...values);
+    boolean isValidEmpID(String empID);
 }

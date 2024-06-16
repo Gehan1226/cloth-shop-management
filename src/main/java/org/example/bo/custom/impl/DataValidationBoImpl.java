@@ -9,7 +9,10 @@ public class DataValidationBoImpl implements DataValidationBo {
     private static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-
+    @Override
+    public boolean isValidEmpID(String empID) {
+        return empID.matches("^E\\d+$");
+    }
     @Override
     public boolean isAllFieldsNotEmpty(String... values) {
         for (int i=0;i< values.length;i++){

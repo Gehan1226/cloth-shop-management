@@ -73,7 +73,6 @@ public class AdminProfilePageFormcontroller implements Initializable {
     public void btnDashboardOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();
-            ChangePasswordFormController.employeeUserEmail = adminEmail;
             URL fxmlLocation = getClass().getClassLoader().getResource("view/adminDashboard.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlLocation);
             Parent parent = loader.load();

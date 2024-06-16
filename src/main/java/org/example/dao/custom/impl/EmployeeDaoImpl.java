@@ -9,6 +9,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.MutationQuery;
 import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
 
@@ -35,19 +36,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> retrieveByEmail(String email) {
+        List<Employee> employeeList = new ArrayList<>();
         try{
             beginSession();
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity where email = :email", EmployeeEntity.class);
             query.setParameter("email", email);
             List<EmployeeEntity> employeeEntityList = query.getResultList();
-            List<Employee> employeeList = new ArrayList<>();
             employeeList.add(new ModelMapper().map(employeeEntityList.get(0), Employee.class));
-            return employeeList;
         }catch (HibernateException e){
             throw new RuntimeException("Error executing Hibernate query", e);
         }finally {
             closeSession();
         }
+        return employeeList;
     }
     @Override
     public boolean save(EmployeeEntity dto) {
@@ -81,15 +82,42 @@ public class EmployeeDaoImpl implements EmployeeDao {
             beginSession();
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity order by id DESC", EmployeeEntity.class);
             query.setMaxResults(1);
-            employeeEntity= (EmployeeEntity) query.uniqueResult();
+            employeeEntity= query.uniqueResult();
         }catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-
         return employeeEntity != null ? (new ModelMapper().map(employeeEntity,Employee.class)) : null;
     }
-
-
+    @Override
+    public boolean replace(EmployeeEntity employeeEntity){
+        String hql = "update EmployeeEntity " +
+                     "set firstName = :value1," +
+                        " lastName = :value2," +
+                        " nic = :value3," +
+                        " mobileNumber = :value4 ," +
+                         "province = :value5," +
+                        ",district = :value6 ," +
+                        "email = :value7" +
+                     "WHERE primaryKey = :primaryKeyValue";
+        try {
+            beginSession();
+            MutationQuery mutationQuery = session.createMutationQuery(hql);
+            mutationQuery.setParameter("value1",employeeEntity.getFirstName());
+            mutationQuery.setParameter("value2",employeeEntity.getLastName());
+            mutationQuery.setParameter("value3",employeeEntity.getNic());
+            mutationQuery.setParameter("value4",employeeEntity.getMobileNumber());
+            mutationQuery.setParameter("value5",employeeEntity.getProvince());
+            mutationQuery.setParameter("value6",employeeEntity.getDistrict());
+            mutationQuery.setParameter("value7",employeeEntity.getEmail());
+            mutationQuery.setParameter("primaryKeyValue",employeeEntity.getEmpID());
+            mutationQuery.executeUpdate();
+        }catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
+    }
 }

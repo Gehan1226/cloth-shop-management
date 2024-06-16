@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="569.0" prefWidth="978.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.EmployeeUpdateRemoveFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="991.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.EmployeeUpdateRemoveFormController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
@@ -23,8 +24,8 @@
    <rowConstraints>
       <RowConstraints maxHeight="100.79999084472657" minHeight="10.0" prefHeight="94.39999694824219" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="86.39999389648438" minHeight="10.0" prefHeight="64.6" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="276.7999755859375" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="43.20002441406251" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="333.3999755859375" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="49.4000244140625" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="18.199975585937523" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
@@ -54,16 +55,6 @@
          <children>
             <JFXTextField fx:id="txtFirstName" layoutX="104.0" prefHeight="34.0" prefWidth="299.0" />
             <JFXTextField fx:id="txtEmail" layoutX="103.0" layoutY="99.0" prefHeight="34.0" prefWidth="299.0" />
-            <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtMobileNumberValidation" fill="#e40a0a" layoutX="262.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Mobile Number" visible="false" wrappingWidth="152.834228515625">
-               <font>
-                  <Font name="System Bold Italic" size="13.0" />
-               </font>
-            </Text>
             <JFXTextField fx:id="txtLastName" layoutX="103.0" layoutY="49.0" prefHeight="34.0" prefWidth="299.0" />
             <JFXTextField fx:id="txtNicNo" layoutX="103.0" layoutY="146.0" prefHeight="34.0" prefWidth="299.0" />
             <JFXTextField fx:id="txtMobileNumber" layoutX="129.0" layoutY="194.0" prefHeight="34.0" prefWidth="282.0" />
@@ -92,6 +83,18 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
+            <JFXComboBox fx:id="cmbProvince" layoutX="93.0" layoutY="254.0" prefHeight="26.0" prefWidth="154.0" promptText="Select Province" />
+            <Text layoutX="13.0" layoutY="273.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Province :">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="15.0" layoutY="317.0" strokeType="OUTSIDE" strokeWidth="0.0" text="District :">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <JFXComboBox fx:id="cmbDistrict" layoutX="93.0" layoutY="299.0" prefHeight="26.0" prefWidth="153.0" promptText="Select District" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
