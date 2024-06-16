@@ -83,3 +83,11 @@ t
 Dsrc/main/java/org/example/controller/AddSupplieerFormcontroller.java,3\e\3e77b99ecbbb20636659883bb7b400f318efa81d
 o
 ?src/main/java/org/example/controller/AddItemFormController.java,b\5\b51770cd02fdd9a7c9ae4e7035fbe601fe922db3
+_
+/src/main/java/org/example/bo/custom/ItemBo.java,1\2\1270673f0439353d040d9dde59f874292749097a
+h
+8src/main/java/org/example/bo/custom/impl/ItemBoImpl.java,3\0\302ca47b943ced29d6c406f55dcd4b7763f9f764
+a
+1src/main/java/org/example/dao/custom/ItemDao.java,a\6\a637e47f192b48e3b42d1cb47e738567b65b2c25
+j
+:src/main/java/org/example/dao/custom/impl/ItemDaoImpl.java,0\a\0ab47a5c12298b9ef98e09a456b631d99495167f

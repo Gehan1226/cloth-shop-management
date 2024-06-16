@@ -8,9 +8,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public class AddSupplieerFormcontroller {
-
+    public static Stage primaryStage;
     public JFXTextField txtFirstName;
     public JFXTextField txtCompany;
     public Text txtEmailValidation;

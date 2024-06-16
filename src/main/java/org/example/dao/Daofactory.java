@@ -1,6 +1,7 @@
 package org.example.dao;
 
 import org.example.dao.custom.impl.EmployeeDaoImpl;
+import org.example.dao.custom.impl.ItemDaoImpl;
 import org.example.dao.custom.impl.UserDaoImpl;
 import org.example.util.DaoType;
 
@@ -16,6 +17,7 @@ public class Daofactory {
         switch (type){
             case USER:return (T) new UserDaoImpl();
             case EMPLOYEE:return (T) new EmployeeDaoImpl();
+            case ITEM:return (T) new ItemDaoImpl();
         }
         return null;
     }
