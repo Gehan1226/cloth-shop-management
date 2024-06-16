@@ -41,7 +41,7 @@ public class AdminDashboardFormController {
 
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
         Stage stage = loadScreen("view/employeeUpdateRemovePageForm.fxml");
-        HomePageFormController.primaryStage = stage;
+        EmployeeUpdateRemoveFormController.primaryStage = stage;
     }
 
 }

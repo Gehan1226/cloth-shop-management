@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -8,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
@@ -29,9 +32,13 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
     public JFXTextField txtEmpID;
     public JFXComboBox cmbProvince;
     public JFXComboBox cmbDistrict;
+    public Text txtEmailValid;
+    public Text txtmobileNumberValid;
+    public JFXButton btnSave;
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
     private UserBo userBo = BoFactory.getInstance().getBo(BoType.USER);
+
     public static Stage primaryStage;
     private String empId;
 
@@ -71,6 +78,7 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
                 txtNicNo.getText(),
                 txtMobileNumber.getText()
         );
+
         if(allFieldsNotEmpty){
             Employee employee = new Employee(
                     empId,
@@ -83,6 +91,14 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
                     txtEmail.getText()
             );
             if (employeeBo.replace(employee)){
+                txtEmpID.setText("");
+                txtFirstName.setText("");
+                txtLastName.setText("");
+                txtEmail.setText("");
+                txtNicNo.setText("");
+                txtMobileNumber.setText("");
+                cmbProvince.getSelectionModel().clearSelection();
+                cmbDistrict.getSelectionModel().clearSelection();
                 new Alert(Alert.AlertType.INFORMATION, "✅ Data Saved!").show();
             }
             else {
@@ -138,15 +154,19 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
     public void btnSearchOnAction(ActionEvent actionEvent) {
         if (dataValidationBo.isValidEmpID(txtEmpID.getText())){
             Employee employee = employeeBo.retrieveById(txtEmpID.getText());
-            txtFirstName.setText(employee.getFirstName());
-            txtLastName.setText(employee.getLastName());
-            txtEmail.setText(employee.getEmail());
-            txtNicNo.setText(employee.getNic());
-            txtMobileNumber.setText(employee.getMobileNumber());
-            cmbProvince.getSelectionModel().select(employee.getProvince());
-            cmbDistrict.getSelectionModel().select(employee.getDistrict());
-            empId = employee.getEmpID();
-            new Alert(Alert.AlertType.INFORMATION, "✅ Data Founded! Now you can update data.").show();
+            if (employee != null){
+                txtFirstName.setText(employee.getFirstName());
+                txtLastName.setText(employee.getLastName());
+                txtEmail.setText(employee.getEmail());
+                txtNicNo.setText(employee.getNic());
+                txtMobileNumber.setText(employee.getMobileNumber());
+                cmbProvince.getSelectionModel().select(employee.getProvince());
+                cmbDistrict.getSelectionModel().select(employee.getDistrict());
+                empId = employee.getEmpID();
+                new Alert(Alert.AlertType.INFORMATION, "✅ Data Founded! Now you can update data.").show();
+                return;
+            }
+            new Alert(Alert.AlertType.INFORMATION, "❌ Data Not Found!").show();
             return;
         }
         new Alert(Alert.AlertType.ERROR, "❌ Wrong ID").show();
@@ -156,5 +176,27 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
     }
 
     public void btnUserListOnAction(ActionEvent actionEvent) {
+    }
+
+    public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
+        boolean isValidEmail = dataValidationBo.isValidEmail(txtEmail.getText());
+        if (!isValidEmail){
+            txtEmailValid.setVisible(true);
+            btnSave.setDisable(true);
+            return;
+        }
+        btnSave.setDisable(false);
+        txtEmailValid.setVisible(false);
+    }
+
+    public void txtMobileNumberOnKeyReleased(KeyEvent keyEvent) {
+        boolean isValidMobileNumber = dataValidationBo.isValidMobileNumber(txtMobileNumber.getText());
+        if (!isValidMobileNumber){
+            txtmobileNumberValid.setVisible(true);
+            btnSave.setDisable(true);
+            return;
+        }
+        btnSave.setDisable(false);
+        txtmobileNumberValid.setVisible(false);
     }
 }

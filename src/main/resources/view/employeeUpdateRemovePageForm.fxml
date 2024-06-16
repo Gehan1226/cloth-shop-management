@@ -54,10 +54,10 @@
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <JFXTextField fx:id="txtFirstName" layoutX="104.0" prefHeight="34.0" prefWidth="299.0" />
-            <JFXTextField fx:id="txtEmail" layoutX="103.0" layoutY="99.0" prefHeight="34.0" prefWidth="299.0" />
+            <JFXTextField fx:id="txtEmail" layoutX="103.0" layoutY="107.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="299.0" />
             <JFXTextField fx:id="txtLastName" layoutX="103.0" layoutY="49.0" prefHeight="34.0" prefWidth="299.0" />
             <JFXTextField fx:id="txtNicNo" layoutX="103.0" layoutY="146.0" prefHeight="34.0" prefWidth="299.0" />
-            <JFXTextField fx:id="txtMobileNumber" layoutX="129.0" layoutY="194.0" prefHeight="34.0" prefWidth="282.0" />
+            <JFXTextField fx:id="txtMobileNumber" layoutX="129.0" layoutY="194.0" onKeyReleased="#txtMobileNumberOnKeyReleased" prefHeight="34.0" prefWidth="282.0" />
             <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name :">
                <font>
                   <Font name="System Bold" size="14.0" />
@@ -95,11 +95,21 @@
                </font>
             </Text>
             <JFXComboBox fx:id="cmbDistrict" layoutX="93.0" layoutY="299.0" prefHeight="26.0" prefWidth="153.0" promptText="Select District" />
+            <Text fx:id="txtEmailValid" fill="#ec0b0b" layoutX="309.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Email" visible="false" wrappingWidth="76.05107879638672">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtmobileNumberValid" fill="#ec0b0b" layoutX="269.0" layoutY="211.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Invalid Mobile Number" visible="false" wrappingWidth="132.05107879638672">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton layoutX="14.0" layoutY="12.0" onAction="#btnSaveOnAction" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #5F7BDE;" text="Save Changes" textFill="#f2eeee">
+            <JFXButton fx:id="btnSave" layoutX="14.0" layoutY="12.0" onAction="#btnSaveOnAction" prefHeight="34.0" prefWidth="138.0" style="-fx-background-color: #5F7BDE;" text="Save Changes" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
