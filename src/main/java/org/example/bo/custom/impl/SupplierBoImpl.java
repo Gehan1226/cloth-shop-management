@@ -5,7 +5,11 @@ import org.example.dao.Daofactory;
 import org.example.dao.custom.SupplierDao;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
+import org.example.entity.ItemEntity;
+import org.example.entity.SupplierEntity;
 import org.example.util.DaoType;
+import org.hibernate.HibernateException;
+import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,5 +33,9 @@ public class SupplierBoImpl implements SupplierBo {
             return "S"+(Integer.parseInt(supplier.getSupID().substring(1))+1);
         }
         return "S1";
+    }
+    @Override
+    public boolean saveSupplier(Supplier supplier,List<String> itemIDS){
+        return supplierDao.save(new ModelMapper().map(supplier,SupplierEntity.class),itemIDS);
     }
 }

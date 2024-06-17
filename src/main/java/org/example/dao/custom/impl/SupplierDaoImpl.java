@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class SupplierDaoImpl implements SupplierDao {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         transaction = session.beginTransaction();
     }
+
     private void closeSession() {
         if (transaction != null && transaction.isActive()) {
             transaction.commit();
@@ -30,40 +32,44 @@ public class SupplierDaoImpl implements SupplierDao {
             session.close();
         }
     }
+
     @Override
     public boolean save(SupplierEntity dto) {
         return false;
     }
+
     @Override
-    public List<Supplier> retrieveAll(){
+    public List<Supplier> retrieveAll() {
         List<Supplier> supplierList = new ArrayList<>();
         try {
             beginSession();
             Query<SupplierEntity> query = session.createQuery("from SupplierEntity", SupplierEntity.class);
             List<SupplierEntity> resultList = query.getResultList();
-            for(SupplierEntity entity : resultList){
+            for (SupplierEntity entity : resultList) {
                 entity.setItemList(null);
-                supplierList.add(new ModelMapper().map(entity,Supplier.class));
+                supplierList.add(new ModelMapper().map(entity, Supplier.class));
             }
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
         return supplierList;
     }
-    public Supplier retrieveByID(String supplierID){
+
+    public Supplier retrieveByID(String supplierID) {
         SupplierEntity supplierEntity = null;
         try {
             beginSession();
             supplierEntity = session.get(SupplierEntity.class, supplierID);
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        return new ModelMapper().map(supplierEntity,Supplier.class);
+        return new ModelMapper().map(supplierEntity, Supplier.class);
     }
+
     @Override
     public Supplier retrieveLastRow() {
         SupplierEntity supplierEntity;
@@ -72,14 +78,31 @@ public class SupplierDaoImpl implements SupplierDao {
             Query<SupplierEntity> query = session.createQuery("from SupplierEntity order by id DESC", SupplierEntity.class);
             query.setMaxResults(1);
             supplierEntity = query.uniqueResult();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        if (supplierEntity!= null){
+        if (supplierEntity != null) {
             supplierEntity.setItemList(null);
         }
-        return supplierEntity != null ? (new ModelMapper().map(supplierEntity,Supplier.class)) : null;
+        return supplierEntity != null ? (new ModelMapper().map(supplierEntity, Supplier.class)) : null;
+    }
+    @Override
+    public boolean save(SupplierEntity supplierEntity, List<String> itemIDS) {
+        try {
+            beginSession();
+            for (int i = 0; i < itemIDS.size(); i++) {
+                ItemEntity itemEntity = session.get(ItemEntity.class, itemIDS.get(i));
+                itemEntity.getSupplierList().add(supplierEntity);
+                supplierEntity.getItemList().add(itemEntity);
+                session.persist(supplierEntity);
+            }
+        } catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
     }
 }
