@@ -12,6 +12,7 @@ import org.example.util.BoType;
 import org.example.util.DaoType;
 import org.modelmapper.ModelMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemBoImpl implements ItemBo {
@@ -26,5 +27,13 @@ public class ItemBoImpl implements ItemBo {
     }
     public boolean saveItem(Item item, List<String> supIDS){
         return itemDao.save(new ModelMapper().map(item, ItemEntity.class),supIDS);
+    }
+    public List<String> getAllIDSAndNames() {
+        List<String> itemIDSandNames = new ArrayList<>();
+        List<Item> itemList = itemDao.retrieveAll();
+        for (Item item : itemList){
+            itemIDSandNames.add(item.getItemId()+" - "+item.getItemName());
+        }
+        return itemIDSandNames;
     }
 }

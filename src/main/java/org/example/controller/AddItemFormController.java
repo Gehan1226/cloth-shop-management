@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
@@ -76,8 +77,11 @@ public class AddItemFormController implements Initializable {
                     Integer.parseInt(txtQTY.getText()),
                     null
             );
-            itemBo.saveItem(item,suplierIDS);
-
+           if(itemBo.saveItem(item, suplierIDS)){
+               new Alert(Alert.AlertType.INFORMATION, "✅ Item Saved!").show();
+                return;
+           }
+            new Alert(Alert.AlertType.ERROR, "❌ Item Save Failed!").show();
         }
 
     }

@@ -11,7 +11,7 @@ import java.util.List;
 public class SupplierBoImpl implements SupplierBo {
     private final SupplierDao supplierDao = Daofactory.getInstance().getDao(DaoType.SUPPLIER);
     @Override
-    public List<String> getAllSupplierIDS() {
+    public List<String> getAllIDSAndNames() {
         System.out.println("he");
         List<String> supplierIDS = new ArrayList<>();
 //        List<Supplier> supplierList = supplierDao.retrieveAll();
