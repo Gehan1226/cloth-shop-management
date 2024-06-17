@@ -51,10 +51,6 @@ public class AddSupplieerFormcontroller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colItemId.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
         colItemName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
-//        String stringOne = "First String";
-//        String stringTwo = "Second String";
-//        String[] row = { stringOne, stringTwo };
-//        tblItems.getItems().add(row);
         txtSupplierID.setText(supplierBo.genarateSupplierID());
         allIDSAndNames = itemBo.getAllIDSAndNames();
         cmbItem.getItems().addAll(allIDSAndNames);

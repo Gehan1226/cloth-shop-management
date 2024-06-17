@@ -3,6 +3,7 @@ package org.example.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -32,27 +33,30 @@ public class AddItemFormController implements Initializable {
     public JFXComboBox cmbSupplierID;
     public Text txtItemID;
     public JFXButton btnSave;
-    public TableView tblSuppliers;
-    public TableColumn colSupplierID;
+    public TableView<String[]> tblSuppliers = new TableView<>();;
+    public TableColumn<String[], String> colSupplierID;
+    public TableColumn<String[], String> colSupplierName;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
     private List<String> suplierIDS = new ArrayList<>();
+    private List<String> allIDSAndNames ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        colSupplierID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
+        colSupplierName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
         txtItemID.setText(itemBo.genarateItemID());
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
-        cmbSupplierID.getItems().add("Select Supplier ID");
-        cmbSupplierID.getItems().addAll(supplierBo.getAllIDSAndNames());
+        allIDSAndNames = supplierBo.getAllIDSAndNames();
+        cmbSupplierID.getItems().addAll(allIDSAndNames);
 
         txtPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*([\\.]\\d*)?")) {
                 txtPrice.setText(oldValue);
             }
         });
-
         txtQTY.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 txtQTY.setText(oldValue);
@@ -75,7 +79,7 @@ public class AddItemFormController implements Initializable {
                     cmbSize.getSelectionModel().getSelectedItem().toString(),
                     Double.parseDouble(txtPrice.getText()),
                     Integer.parseInt(txtQTY.getText()),
-                    null
+                    new ArrayList<>()
             );
            if(itemBo.saveItem(item, suplierIDS)){
                new Alert(Alert.AlertType.INFORMATION, "✅ Item Saved!").show();
@@ -83,7 +87,6 @@ public class AddItemFormController implements Initializable {
            }
             new Alert(Alert.AlertType.ERROR, "❌ Item Save Failed!").show();
         }
-
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -100,6 +103,21 @@ public class AddItemFormController implements Initializable {
 
 
     public void btnAddOnAction(ActionEvent actionEvent) {
-        suplierIDS.add(cmbSupplierID.getSelectionModel().getSelectedItem().toString());
+        if (cmbSupplierID.getValue() != null){
+            Object selectedItem = cmbSupplierID.getSelectionModel().getSelectedItem();
+            String cmbValue = selectedItem.toString();
+            String[] arr = cmbValue.split(" - ");
+            tblSuppliers.getItems().add(arr);
+            cmbSupplierID.getItems().remove(selectedItem);
+            cmbSupplierID.getSelectionModel().clearSelection();
+            suplierIDS.add(arr[0]);
+        }
+    }
+
+    public void btnClearOnAction(ActionEvent actionEvent) {
+        tblSuppliers.getItems().clear();
+        cmbSupplierID.getItems().clear();
+        cmbSupplierID.getItems().addAll(allIDSAndNames);
+        suplierIDS.clear();
     }
 }

@@ -18,13 +18,12 @@ public class SupplierBoImpl implements SupplierBo {
     private final SupplierDao supplierDao = Daofactory.getInstance().getDao(DaoType.SUPPLIER);
     @Override
     public List<String> getAllIDSAndNames() {
-        System.out.println("he");
-        List<String> supplierIDS = new ArrayList<>();
-//        List<Supplier> supplierList = supplierDao.retrieveAll();
-//        for (Supplier supplier : supplierList){
-//            supplierIDS.add(supplier.getSupID());
-//        }
-        return supplierIDS;
+        List<String> supplierIDSAndNames = new ArrayList<>();
+        List<Supplier> supplierList = supplierDao.retrieveAll();
+        for (Supplier supplier : supplierList){
+            supplierIDSAndNames.add(supplier.getSupID()+" - "+supplier.getFirstName()+" "+supplier.getLastName());
+        }
+        return supplierIDSAndNames;
     }
     @Override
     public String genarateSupplierID() {
