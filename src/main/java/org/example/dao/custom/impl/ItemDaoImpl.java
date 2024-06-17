@@ -6,12 +6,15 @@ import org.example.dto.Employee;
 import org.example.dto.Item;
 import org.example.entity.EmployeeEntity;
 import org.example.entity.ItemEntity;
+import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 public class ItemDaoImpl implements ItemDao {
     private Session session;
@@ -30,10 +33,6 @@ public class ItemDaoImpl implements ItemDao {
         }
     }
     @Override
-    public boolean save(ItemEntity dto) {
-        return false;
-    }
-    @Override
     public Item retrieveLastRow() {
         ItemEntity itemEntity;
         try {
@@ -47,5 +46,24 @@ public class ItemDaoImpl implements ItemDao {
             closeSession();
         }
         return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
+    }
+    public boolean save(ItemEntity itemEntity, List<String> supplierIDS){
+        try {
+            beginSession();
+            if (!supplierIDS.isEmpty()){
+                for (int i=0;i<supplierIDS.size();i++){
+                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierIDS.get(i));
+                    supplierEntity.getItemList().add(itemEntity);
+                    session.persist(itemEntity);
+                }
+            }else {
+                session.persist(itemEntity);
+            }
+        }catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
     }
 }

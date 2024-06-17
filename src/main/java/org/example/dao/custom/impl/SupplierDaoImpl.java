@@ -50,4 +50,16 @@ public class SupplierDaoImpl implements SupplierDao {
         }
         return supplierList;
     }
+    public Supplier retrieveByID(String supplierID){
+        SupplierEntity supplierEntity = null;
+        try {
+            beginSession();
+            supplierEntity = session.get(SupplierEntity.class, supplierID);
+        }catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return new ModelMapper().map(supplierEntity,Supplier.class);
+    }
 }

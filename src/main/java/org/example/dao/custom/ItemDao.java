@@ -5,6 +5,9 @@ import org.example.dto.Employee;
 import org.example.dto.Item;
 import org.example.entity.ItemEntity;
 
-public interface ItemDao extends CrudDao<ItemEntity> {
+import java.util.List;
+
+public interface ItemDao{
     Item retrieveLastRow();
+    boolean save(ItemEntity itemEntity, List<String> supplierIDS);
 }

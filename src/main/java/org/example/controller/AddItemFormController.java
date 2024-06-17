@@ -5,6 +5,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
@@ -16,6 +18,7 @@ import org.example.dto.Supplier;
 import org.example.util.BoType;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -28,9 +31,12 @@ public class AddItemFormController implements Initializable {
     public JFXComboBox cmbSupplierID;
     public Text txtItemID;
     public JFXButton btnSave;
+    public TableView tblSuppliers;
+    public TableColumn colSupplierID;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
+    private List<String> suplierIDS = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,30 +62,23 @@ public class AddItemFormController implements Initializable {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
-//        boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
-//                txtItemName.getText(),
-//                txtPrice.getText(),
-//                txtQTY.getText()
-//        );
-//        Supplier supplier = null;
-//        if (!cmbSupplierID.getSelectionModel().isEmpty()){
-//            supId = cmbSupplierID.getSelectionModel().getSelectedItem().toString();
-//            if (!supId.equals("Select Supplier ID")){
-//                supplier = new Supplier();
-//
-//            }
-//        }
-//        if (isAllFieldsNotEmpty && !cmbSize.getSelectionModel().isEmpty()){
-//            Item item = new Item(
-//                    txtItemID.getText(),
-//                    txtItemName.getText(),
-//                    cmbSize.getSelectionModel().getSelectedItem().toString(),
-//                    Double.parseDouble(txtPrice.getText()),
-//                    Integer.parseInt(txtQTY.getText()),
-//                    supplier
-//            );
-//
-//        }
+        boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
+                txtItemName.getText(),
+                txtPrice.getText(),
+                txtQTY.getText()
+        );
+        if (isAllFieldsNotEmpty && !cmbSize.getSelectionModel().isEmpty()){
+            Item item = new Item(
+                    txtItemID.getText(),
+                    txtItemName.getText(),
+                    cmbSize.getSelectionModel().getSelectedItem().toString(),
+                    Double.parseDouble(txtPrice.getText()),
+                    Integer.parseInt(txtQTY.getText()),
+                    null
+            );
+            itemBo.saveItem(item,suplierIDS);
+
+        }
 
     }
 
@@ -96,5 +95,7 @@ public class AddItemFormController implements Initializable {
     }
 
 
-
+    public void btnAddOnAction(ActionEvent actionEvent) {
+        suplierIDS.add(cmbSupplierID.getSelectionModel().getSelectedItem().toString());
+    }
 }

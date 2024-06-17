@@ -4,6 +4,8 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="567.0" prefWidth="1034.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AddItemFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="618.0" prefWidth="1040.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.AddItemFormController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
@@ -51,23 +53,33 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <AnchorPane prefHeight="330.0" prefWidth="434.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <JFXTextField fx:id="txtItemName" layoutX="34.0" layoutY="34.0" prefHeight="34.0" prefWidth="342.0" promptText="Item Name" />
-            <JFXTextField fx:id="txtQTY" layoutX="34.0" layoutY="146.0" prefHeight="34.0" prefWidth="342.0" promptText="QTY on hand " />
-            <JFXTextField fx:id="txtPrice" layoutX="34.0" layoutY="91.0" prefHeight="34.0" prefWidth="342.0" promptText="Price per One" />
-            <JFXComboBox fx:id="cmbSize" layoutX="34.0" layoutY="207.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Size" />
-            <JFXComboBox fx:id="cmbSupplierID" layoutX="217.0" layoutY="207.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Supplier ID" />
-            <Text fill="#1a37ff" layoutX="365.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*optional" wrappingWidth="54.13671875">
+            <JFXTextField fx:id="txtItemName" layoutX="34.0" layoutY="-10.0" prefHeight="34.0" prefWidth="342.0" promptText="Item Name" />
+            <JFXTextField fx:id="txtQTY" layoutX="34.0" layoutY="85.0" prefHeight="34.0" prefWidth="342.0" promptText="QTY on hand " />
+            <JFXTextField fx:id="txtPrice" layoutX="34.0" layoutY="37.0" prefHeight="34.0" prefWidth="342.0" promptText="Price per One" />
+            <JFXComboBox fx:id="cmbSize" layoutX="34.0" layoutY="135.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Size" />
+            <JFXComboBox fx:id="cmbSupplierID" layoutX="217.0" layoutY="136.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Supplier ID" />
+            <JFXButton layoutX="361.0" layoutY="137.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: #1679AB;" text="ADD" textFill="#f7f5f5">
                <font>
-                  <Font name="System Bold Italic" size="12.0" />
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <TableView fx:id="tblSuppliers" layoutX="72.0" layoutY="211.0" prefHeight="110.0" prefWidth="262.0">
+              <columns>
+                <TableColumn fx:id="colSupplierID" editable="false" prefWidth="261.59997406005857" text="Supplier ID" />
+              </columns>
+            </TableView>
+            <Text fill="#251ed4" layoutX="171.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers">
+               <font>
+                  <Font name="System Bold" size="15.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton fx:id="btnSave" layoutX="94.0" layoutY="14.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Save Item" textFill="#f2eeee">
+            <JFXButton fx:id="btnSave" layoutX="123.0" layoutY="25.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Save Item" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -84,12 +96,12 @@
       </JFXButton>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Text layoutX="87.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item ID :">
+            <Text layoutX="111.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item ID :">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Text>
-            <Text fx:id="txtItemID" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
+            <Text fx:id="txtItemID" layoutX="185.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

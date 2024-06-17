@@ -22,5 +22,4 @@ public class ItemEntity {
     private Integer qty;
     @ManyToMany(mappedBy = "itemList")
     private List<SupplierEntity> supplierList = new ArrayList<>();
-
 }

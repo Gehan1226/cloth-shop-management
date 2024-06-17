@@ -7,8 +7,12 @@ import org.example.dao.Daofactory;
 import org.example.dao.custom.ItemDao;
 import org.example.dao.custom.UserDao;
 import org.example.dto.Item;
+import org.example.entity.ItemEntity;
 import org.example.util.BoType;
 import org.example.util.DaoType;
+import org.modelmapper.ModelMapper;
+
+import java.util.List;
 
 public class ItemBoImpl implements ItemBo {
     private final ItemDao itemDao = Daofactory.getInstance().getDao(DaoType.ITEM);
@@ -20,7 +24,7 @@ public class ItemBoImpl implements ItemBo {
         }
         return "I1";
     }
-    public boolean saveItem(Item item,String supId){
-        return true;
+    public boolean saveItem(Item item, List<String> supIDS){
+        return itemDao.save(new ModelMapper().map(item, ItemEntity.class),supIDS);
     }
 }
