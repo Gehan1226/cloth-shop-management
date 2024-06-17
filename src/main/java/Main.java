@@ -10,7 +10,7 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/home_page_from.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("view/addItemForm.fxml"))));
         stage.show();
         HomePageFormController.primaryStage = stage;
     }

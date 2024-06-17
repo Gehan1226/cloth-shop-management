@@ -1,9 +1,6 @@
 package org.example.entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,6 +21,11 @@ public class SupplierEntity {
     private String company;
     private String email;
     private String mobileNumber;
-    @OneToMany(mappedBy = "supplierEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "supplierList",
+            joinColumns = { @JoinColumn(name = "supID") },
+            inverseJoinColumns = { @JoinColumn(name = "itemId") }
+    )
     private List<ItemEntity> itemList = new ArrayList<>();
 }

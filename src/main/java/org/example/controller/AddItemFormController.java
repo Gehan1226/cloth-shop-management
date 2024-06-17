@@ -8,8 +8,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
+import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.SupplierBo;
+import org.example.dto.Item;
+import org.example.dto.Supplier;
 import org.example.util.BoType;
 
 import java.net.URL;
@@ -26,21 +29,58 @@ public class AddItemFormController implements Initializable {
     public Text txtItemID;
     public JFXButton btnSave;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
+    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtItemID.setText(itemBo.genarateItemID());
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
+        cmbSupplierID.getItems().add("Select Supplier ID");
         cmbSupplierID.getItems().addAll(supplierBo.getAllSupplierIDS());
 
+        txtPrice.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*([\\.]\\d*)?")) {
+                txtPrice.setText(oldValue);
+            }
+        });
+
+        txtQTY.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                txtQTY.setText(oldValue);
+            }
+        });
     }
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
     }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
+//        boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
+//                txtItemName.getText(),
+//                txtPrice.getText(),
+//                txtQTY.getText()
+//        );
+//        Supplier supplier = null;
+//        if (!cmbSupplierID.getSelectionModel().isEmpty()){
+//            supId = cmbSupplierID.getSelectionModel().getSelectedItem().toString();
+//            if (!supId.equals("Select Supplier ID")){
+//                supplier = new Supplier();
+//
+//            }
+//        }
+//        if (isAllFieldsNotEmpty && !cmbSize.getSelectionModel().isEmpty()){
+//            Item item = new Item(
+//                    txtItemID.getText(),
+//                    txtItemName.getText(),
+//                    cmbSize.getSelectionModel().getSelectedItem().toString(),
+//                    Double.parseDouble(txtPrice.getText()),
+//                    Integer.parseInt(txtQTY.getText()),
+//                    supplier
+//            );
+//
+//        }
+
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -54,6 +94,7 @@ public class AddItemFormController implements Initializable {
 
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
     }
+
 
 
 }

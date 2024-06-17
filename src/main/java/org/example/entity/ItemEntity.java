@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.dto.Supplier;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Getter
 @Setter
@@ -17,7 +20,7 @@ public class ItemEntity {
     private String size;
     private Double price;
     private Integer qty;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "supID")
-    private SupplierEntity supplierEntity;
+    @ManyToMany(mappedBy = "itemList")
+    private List<SupplierEntity> supplierList = new ArrayList<>();
+
 }

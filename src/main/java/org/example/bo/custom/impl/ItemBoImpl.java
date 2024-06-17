@@ -20,4 +20,7 @@ public class ItemBoImpl implements ItemBo {
         }
         return "I1";
     }
+    public boolean saveItem(Item item,String supId){
+        return true;
+    }
 }
