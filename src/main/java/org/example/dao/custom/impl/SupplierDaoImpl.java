@@ -1,6 +1,7 @@
 package org.example.dao.custom.impl;
 
 import org.example.dao.custom.SupplierDao;
+import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
@@ -41,6 +42,7 @@ public class SupplierDaoImpl implements SupplierDao {
             Query<SupplierEntity> query = session.createQuery("from SupplierEntity", SupplierEntity.class);
             List<SupplierEntity> resultList = query.getResultList();
             for(SupplierEntity entity : resultList){
+                entity.setItemList(null);
                 supplierList.add(new ModelMapper().map(entity,Supplier.class));
             }
         }catch (HibernateException e) {
@@ -61,5 +63,23 @@ public class SupplierDaoImpl implements SupplierDao {
             closeSession();
         }
         return new ModelMapper().map(supplierEntity,Supplier.class);
+    }
+    @Override
+    public Supplier retrieveLastRow() {
+        SupplierEntity supplierEntity;
+        try {
+            beginSession();
+            Query<SupplierEntity> query = session.createQuery("from SupplierEntity order by id DESC", SupplierEntity.class);
+            query.setMaxResults(1);
+            supplierEntity = query.uniqueResult();
+        }catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        if (supplierEntity!= null){
+            supplierEntity.setItemList(null);
+        }
+        return supplierEntity != null ? (new ModelMapper().map(supplierEntity,Supplier.class)) : null;
     }
 }

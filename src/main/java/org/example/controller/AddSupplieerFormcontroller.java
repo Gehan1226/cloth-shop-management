@@ -4,13 +4,22 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.bo.BoFactory;
+import org.example.bo.custom.DataValidationBo;
+import org.example.bo.custom.ItemBo;
+import org.example.bo.custom.SupplierBo;
+import org.example.util.BoType;
 
-public class AddSupplieerFormcontroller {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AddSupplieerFormcontroller implements Initializable {
     public static Stage primaryStage;
     public JFXTextField txtFirstName;
     public JFXTextField txtCompany;
@@ -25,7 +34,15 @@ public class AddSupplieerFormcontroller {
     public TableColumn colItemName;
     public Text txtSupplierID;
     public JFXComboBox cmbItem;
+    private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
+    private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
+    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtSupplierID.setText(supplierBo.genarateSupplierID());
+        cmbItem.getItems().addAll(itemBo.getAllIDSAndNames());
+    }
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
     }
 
@@ -52,4 +69,6 @@ public class AddSupplieerFormcontroller {
 
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
     }
+
+
 }

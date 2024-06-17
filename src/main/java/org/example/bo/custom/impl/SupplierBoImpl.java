@@ -3,6 +3,8 @@ package org.example.bo.custom.impl;
 import org.example.bo.custom.SupplierBo;
 import org.example.dao.Daofactory;
 import org.example.dao.custom.SupplierDao;
+import org.example.dto.Item;
+import org.example.dto.Supplier;
 import org.example.util.DaoType;
 
 import java.util.ArrayList;
@@ -19,5 +21,13 @@ public class SupplierBoImpl implements SupplierBo {
 //            supplierIDS.add(supplier.getSupID());
 //        }
         return supplierIDS;
+    }
+    @Override
+    public String genarateSupplierID() {
+        Supplier supplier = supplierDao.retrieveLastRow();
+        if (supplier!= null){
+            return "S"+(Integer.parseInt(supplier.getSupID().substring(1))+1);
+        }
+        return "S1";
     }
 }

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface SupplierDao extends CrudDao<SupplierEntity> {
     List<Supplier> retrieveAll();
-
+    Supplier retrieveLastRow();
 }

@@ -45,7 +45,7 @@ public class AddItemFormController implements Initializable {
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
         cmbSupplierID.getItems().add("Select Supplier ID");
-        cmbSupplierID.getItems().addAll(supplierBo.getAllSupplierIDS());
+        cmbSupplierID.getItems().addAll(supplierBo.getAllIDSAndNames());
 
         txtPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*([\\.]\\d*)?")) {

@@ -78,6 +78,7 @@ public class ItemDaoImpl implements ItemDao {
             Query<ItemEntity> query = session.createQuery("from ItemEntity", ItemEntity.class);
             List<ItemEntity> resultList = query.getResultList();
             for(ItemEntity entity : resultList){
+                entity.setSupplierList(null);
                 itemList.add(new ModelMapper().map(entity,Item.class));
             }
         }catch (HibernateException e) {
@@ -85,6 +86,7 @@ public class ItemDaoImpl implements ItemDao {
         } finally {
             closeSession();
         }
+
         return itemList;
     }
 }

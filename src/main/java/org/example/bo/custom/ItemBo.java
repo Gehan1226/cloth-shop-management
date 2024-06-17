@@ -10,4 +10,5 @@ import java.util.List;
 public interface ItemBo extends SuperBo {
     String genarateItemID();
     boolean saveItem(Item item, List<String> supIDS);
+    List<String> getAllIDSAndNames();
 }

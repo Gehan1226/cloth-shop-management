@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface SupplierBo extends SuperBo {
     List<String> getAllIDSAndNames();
+    String genarateSupplierID();
 }

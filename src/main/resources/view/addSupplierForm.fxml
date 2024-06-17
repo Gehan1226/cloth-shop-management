@@ -70,8 +70,8 @@
             <JFXTextField fx:id="txtLastName" layoutX="34.0" layoutY="49.0" prefHeight="34.0" prefWidth="342.0" promptText="Last Name" />
             <JFXTextField fx:id="txtEmail" layoutX="34.0" layoutY="146.0" prefHeight="34.0" prefWidth="342.0" promptText="Email" />
             <JFXTextField fx:id="txtMobileNumber" layoutX="34.0" layoutY="195.0" onKeyReleased="#txtMobileNoOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Mobile Number" />
-            <JFXComboBox fx:id="cmbItem" layoutX="34.0" layoutY="248.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Item" />
-            <JFXButton layoutX="191.0" layoutY="248.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
+            <JFXComboBox fx:id="cmbItem" layoutX="34.0" layoutY="248.0" prefHeight="26.0" prefWidth="271.0" promptText="Select Item" />
+            <JFXButton layoutX="318.0" layoutY="248.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
