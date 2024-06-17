@@ -1,9 +1,6 @@
 package org.example.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.management.ConstructorParameters;
 import java.util.ArrayList;
@@ -13,7 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-
+@NoArgsConstructor
 public class Supplier {
     private String supID;
     private String firstName;
