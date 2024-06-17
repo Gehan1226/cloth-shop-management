@@ -117,7 +117,9 @@ public class AddSupplieerFormcontroller implements Initializable {
                 return;
             }
             new Alert(Alert.AlertType.ERROR, "❌ Item Save Failed !").show();
+            return;
         }
+        new Alert(Alert.AlertType.INFORMATION, "Please fill every field!").show();
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
