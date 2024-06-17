@@ -91,3 +91,11 @@ a
 1src/main/java/org/example/dao/custom/ItemDao.java,a\6\a637e47f192b48e3b42d1cb47e738567b65b2c25
 j
 :src/main/java/org/example/dao/custom/impl/ItemDaoImpl.java,0\a\0ab47a5c12298b9ef98e09a456b631d99495167f
+e
+5src/main/java/org/example/dao/custom/SupplierDao.java,1\6\16da5bf0bf787e5d73abfbfa7bc1e6a692427065
+n
+>src/main/java/org/example/dao/custom/impl/SupplierDaoImpl.java,b\0\b0c4ffb30154f61bf78b8beee80ff8b7f85c189c
+c
+3src/main/java/org/example/bo/custom/SupplierBo.java,e\e\ee6db7d968db1a6c8a01c2d9f8178ae493fd005c
+l
+<src/main/java/org/example/bo/custom/impl/SupplierBoImpl.java,c\d\cd1978ea5f27f291f99ec1feaacd68f8e42b668b

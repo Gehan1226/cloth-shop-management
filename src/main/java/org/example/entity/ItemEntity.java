@@ -19,5 +19,5 @@ public class ItemEntity {
     private Integer qty;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supID")
-    private Supplier supplier;
+    private SupplierEntity supplierEntity;
 }

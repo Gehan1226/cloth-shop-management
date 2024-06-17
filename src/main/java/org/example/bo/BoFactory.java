@@ -1,9 +1,6 @@
 package org.example.bo;
 
-import org.example.bo.custom.impl.DataValidationBoImpl;
-import org.example.bo.custom.impl.EmployeeBoImpl;
-import org.example.bo.custom.impl.ItemBoImpl;
-import org.example.bo.custom.impl.UserBoImpl;
+import org.example.bo.custom.impl.*;
 import org.example.dao.custom.impl.ItemDaoImpl;
 import org.example.util.BoType;
 
@@ -20,6 +17,7 @@ public class BoFactory {
             case USER:return (T) new UserBoImpl();
             case VALIDATE:return (T) new DataValidationBoImpl();
             case ITEM:return (T) new ItemBoImpl();
+            case SUPPLIER:return (T) new SupplierBoImpl();
         }
         return null;
     }

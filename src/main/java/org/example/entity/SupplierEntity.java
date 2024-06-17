@@ -24,6 +24,6 @@ public class SupplierEntity {
     private String company;
     private String email;
     private String mobileNumber;
-    @OneToMany(mappedBy = "supplier", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Item> itemList = new ArrayList<>();
+    @OneToMany(mappedBy = "supplierEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemEntity> itemList = new ArrayList<>();
 }

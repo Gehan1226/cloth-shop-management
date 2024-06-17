@@ -5,14 +5,15 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.ItemBo;
+import org.example.bo.custom.SupplierBo;
 import org.example.util.BoType;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class AddItemFormController implements Initializable {
@@ -25,7 +26,7 @@ public class AddItemFormController implements Initializable {
     public Text txtItemID;
     public JFXButton btnSave;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
-    //private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
+    private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
 
 
     @Override
@@ -33,6 +34,8 @@ public class AddItemFormController implements Initializable {
         txtItemID.setText(itemBo.genarateItemID());
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
+        cmbSupplierID.getItems().addAll(supplierBo.getAllSupplierIDS());
+
     }
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
     }

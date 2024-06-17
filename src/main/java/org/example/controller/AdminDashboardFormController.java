@@ -44,4 +44,8 @@ public class AdminDashboardFormController {
         EmployeeUpdateRemoveFormController.primaryStage = stage;
     }
 
+    public void btnAddItem(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/addItemForm.fxml");
+        AddItemFormController.primaryStage = stage;
+    }
 }

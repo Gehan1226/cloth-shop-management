@@ -58,6 +58,11 @@
             <JFXTextField fx:id="txtPrice" layoutX="34.0" layoutY="91.0" prefHeight="34.0" prefWidth="342.0" promptText="Price per One" />
             <JFXComboBox fx:id="cmbSize" layoutX="34.0" layoutY="207.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Size" />
             <JFXComboBox fx:id="cmbSupplierID" layoutX="217.0" layoutY="207.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Supplier ID" />
+            <Text fill="#1a37ff" layoutX="365.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*optional" wrappingWidth="54.13671875">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">

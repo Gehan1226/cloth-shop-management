@@ -98,7 +98,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="144.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Product" textFill="#f2eeee">
+            <JFXButton layoutX="144.0" layoutY="66.0" onAction="#btnAddItem" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Product" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>

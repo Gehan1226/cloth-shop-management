@@ -1,5 +1,5 @@
 package org.example.util;
 
 public enum DaoType {
-    EMPLOYEE,USER,ITEM
+    EMPLOYEE,USER,ITEM,SUPPLIER
 }
