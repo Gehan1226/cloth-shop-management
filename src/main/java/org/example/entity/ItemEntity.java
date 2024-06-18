@@ -20,6 +20,7 @@ public class ItemEntity {
     private Double price;
     private Integer qty;
     private String categorie;
+    private String itemImagePath;
     @ManyToMany(mappedBy = "itemList")
     private List<SupplierEntity> supplierList = new ArrayList<>();
 }

@@ -16,5 +16,6 @@ public class Item {
     private Double price;
     private Integer qty;
     private String categorie;
+    private String itemImagePath;
     private List<Supplier> supplier = new ArrayList<>();
 }

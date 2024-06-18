@@ -9,7 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
@@ -19,6 +22,7 @@ import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +46,7 @@ public class AddItemFormController implements Initializable {
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
     private List<String> suplierIDS = new ArrayList<>();
     private List<String> allIDSAndNames ;
+    private String imagePath;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -89,6 +94,8 @@ public class AddItemFormController implements Initializable {
                     cmbSize.getSelectionModel().getSelectedItem().toString(),
                     Double.parseDouble(txtPrice.getText()),
                     Integer.parseInt(txtQTY.getText()),
+                    cmbCategorie.getSelectionModel().getSelectedItem().toString(),
+                    imagePath,
                     new ArrayList<>()
             );
            if(itemBo.saveItem(item, suplierIDS)){
@@ -129,5 +136,16 @@ public class AddItemFormController implements Initializable {
         cmbSupplierID.getItems().clear();
         cmbSupplierID.getItems().addAll(allIDSAndNames);
         suplierIDS.clear();
+    }
+
+    public void btnAddImageOnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog(primaryStage);
+        if (file != null) {
+            imagePath = file.toURI().toString();
+        }
     }
 }
