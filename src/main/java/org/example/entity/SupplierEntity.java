@@ -2,8 +2,6 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.dto.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +21,7 @@ public class SupplierEntity {
     private String mobileNumber;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "supplierList",
+            name = "Supplier_Item",
             joinColumns = { @JoinColumn(name = "supID") },
             inverseJoinColumns = { @JoinColumn(name = "itemId") }
     )

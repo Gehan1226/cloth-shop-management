@@ -59,33 +59,23 @@
             <JFXTextField fx:id="txtQTY" layoutX="34.0" layoutY="85.0" prefHeight="34.0" prefWidth="342.0" promptText="QTY on hand " />
             <JFXTextField fx:id="txtPrice" layoutX="34.0" layoutY="37.0" prefHeight="34.0" prefWidth="342.0" promptText="Price per One" />
             <JFXComboBox fx:id="cmbSize" layoutX="34.0" layoutY="135.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Size" />
-            <JFXComboBox fx:id="cmbSupplierID" layoutX="217.0" layoutY="136.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Supplier ID" />
-            <JFXButton layoutX="361.0" layoutY="137.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: #1679AB;" text="ADD" textFill="#f7f5f5">
+            <JFXComboBox fx:id="cmbSupplierID" layoutX="34.0" layoutY="188.0" prefHeight="26.0" prefWidth="187.0" promptText="Select Supplier ID" />
+            <JFXButton layoutX="234.0" layoutY="188.0" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="45.0" style="-fx-background-color: #1679AB;" text="ADD" textFill="#f7f5f5">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <TableView fx:id="tblSuppliers" layoutX="72.0" layoutY="211.0" prefHeight="114.0" prefWidth="262.0">
-              <columns>
-                <TableColumn fx:id="colSupplierID" editable="false" prefWidth="81.60003662109375" text="Supplier ID" />
-                  <TableColumn fx:id="colSupplierName" editable="false" prefWidth="179.20001220703125" text="Supplier Name" />
-              </columns>
-            </TableView>
-            <Text fill="#251ed4" layoutX="171.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
-            </Text>
-            <JFXButton layoutX="346.0" layoutY="215.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear " textFill="#f2f0f0">
+            <JFXButton layoutX="296.0" layoutY="188.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear " textFill="#f2f0f0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
+            <JFXComboBox fx:id="cmbCategorie" layoutX="205.0" layoutY="135.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Categorie" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton fx:id="btnSave" layoutX="123.0" layoutY="25.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Save Item" textFill="#f2eeee">
+            <JFXButton fx:id="btnSave" layoutX="123.0" layoutY="16.0" onAction="#btnSaveOnAction" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Save Item" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -135,11 +125,17 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <children>
-            <ImageView fitHeight="262.0" fitWidth="214.0" layoutX="13.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/images/OIP__4_-removebg-preview.png" />
-               </image>
-            </ImageView>
+            <TableView fx:id="tblSuppliers" layoutY="27.0" prefHeight="188.0" prefWidth="262.0">
+              <columns>
+                <TableColumn fx:id="colSupplierID" editable="false" prefWidth="81.60003662109375" text="Supplier ID" />
+                  <TableColumn fx:id="colSupplierName" editable="false" prefWidth="179.20001220703125" text="Supplier Name" />
+              </columns>
+            </TableView>
+            <Text fill="#251ed4" layoutX="98.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>

@@ -36,6 +36,7 @@ public class AddItemFormController implements Initializable {
     public TableView<String[]> tblSuppliers = new TableView<>();;
     public TableColumn<String[], String> colSupplierID;
     public TableColumn<String[], String> colSupplierName;
+    public JFXComboBox cmbCategorie;
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
@@ -46,17 +47,26 @@ public class AddItemFormController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colSupplierID.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[0]));
         colSupplierName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[1]));
+
         txtItemID.setText(itemBo.genarateItemID());
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
         allIDSAndNames = supplierBo.getAllIDSAndNames();
         cmbSupplierID.getItems().addAll(allIDSAndNames);
+        String[] categoriesArr = {"Ladies","Gents","Kids"};
+        cmbCategorie.getItems().addAll(categoriesArr);
 
+        addListenerTxtPrice();
+        addListenerTxtQTY();
+    }
+    private void addListenerTxtPrice(){
         txtPrice.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*([\\.]\\d*)?")) {
                 txtPrice.setText(oldValue);
             }
         });
+    }
+    private void addListenerTxtQTY(){
         txtQTY.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 txtQTY.setText(oldValue);

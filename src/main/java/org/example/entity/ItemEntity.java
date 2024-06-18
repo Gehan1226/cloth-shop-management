@@ -19,6 +19,7 @@ public class ItemEntity {
     private String size;
     private Double price;
     private Integer qty;
+    private String categorie;
     @ManyToMany(mappedBy = "itemList")
     private List<SupplierEntity> supplierList = new ArrayList<>();
 }
