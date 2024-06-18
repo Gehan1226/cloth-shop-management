@@ -92,7 +92,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
     @Override
     public boolean replace(EmployeeEntity employeeEntity){
-        System.out.println(employeeEntity);
         String hql = "update EmployeeEntity " +
                      "set firstName = :value1," +
                         " lastName = :value2," +

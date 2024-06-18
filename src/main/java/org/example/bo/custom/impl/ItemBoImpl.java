@@ -36,4 +36,9 @@ public class ItemBoImpl implements ItemBo {
         }
         return itemIDSandNames;
     }
+    @Override
+    public Item retrieveById(String id){
+        return itemDao.retrieveByID(id);
+
+    }
 }

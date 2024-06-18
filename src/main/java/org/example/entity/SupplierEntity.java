@@ -21,7 +21,7 @@ public class SupplierEntity {
     private String mobileNumber;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "Supplier_Item",
+            name = "supplier_item",
             joinColumns = { @JoinColumn(name = "supID") },
             inverseJoinColumns = { @JoinColumn(name = "itemId") }
     )

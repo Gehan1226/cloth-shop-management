@@ -17,5 +17,5 @@ public class Item {
     private Integer qty;
     private String categorie;
     private String itemImagePath;
-    private List<Supplier> supplier = new ArrayList<>();
+    private List<Supplier> supplierList = new ArrayList<>();
 }

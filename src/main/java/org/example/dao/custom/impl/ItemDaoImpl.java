@@ -9,6 +9,7 @@ import org.example.entity.EmployeeEntity;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
+import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -52,6 +53,7 @@ public class ItemDaoImpl implements ItemDao {
         }
         return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
     }
+    @Override
     public boolean save(ItemEntity itemEntity, List<String> supplierIDS){
         try {
             beginSession();
@@ -59,7 +61,7 @@ public class ItemDaoImpl implements ItemDao {
                 for (int i=0;i<supplierIDS.size();i++){
                     SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierIDS.get(i));
                     supplierEntity.getItemList().add(itemEntity);
-                    session.persist(itemEntity);
+                    session.persist(supplierEntity);
                 }
             }else {
                 session.persist(itemEntity);
@@ -71,6 +73,7 @@ public class ItemDaoImpl implements ItemDao {
         }
         return true;
     }
+    @Override
     public List<Item> retrieveAll(){
         List<Item> itemList = new ArrayList<>();
         try {
@@ -86,7 +89,31 @@ public class ItemDaoImpl implements ItemDao {
         } finally {
             closeSession();
         }
-
         return itemList;
+    }
+    public Item retrieveByID(String id){
+        Item item = null;
+        try {
+            beginSession();
+            ItemEntity itemEntity = session.get(ItemEntity.class, id);
+            item = new ModelMapper().map(itemEntity, Item.class);
+        }catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return item;
+    }
+    public boolean update(ItemEntity itemEntity){
+        try {
+            beginSession();
+            session.get(ItemEntity.class,itemEntity.getItemId());
+            session.merge(itemEntity);
+        }catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
     }
 }

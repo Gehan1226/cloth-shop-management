@@ -45,7 +45,7 @@ public class AddItemFormController implements Initializable {
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
     private List<String> suplierIDS = new ArrayList<>();
-    private List<String> allIDSAndNames ;
+    private List<String> allIDSAndNames;
     private String imagePath;
 
     @Override

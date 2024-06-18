@@ -46,7 +46,6 @@ public class SupplierDaoImpl implements SupplierDao {
             Query<SupplierEntity> query = session.createQuery("from SupplierEntity", SupplierEntity.class);
             List<SupplierEntity> resultList = query.getResultList();
             for (SupplierEntity entity : resultList) {
-                entity.setItemList(null);
                 supplierList.add(new ModelMapper().map(entity, Supplier.class));
             }
         } catch (HibernateException e) {
@@ -105,4 +104,5 @@ public class SupplierDaoImpl implements SupplierDao {
         }
         return true;
     }
+
 }
