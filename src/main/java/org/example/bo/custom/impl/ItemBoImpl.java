@@ -5,8 +5,10 @@ import org.example.bo.custom.EmployeeBo;
 import org.example.bo.custom.ItemBo;
 import org.example.dao.Daofactory;
 import org.example.dao.custom.ItemDao;
+import org.example.dao.custom.SupplierDao;
 import org.example.dao.custom.UserDao;
 import org.example.dto.Item;
+import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.util.BoType;
 import org.example.util.DaoType;
@@ -17,6 +19,7 @@ import java.util.List;
 
 public class ItemBoImpl implements ItemBo {
     private final ItemDao itemDao = Daofactory.getInstance().getDao(DaoType.ITEM);
+    private final SupplierDao supplierDao = Daofactory.getInstance().getDao(DaoType.SUPPLIER);
     @Override
     public String genarateItemID() {
         Item item = itemDao.retrieveLastRow();
@@ -39,6 +42,12 @@ public class ItemBoImpl implements ItemBo {
     @Override
     public Item retrieveById(String id){
         return itemDao.retrieveByID(id);
-
+    }
+    public boolean updateItem(Item item,List<String> SupllierIDS){
+        for (String id : SupllierIDS){
+            Supplier supplier = supplierDao.retrieveByID(id);
+            item.getSupplierList().add(supplier);
+        }
+        return itemDao.update(new ModelMapper().map(item, ItemEntity.class));
     }
 }

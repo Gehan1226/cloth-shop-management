@@ -101,7 +101,7 @@ public class UpdateRemoveItemFormController implements Initializable {
                     imgCloth.getImage().getUrl().toString(),
                     new ArrayList<>()
             );
-
+            itemBo.updateItem(item,SelectedSuplierIDS);
         }
 
 
