@@ -130,7 +130,6 @@ public class AddItemFormController implements Initializable {
             suplierIDS.add(arr[0]);
         }
     }
-
     public void btnClearOnAction(ActionEvent actionEvent) {
         tblSuppliers.getItems().clear();
         cmbSupplierID.getItems().clear();

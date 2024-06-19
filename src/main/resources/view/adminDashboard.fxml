@@ -83,7 +83,7 @@
                   <Image url="@../asset/images/203-2035339_register-user-register-online-icon-png-removebg-preview.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="-87.0" layoutY="205.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="   Employee List" textFill="#f2eeee">
+            <JFXButton layoutX="-87.0" layoutY="205.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="   Employee List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -93,12 +93,12 @@
                   <Image url="@../asset/images/R%20(3).png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="-87.0" layoutY="274.0" onAction="#btnUpdateRemoveOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="     Update or Remove Employee" textFill="#f2eeee">
+            <JFXButton layoutX="-87.0" layoutY="274.0" onAction="#btnEmployeeUpdateRemoveOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="     Update or Remove Employee" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="144.0" layoutY="66.0" onAction="#btnAddItem" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Product" textFill="#f2eeee">
+            <JFXButton layoutX="144.0" layoutY="66.0" onAction="#btnAddItemOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Product" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -108,7 +108,7 @@
                   <Image url="@../asset/images/Add-item-icon.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="143.0" layoutY="207.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Product List" textFill="#f2eeee">
+            <JFXButton layoutX="143.0" layoutY="207.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Product List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -118,7 +118,7 @@
                   <Image url="@../asset/images/OIP__5_-removebg-preview.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="144.0" layoutY="274.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="    Update or Remove Product" textFill="#f2eeee">
+            <JFXButton layoutX="144.0" layoutY="274.0" onAction="#btnItemUpdateRemoveOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="    Update or Remove Product" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
@@ -160,7 +160,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="589.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="589.0" layoutY="66.0" onAction="#btnAddSupplierOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Add Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -170,7 +170,7 @@
                   <Image url="@../asset/images/R%20(7).png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="589.0" layoutY="139.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="589.0" layoutY="139.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -180,7 +180,7 @@
                   <Image url="@../asset/images/search-user-icon-vector-5053894-removebg-preview.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="589.0" layoutY="208.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Supplier List" textFill="#f2eeee">
+            <JFXButton layoutX="589.0" layoutY="208.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Supplier List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -190,13 +190,13 @@
                   <Image url="@../asset/images/R%20(3).png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="589.0" layoutY="274.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="         Update or Remove Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="589.0" layoutY="274.0" onAction="#btnSpplierUpdateRemoveOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="         Update or Remove Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
             <Separator layoutX="566.0" layoutY="74.0" orientation="VERTICAL" prefHeight="200.0" />
-            <JFXButton layoutX="143.0" layoutY="140.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Product" textFill="#f2eeee">
+            <JFXButton layoutX="143.0" layoutY="140.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Product" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -226,7 +226,7 @@
                   <Image url="@../asset/images/search-user-icon-vector-5053894-removebg-preview.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="-87.0" layoutY="136.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="     Search Employee" textFill="#f2eeee">
+            <JFXButton layoutX="-87.0" layoutY="136.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="     Search Employee" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

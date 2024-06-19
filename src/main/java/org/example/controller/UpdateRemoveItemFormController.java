@@ -12,6 +12,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class UpdateRemoveItemFormController implements Initializable {
+    public static Stage primaryStage;
     public JFXTextField txtItemName;
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;
@@ -103,7 +105,11 @@ public class UpdateRemoveItemFormController implements Initializable {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-        itemBo.deleteItem(currentItemID);
+        if(itemBo.deleteItem(currentItemID)){
+            new Alert(Alert.AlertType.INFORMATION, "✅ Item Delete Successfully !").show();
+            return;
+        }
+        new Alert(Alert.AlertType.ERROR, "❌ Item Delete Failed!").show();
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {

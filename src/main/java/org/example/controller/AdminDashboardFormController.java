@@ -39,13 +39,26 @@ public class AdminDashboardFormController {
         AdminProfilePageFormcontroller.primaryStage = loadScreen("view/adminProfilePageForm.fxml");
     }
 
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
+    public void btnEmployeeUpdateRemoveOnAction(ActionEvent actionEvent) {
         Stage stage = loadScreen("view/employeeUpdateRemovePageForm.fxml");
         EmployeeUpdateRemoveFormController.primaryStage = stage;
     }
 
-    public void btnAddItem(ActionEvent actionEvent) {
+    public void btnAddItemOnAction(ActionEvent actionEvent) {
         Stage stage = loadScreen("view/addItemForm.fxml");
         AddItemFormController.primaryStage = stage;
+    }
+
+    public void btnItemUpdateRemoveOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/updateItemForm.fxml.fxml");
+        UpdateRemoveItemFormController.primaryStage = stage;
+    }
+
+    public void btnAddSupplierOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/addSupplierForm.fxml.fxml.fxml");
+        AddSupplieerFormcontroller.primaryStage = stage;
+    }
+
+    public void btnSpplierUpdateRemoveOnAction(ActionEvent actionEvent) {
     }
 }
