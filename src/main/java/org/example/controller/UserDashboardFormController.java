@@ -27,10 +27,31 @@ public class UserDashboardFormController {
         return stage;
     }
     public void btnMainmenuOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/home_page_from.fxml");
+        HomePageFormController.primaryStage = stage;
     }
 
     public void btnProfileOnAction(ActionEvent actionEvent) {
         EmployeeProfilePageFormController.employeeUserEmail = employeeUserEmail;
         EmployeeProfilePageFormController.primaryStage = loadScreen("view/employeeProfilePageForm.fxml");
+    }
+
+    public void btnAddItemOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/addItemForm.fxml");
+        AddItemFormController.primaryStage = stage;
+    }
+
+    public void btnItemUpdateRemoveOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/updateItemForm.fxml.fxml");
+        UpdateRemoveItemFormController.primaryStage = stage;
+    }
+
+    public void btnAddSupplierOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/addSupplierForm.fxml.fxml.fxml");
+        AddSupplieerFormcontroller.primaryStage = stage;
+    }
+
+    public void btnSupplierUpdateRemoveOnAction(ActionEvent actionEvent) {
+
     }
 }
