@@ -31,8 +31,6 @@ j
 :src/main/java/org/example/dao/custom/impl/UserDaoImpl.java,a\6\a622f3f0470df24d6f0e5831dfac3f0bf54b08af
 a
 1src/main/java/org/example/dao/custom/UserDao.java,f\3\f374be87d0946173729eb26dcc3d401b3b0ea95c
-Z
-*src/main/java/org/example/dao/CrudDao.java,0\c\0c86038feff71bb82d6abd646990279c42e74fa1
 a
 1src/main/java/org/example/util/HibernateUtil.java,d\2\d220e415002e683af285f12a089f3139d7e179cb
 [

@@ -2,6 +2,7 @@ package org.example.dao.custom.impl;
 
 import org.example.dao.custom.ItemDao;
 import org.example.dto.Item;
+import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
@@ -23,6 +24,7 @@ public class ItemDaoImpl implements ItemDao {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         transaction = session.beginTransaction();
     }
+
     private void closeSession() {
         if (transaction != null && transaction.isActive()) {
             transaction.commit();
@@ -31,6 +33,7 @@ public class ItemDaoImpl implements ItemDao {
             session.close();
         }
     }
+
     @Override
     public Item retrieveLastRow() {
         ItemEntity itemEntity;
@@ -39,66 +42,82 @@ public class ItemDaoImpl implements ItemDao {
             Query<ItemEntity> query = session.createQuery("from ItemEntity order by id DESC", ItemEntity.class);
             query.setMaxResults(1);
             itemEntity = query.uniqueResult();
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        if (itemEntity!= null){
+        if (itemEntity != null) {
             itemEntity.setSupplierList(null);
         }
-        return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
+        return itemEntity != null ? (new ModelMapper().map(itemEntity, Item.class)) : null;
     }
+
     @Override
-    public boolean save(ItemEntity itemEntity){
+    public boolean save(ItemEntity itemEntity, List<String> supplierIDS) {
         try {
             beginSession();
-            session.persist(itemEntity);
-        }catch (HibernateException e) {
+            if (!supplierIDS.isEmpty()) {
+                for (int i = 0; i < supplierIDS.size(); i++) {
+                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierIDS.get(i));
+                    supplierEntity.getItemList().add(itemEntity);
+                    session.persist(itemEntity);
+                    session.persist(supplierEntity);
+                }
+            } else {
+                session.persist(itemEntity);
+            }
+        } catch (HibernateException e) {
             return false;
         } finally {
             closeSession();
         }
         return true;
     }
+
     @Override
-    public List<Item> retrieveAll(){
+    public List<Item> retrieveAll() {
         try {
             List<Item> itemList = new ArrayList<>();
             beginSession();
             Query<ItemEntity> query = session.createQuery("from ItemEntity", ItemEntity.class);
             List<ItemEntity> resultList = query.getResultList();
-            for(ItemEntity entity : resultList){
+            for (ItemEntity entity : resultList) {
                 entity.setSupplierList(null);
-                itemList.add(new ModelMapper().map(entity,Item.class));
+                itemList.add(new ModelMapper().map(entity, Item.class));
             }
             return itemList;
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
     }
+
     @Override
-    public Item retrieve(String id){
+    public Item retrieve(String id) {
         ItemEntity itemEntity = null;
+        Item item = null;
         try {
             beginSession();
             itemEntity = session.get(ItemEntity.class, id);
-        }catch (HibernateException e) {
+            if (itemEntity != null) {
+                item = new ModelMapper().map(itemEntity, Item.class);
+            }
+        } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
+        return item;
     }
     @Override
-    public boolean update(ItemEntity itemEntity){
+    public boolean update(ItemEntity itemEntity) {
         try {
             beginSession();
-            session.get(ItemEntity.class,itemEntity.getItemId());
+            session.get(ItemEntity.class, itemEntity.getItemId());
             session.merge(itemEntity);
-        }catch (HibernateException e) {
+        } catch (HibernateException e) {
             return false;
         } finally {
             closeSession();
@@ -109,5 +128,4 @@ public class ItemDaoImpl implements ItemDao {
     public boolean delete(String ID) {
         return false;
     }
-
 }

@@ -82,10 +82,19 @@ public class SupplierDaoImpl implements SupplierDao {
         return supplierEntity != null ? (new ModelMapper().map(supplierEntity, Supplier.class)) : null;
     }
     @Override
-    public boolean save(SupplierEntity supplierEntity) {
+    public boolean save(SupplierEntity supplierEntity,List<String> itemIDS) {
         try {
             beginSession();
-            session.persist(supplierEntity);
+            if (!itemIDS.isEmpty()) {
+                for (int i = 0; i < itemIDS.size(); i++) {
+                    ItemEntity itemEntity = session.get(ItemEntity.class, itemIDS.get(i));
+                    supplierEntity.getItemList().add(itemEntity);
+                    session.persist(supplierEntity);
+                    session.persist(itemEntity);
+                }
+            } else {
+                session.persist(supplierEntity);
+            }
         } catch (HibernateException e) {
             return false;
         } finally {

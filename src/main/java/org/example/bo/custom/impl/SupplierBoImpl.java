@@ -38,10 +38,6 @@ public class SupplierBoImpl implements SupplierBo {
     }
     @Override
     public boolean saveSupplier(Supplier supplier,List<String> itemIDS){
-        for (String id : itemIDS){
-            Item item = itemDao.retrieve(id);
-            supplier.getItemList().add(item);
-        }
-        return supplierDao.save(new ModelMapper().map(supplier,SupplierEntity.class));
+        return supplierDao.save(new ModelMapper().map(supplier,SupplierEntity.class),itemIDS);
     }
 }

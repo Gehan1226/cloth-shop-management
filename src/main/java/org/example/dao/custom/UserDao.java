@@ -1,12 +1,12 @@
 package org.example.dao.custom;
 
-import org.example.dao.CrudDao;
+import org.example.dao.SuperDao;
 import org.example.dto.User;
 import org.example.entity.UserEntity;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserDao extends SuperDao {
     boolean save(UserEntity entity);
     List<User> hasAdmin();
     List<User> retrieveUser(String email);

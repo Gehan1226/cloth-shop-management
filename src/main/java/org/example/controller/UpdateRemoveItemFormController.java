@@ -44,7 +44,7 @@ public class UpdateRemoveItemFormController implements Initializable {
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
     private List<String> allIDS;
     private List<String> cmbValues;
-    private List<String> SelectedSuplierIDS = new ArrayList<>();
+    private List<String> selectedSuplierIDS = new ArrayList<>();
     private String currentItemID;
 
     @Override
@@ -70,12 +70,12 @@ public class UpdateRemoveItemFormController implements Initializable {
             tblSupplier.getItems().add(arr);
             cmbSupplierID.getItems().remove(selectedItem);
             cmbSupplierID.getSelectionModel().clearSelection();
-            SelectedSuplierIDS.add(arr[0]);
+            selectedSuplierIDS.add(arr[0]);
         }
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
-        SelectedSuplierIDS.clear();
+        selectedSuplierIDS.clear();
         tblSupplier.getItems().clear();
         cmbValues.clear();
         cmbSupplierID.getItems().clear();
@@ -91,6 +91,11 @@ public class UpdateRemoveItemFormController implements Initializable {
         );
         boolean isComboboxSelected = !cmbSize.getSelectionModel().isEmpty() && !cmbCategorie.getSelectionModel().isEmpty();
         if (isAllFieldsNotEmpty && isComboboxSelected){
+            List<Supplier> suppliers = new ArrayList<>();
+            for (String a : selectedSuplierIDS){
+                Supplier supplier = new Supplier();
+                supplier.setSupID(a);
+            }
             Item item = new Item(
                     currentItemID,
                     txtItemName.getText(),
@@ -99,9 +104,9 @@ public class UpdateRemoveItemFormController implements Initializable {
                     Integer.parseInt(txtQTY.getText()),
                     cmbCategorie.getSelectionModel().getSelectedItem().toString(),
                     imgCloth.getImage().getUrl().toString(),
-                    new ArrayList<>()
+                    suppliers
             );
-            itemBo.updateItem(item,SelectedSuplierIDS);
+            itemBo.updateItem(item,selectedSuplierIDS);
         }
     }
 
@@ -127,7 +132,7 @@ public class UpdateRemoveItemFormController implements Initializable {
             for (Supplier sup : supplier){
                 String[] temp = {sup.getSupID(),sup.getFirstName()+" "+sup.getLastName()};
                 tblSupplier.getItems().add(temp);
-                SelectedSuplierIDS.add(sup.getSupID());
+                selectedSuplierIDS.add(sup.getSupID());
 
                 if (cmbValues.contains(temp[0]+" - "+temp[1])){
                     cmbValues.remove(temp[0]+" - "+temp[1]);
@@ -146,4 +151,6 @@ public class UpdateRemoveItemFormController implements Initializable {
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
     }
 
+    public void btnChangeImgOnAction(ActionEvent actionEvent) {
+    }
 }

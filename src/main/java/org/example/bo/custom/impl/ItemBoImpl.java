@@ -29,11 +29,7 @@ public class ItemBoImpl implements ItemBo {
         return "I1";
     }
     public boolean saveItem(Item item, List<String> supIDS){
-        for (String id : supIDS){
-            Supplier supplier = new ModelMapper().map(supplierDao.retrieve(id), Supplier.class);
-            item.getSupplierList().add(supplier);
-        }
-        return itemDao.save(new ModelMapper().map(item, ItemEntity.class));
+        return itemDao.save(new ModelMapper().map(item, ItemEntity.class),supIDS);
     }
     public List<String> getAllIDSAndNames() {
         List<String> itemIDSandNames = new ArrayList<>();
@@ -51,6 +47,7 @@ public class ItemBoImpl implements ItemBo {
         for (String id : SupllierIDS){
             Supplier supplier = new ModelMapper().map(supplierDao.retrieve(id), Supplier.class);
             item.getSupplierList().add(supplier);
+            System.out.println("RUN");
         }
         return itemDao.update(new ModelMapper().map(item, ItemEntity.class));
     }
