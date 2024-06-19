@@ -81,11 +81,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="310.0" layoutY="383.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear All " textFill="#f2f0f0">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </JFXButton>
+
             <JFXButton layoutX="44.0" layoutY="14.0" onAction="#btnChangeImgOnAction" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #1679AB;" text="Change Image" textFill="#f7f5f5">
                <font>
                   <Font name="System Bold" size="11.0" />

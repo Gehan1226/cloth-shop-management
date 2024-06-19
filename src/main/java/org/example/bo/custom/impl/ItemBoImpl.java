@@ -43,12 +43,11 @@ public class ItemBoImpl implements ItemBo {
     public Item retrieveById(String id){
         return itemDao.retrieve(id);
     }
-    public boolean updateItem(Item item,List<String> SupllierIDS){
-        for (String id : SupllierIDS){
-            Supplier supplier = new ModelMapper().map(supplierDao.retrieve(id), Supplier.class);
-            item.getSupplierList().add(supplier);
-            System.out.println("RUN");
-        }
-        return itemDao.update(new ModelMapper().map(item, ItemEntity.class));
+    public boolean updateItem(Item item,List<String> supllierIDS){
+        return itemDao.update(new ModelMapper().map(item, ItemEntity.class),supllierIDS);
     }
+    public boolean deleteItem(String itemID){
+        return itemDao.delete(itemID);
+    }
+
 }

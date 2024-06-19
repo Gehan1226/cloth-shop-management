@@ -11,7 +11,7 @@ public interface ItemDao extends SuperDao {
     List<Item> retrieveAll();
     boolean save(ItemEntity itemEntity, List<String> supplierIDS);
     Item retrieve(String id);
-    boolean update(ItemEntity itemEntity);
+    boolean update(ItemEntity itemEntity,List<String> suplierIDS);
     boolean delete(String ID);
 
 }

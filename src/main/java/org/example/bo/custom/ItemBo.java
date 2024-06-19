@@ -10,5 +10,6 @@ public interface ItemBo extends SuperBo {
     boolean saveItem(Item item, List<String> supIDS);
     List<String> getAllIDSAndNames();
     Item retrieveById(String id);
-    boolean updateItem(Item item,List<String> SupllierIDS);
+    boolean updateItem(Item item,List<String> supllierIDS);
+    boolean deleteItem(String itemID);
 }

@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
@@ -74,14 +75,6 @@ public class UpdateRemoveItemFormController implements Initializable {
         }
     }
 
-    public void btnClearOnAction(ActionEvent actionEvent) {
-        selectedSuplierIDS.clear();
-        tblSupplier.getItems().clear();
-        cmbValues.clear();
-        cmbSupplierID.getItems().clear();
-        cmbSupplierID.getItems().addAll(allIDS);
-    }
-
     public void btnSaveOnAction(ActionEvent actionEvent) {
         boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
                 currentItemID,
@@ -91,11 +84,6 @@ public class UpdateRemoveItemFormController implements Initializable {
         );
         boolean isComboboxSelected = !cmbSize.getSelectionModel().isEmpty() && !cmbCategorie.getSelectionModel().isEmpty();
         if (isAllFieldsNotEmpty && isComboboxSelected){
-            List<Supplier> suppliers = new ArrayList<>();
-            for (String a : selectedSuplierIDS){
-                Supplier supplier = new Supplier();
-                supplier.setSupID(a);
-            }
             Item item = new Item(
                     currentItemID,
                     txtItemName.getText(),
@@ -104,13 +92,18 @@ public class UpdateRemoveItemFormController implements Initializable {
                     Integer.parseInt(txtQTY.getText()),
                     cmbCategorie.getSelectionModel().getSelectedItem().toString(),
                     imgCloth.getImage().getUrl().toString(),
-                    suppliers
+                    null
             );
-            itemBo.updateItem(item,selectedSuplierIDS);
+            if (itemBo.updateItem(item,selectedSuplierIDS)){
+                new Alert(Alert.AlertType.INFORMATION, "✅ Item Update Successfully !").show();
+                return;
+            }
+            new Alert(Alert.AlertType.ERROR, "❌ Item Update Failed!").show();
         }
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
+        itemBo.deleteItem(currentItemID);
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -125,8 +118,11 @@ public class UpdateRemoveItemFormController implements Initializable {
             txtQTY.setText(item.getQty()+"");
             cmbSize.getSelectionModel().select(item.getSize());
             cmbCategorie.getSelectionModel().select(item.getCategorie());
-            //Image image = new Image(item.getItemImagePath());
-            //imgCloth.setImage(image);
+
+            if (item.getItemImagePath() != null){
+                Image image = new Image(item.getItemImagePath());
+                imgCloth.setImage(image);
+            }
 
             List<Supplier> supplier = item.getSupplierList();
             for (Supplier sup : supplier){
@@ -141,8 +137,8 @@ public class UpdateRemoveItemFormController implements Initializable {
             cmbSupplierID.getItems().addAll(cmbValues);
         }
     }
-
     public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
+
     }
 
     public void btnSupplierListOnAction(ActionEvent actionEvent) {

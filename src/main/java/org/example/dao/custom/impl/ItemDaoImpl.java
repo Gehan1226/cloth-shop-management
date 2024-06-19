@@ -1,5 +1,9 @@
 package org.example.dao.custom.impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import org.example.dao.custom.ItemDao;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
@@ -13,12 +17,15 @@ import org.hibernate.query.Query;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 public class ItemDaoImpl implements ItemDao {
     private Session session;
     private Transaction transaction;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
+    EntityManager entityManager = emf.createEntityManager();
 
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -112,11 +119,16 @@ public class ItemDaoImpl implements ItemDao {
         return item;
     }
     @Override
-    public boolean update(ItemEntity itemEntity) {
+    public boolean update(ItemEntity itemEntity,List<String> suplierIDS) {
         try {
             beginSession();
-            session.get(ItemEntity.class, itemEntity.getItemId());
-            session.merge(itemEntity);
+            ItemEntity itemEntity1 = session.get(ItemEntity.class, itemEntity.getItemId());
+            itemEntity1.setItemName(itemEntity.getItemName());
+            for (String id : suplierIDS){
+                SupplierEntity supplierEntity = session.get(SupplierEntity.class, id);
+                supplierEntity.getItemList().add(itemEntity1);
+            }
+            session.merge(itemEntity1);
         } catch (HibernateException e) {
             return false;
         } finally {
@@ -125,7 +137,29 @@ public class ItemDaoImpl implements ItemDao {
         return true;
     }
     @Override
-    public boolean delete(String ID) {
-        return false;
+    public boolean delete(String id) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        try {
+            ItemEntity itemEntity = entityManager.find(ItemEntity.class, id);
+            if (itemEntity != null) {
+                List<SupplierEntity> suppliers = new ArrayList<>(itemEntity.getSupplierList());
+                for (SupplierEntity supplier : suppliers) {
+                    supplier.getItemList().remove(itemEntity);
+                    entityManager.merge(supplier);
+                }
+                itemEntity.getSupplierList().clear();
+                entityManager.merge(itemEntity);
+                entityManager.remove(itemEntity);
+            }
+            entityTransaction.commit();
+        } catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            entityManager.close();
+        }
+        return true;
     }
 }
