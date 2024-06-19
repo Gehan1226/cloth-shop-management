@@ -8,10 +8,8 @@ import org.example.entity.ItemEntity;
 
 import java.util.List;
 
-public interface ItemDao extends SuperDao {
+public interface ItemDao extends CrudDao<ItemEntity,Item> {
     Item retrieveLastRow();
-    boolean save(ItemEntity itemEntity, List<String> supplierIDS);
     List<Item> retrieveAll();
-    Item retrieveByID(String id);
-    boolean update(ItemEntity itemEntity)
+
 }

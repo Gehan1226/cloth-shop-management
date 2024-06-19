@@ -6,9 +6,7 @@ import org.example.entity.SupplierEntity;
 
 import java.util.List;
 
-public interface SupplierDao extends CrudDao<SupplierEntity> {
+public interface SupplierDao extends CrudDao<SupplierEntity, Supplier> {
     List<Supplier> retrieveAll();
-    Supplier retrieveByID(String supplierID);
     Supplier retrieveLastRow();
-    boolean save(SupplierEntity supplierEntity, List<String> itemIDS);
 }

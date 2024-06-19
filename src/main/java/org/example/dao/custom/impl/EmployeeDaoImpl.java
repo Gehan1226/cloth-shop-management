@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDaoImpl implements EmployeeDao {
-
     private Session session;
     private Transaction transaction;
 
@@ -63,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return true;
     }
     @Override
-    public Employee retrieveById(String id){
+    public Employee retrieve(String id){
         EmployeeEntity employeeEntity;
         try {
             beginSession();
@@ -91,7 +90,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employeeEntity != null ? (new ModelMapper().map(employeeEntity,Employee.class)) : null;
     }
     @Override
-    public boolean replace(EmployeeEntity employeeEntity){
+    public boolean update(EmployeeEntity employeeEntity){
         String hql = "update EmployeeEntity " +
                      "set firstName = :value1," +
                         " lastName = :value2," +

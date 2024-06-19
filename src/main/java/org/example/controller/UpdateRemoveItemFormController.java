@@ -103,8 +103,6 @@ public class UpdateRemoveItemFormController implements Initializable {
             );
             itemBo.updateItem(item,SelectedSuplierIDS);
         }
-
-
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {

@@ -40,11 +40,11 @@ public class EmployeeBoImpl implements EmployeeBo {
     }
     @Override
     public Employee retrieveById(String empID){
-        return employeeDao.retrieveById(empID);
+        return employeeDao.retrieve(empID);
     }
     @Override
     public boolean replace(Employee employee){
-        return employeeDao.replace(new ModelMapper().map(employee, EmployeeEntity.class));
+        return employeeDao.update(new ModelMapper().map(employee, EmployeeEntity.class));
     }
     @Override
     public boolean deleteEmployee(Employee employee) {

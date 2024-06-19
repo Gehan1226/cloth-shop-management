@@ -6,7 +6,8 @@ import org.example.entity.UserEntity;
 
 import java.util.List;
 
-public interface UserDao extends CrudDao<UserEntity> {
+public interface UserDao {
+    boolean save(UserEntity entity);
     List<User> hasAdmin();
     List<User> retrieveUser(String email);
     boolean updateUserPassword(String email, String password);

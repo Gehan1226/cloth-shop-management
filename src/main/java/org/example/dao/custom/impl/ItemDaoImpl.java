@@ -1,15 +1,10 @@
 package org.example.dao.custom.impl;
 
-import org.example.bo.custom.ItemBo;
 import org.example.dao.custom.ItemDao;
-import org.example.dto.Employee;
 import org.example.dto.Item;
-import org.example.dto.Supplier;
-import org.example.entity.EmployeeEntity;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -18,6 +13,7 @@ import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ItemDaoImpl implements ItemDao {
     private Session session;
@@ -54,18 +50,10 @@ public class ItemDaoImpl implements ItemDao {
         return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
     }
     @Override
-    public boolean save(ItemEntity itemEntity, List<String> supplierIDS){
+    public boolean save(ItemEntity itemEntity){
         try {
             beginSession();
-            if (!supplierIDS.isEmpty()){
-                for (int i=0;i<supplierIDS.size();i++){
-                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierIDS.get(i));
-                    supplierEntity.getItemList().add(itemEntity);
-                    session.persist(supplierEntity);
-                }
-            }else {
-                session.persist(itemEntity);
-            }
+            session.persist(itemEntity);
         }catch (HibernateException e) {
             return false;
         } finally {
@@ -75,8 +63,8 @@ public class ItemDaoImpl implements ItemDao {
     }
     @Override
     public List<Item> retrieveAll(){
-        List<Item> itemList = new ArrayList<>();
         try {
+            List<Item> itemList = new ArrayList<>();
             beginSession();
             Query<ItemEntity> query = session.createQuery("from ItemEntity", ItemEntity.class);
             List<ItemEntity> resultList = query.getResultList();
@@ -84,26 +72,27 @@ public class ItemDaoImpl implements ItemDao {
                 entity.setSupplierList(null);
                 itemList.add(new ModelMapper().map(entity,Item.class));
             }
+            return itemList;
         }catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        return itemList;
     }
-    public Item retrieveByID(String id){
-        Item item = null;
+    @Override
+    public Item retrieve(String id){
+        ItemEntity itemEntity = null;
         try {
             beginSession();
-            ItemEntity itemEntity = session.get(ItemEntity.class, id);
-            item = new ModelMapper().map(itemEntity, Item.class);
+            itemEntity = session.get(ItemEntity.class, id);
         }catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        return item;
+        return itemEntity != null ? (new ModelMapper().map(itemEntity,Item.class)) : null;
     }
+    @Override
     public boolean update(ItemEntity itemEntity){
         try {
             beginSession();
@@ -116,4 +105,9 @@ public class ItemDaoImpl implements ItemDao {
         }
         return true;
     }
+    @Override
+    public boolean delete(String ID) {
+        return false;
+    }
+
 }

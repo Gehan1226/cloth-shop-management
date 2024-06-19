@@ -7,10 +7,8 @@ import org.example.entity.EmployeeEntity;
 
 import java.util.List;
 
-public interface EmployeeDao extends CrudDao<EmployeeEntity> {
+public interface EmployeeDao extends CrudDao<EmployeeEntity,Employee> {
     List<Employee> retrieveByEmail(String email);
-    Employee retrieveById(String empId);
     Employee retrieveLastRow();
-    boolean replace(EmployeeEntity employeeEntity);
-    boolean delete(String empID);
+
 }

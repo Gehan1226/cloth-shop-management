@@ -34,11 +34,6 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean save(SupplierEntity dto) {
-        return false;
-    }
-
-    @Override
     public List<Supplier> retrieveAll() {
         List<Supplier> supplierList = new ArrayList<>();
         try {
@@ -55,20 +50,19 @@ public class SupplierDaoImpl implements SupplierDao {
         }
         return supplierList;
     }
-
-    public Supplier retrieveByID(String supplierID) {
+    @Override
+    public Supplier retrieve(String supplierID) {
         SupplierEntity supplierEntity = null;
         try {
             beginSession();
             supplierEntity = session.get(SupplierEntity.class, supplierID);
+            return new ModelMapper().map(supplierEntity, Supplier.class);
         } catch (HibernateException e) {
             throw new RuntimeException("Error executing Hibernate query", e);
         } finally {
             closeSession();
         }
-        return new ModelMapper().map(supplierEntity, Supplier.class);
     }
-
     @Override
     public Supplier retrieveLastRow() {
         SupplierEntity supplierEntity;
@@ -88,15 +82,10 @@ public class SupplierDaoImpl implements SupplierDao {
         return supplierEntity != null ? (new ModelMapper().map(supplierEntity, Supplier.class)) : null;
     }
     @Override
-    public boolean save(SupplierEntity supplierEntity, List<String> itemIDS) {
+    public boolean save(SupplierEntity supplierEntity) {
         try {
             beginSession();
-            for (int i = 0; i < itemIDS.size(); i++) {
-                ItemEntity itemEntity = session.get(ItemEntity.class, itemIDS.get(i));
-                itemEntity.getSupplierList().add(supplierEntity);
-                supplierEntity.getItemList().add(itemEntity);
-                session.persist(supplierEntity);
-            }
+            session.persist(supplierEntity);
         } catch (HibernateException e) {
             return false;
         } finally {
@@ -104,5 +93,12 @@ public class SupplierDaoImpl implements SupplierDao {
         }
         return true;
     }
-
+    @Override
+    public boolean update(SupplierEntity dto) {
+        return false;
+    }
+    @Override
+    public boolean delete(String ID) {
+        return false;
+    }
 }

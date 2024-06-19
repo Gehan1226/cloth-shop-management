@@ -29,7 +29,11 @@ public class ItemBoImpl implements ItemBo {
         return "I1";
     }
     public boolean saveItem(Item item, List<String> supIDS){
-        return itemDao.save(new ModelMapper().map(item, ItemEntity.class),supIDS);
+        for (String id : supIDS){
+            Supplier supplier = new ModelMapper().map(supplierDao.retrieve(id), Supplier.class);
+            item.getSupplierList().add(supplier);
+        }
+        return itemDao.save(new ModelMapper().map(item, ItemEntity.class));
     }
     public List<String> getAllIDSAndNames() {
         List<String> itemIDSandNames = new ArrayList<>();
@@ -41,11 +45,11 @@ public class ItemBoImpl implements ItemBo {
     }
     @Override
     public Item retrieveById(String id){
-        return itemDao.retrieveByID(id);
+        return itemDao.retrieve(id);
     }
     public boolean updateItem(Item item,List<String> SupllierIDS){
         for (String id : SupllierIDS){
-            Supplier supplier = supplierDao.retrieveByID(id);
+            Supplier supplier = new ModelMapper().map(supplierDao.retrieve(id), Supplier.class);
             item.getSupplierList().add(supplier);
         }
         return itemDao.update(new ModelMapper().map(item, ItemEntity.class));
