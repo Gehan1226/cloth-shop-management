@@ -1,9 +1,6 @@
 package org.example.dao;
 
-import org.example.dao.custom.impl.EmployeeDaoImpl;
-import org.example.dao.custom.impl.ItemDaoImpl;
-import org.example.dao.custom.impl.SupplierDaoImpl;
-import org.example.dao.custom.impl.UserDaoImpl;
+import org.example.dao.custom.impl.*;
 import org.example.util.DaoType;
 
 public class Daofactory {
@@ -20,6 +17,7 @@ public class Daofactory {
             case EMPLOYEE:return (T) new EmployeeDaoImpl();
             case ITEM:return (T) new ItemDaoImpl();
             case SUPPLIER:return (T) new SupplierDaoImpl();
+            case ORDER:return (T) new OrderDaoImpl();
         }
         return null;
     }

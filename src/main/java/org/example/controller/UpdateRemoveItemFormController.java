@@ -94,6 +94,7 @@ public class UpdateRemoveItemFormController implements Initializable {
                     Integer.parseInt(txtQTY.getText()),
                     cmbCategorie.getSelectionModel().getSelectedItem().toString(),
                     imgCloth.getImage().getUrl().toString(),
+                    null,
                     null
             );
             if (itemBo.updateItem(item,selectedSuplierIDS)){

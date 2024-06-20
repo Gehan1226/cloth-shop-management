@@ -125,7 +125,6 @@ public class SupplierDaoImpl implements SupplierDao {
                 ItemEntity itemEntity = session.get(ItemEntity.class, id);
                 if (itemEntity != null) {
                     supplierEntity.getItemList().add(itemEntity);
-
                     if (!itemEntity.getSupplierList().contains(supplierEntity)) {
                         itemEntity.getSupplierList().add(supplierEntity);
                     }

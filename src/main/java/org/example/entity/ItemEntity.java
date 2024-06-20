@@ -2,11 +2,6 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.example.dto.Supplier;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -24,5 +19,7 @@ public class ItemEntity {
     private String categorie;
     private String itemImagePath;
     @ManyToMany(mappedBy = "itemList")
-    private List<SupplierEntity> supplierList = new ArrayList<>();
+    private List<SupplierEntity> supplierList;
+    @ManyToMany(mappedBy = "itemList")
+    private List<OrderEntity> orderList ;
 }

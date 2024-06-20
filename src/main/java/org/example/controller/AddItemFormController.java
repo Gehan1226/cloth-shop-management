@@ -96,6 +96,7 @@ public class AddItemFormController implements Initializable {
                     Integer.parseInt(txtQTY.getText()),
                     cmbCategorie.getSelectionModel().getSelectedItem().toString(),
                     imagePath,
+                    new ArrayList<>(),
                     new ArrayList<>()
             );
            if(itemBo.saveItem(item, suplierIDS)){

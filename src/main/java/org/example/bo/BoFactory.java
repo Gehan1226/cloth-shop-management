@@ -18,6 +18,7 @@ public class BoFactory {
             case VALIDATE:return (T) new DataValidationBoImpl();
             case ITEM:return (T) new ItemBoImpl();
             case SUPPLIER:return (T) new SupplierBoImpl();
+            case ORDER:return (T) new OrderBoImpl();
         }
         return null;
     }

@@ -5,10 +5,10 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Item {
     private String itemId;
     private String itemName;
@@ -17,5 +17,6 @@ public class Item {
     private Integer qty;
     private String categorie;
     private String itemImagePath;
-    private List<Supplier> supplierList = new ArrayList<>();
+    private List<Supplier> supplierList;
+    private List<Order> orderList ;
 }

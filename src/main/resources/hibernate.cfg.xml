@@ -22,5 +22,8 @@
         <mapping class="org.example.entity.EmployeeEntity"/>
         <mapping class="org.example.entity.ItemEntity"/>
         <mapping class="org.example.entity.SupplierEntity"/>
+        <mapping class="org.example.entity.OrderEntity"/>
+        <mapping class="org.example.entity.CustomerEntity"/>
+
     </session-factory>
 </hibernate-configuration>
