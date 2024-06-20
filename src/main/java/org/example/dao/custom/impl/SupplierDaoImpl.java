@@ -1,5 +1,9 @@
 package org.example.dao.custom.impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Persistence;
 import org.example.dao.custom.SupplierDao;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
@@ -18,6 +22,8 @@ import java.util.List;
 public class SupplierDaoImpl implements SupplierDao {
     private Session session;
     private Transaction transaction;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
+    EntityManager entityManager = emf.createEntityManager();
 
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -103,11 +109,60 @@ public class SupplierDaoImpl implements SupplierDao {
         return true;
     }
     @Override
-    public boolean update(SupplierEntity dto) {
-        return false;
+    public boolean update(SupplierEntity dto,List<String> itemIDS) {
+        try {
+            beginSession();
+
+            SupplierEntity supplierEntity = session.get(SupplierEntity.class, dto.getSupID());
+            supplierEntity.setFirstName(dto.getFirstName());
+            supplierEntity.setLastName(dto.getLastName());
+            supplierEntity.setEmail(dto.getEmail());
+            supplierEntity.setCompany(dto.getCompany());
+            supplierEntity.setMobileNumber(dto.getMobileNumber());
+            supplierEntity.getItemList().clear();
+
+            for (String id : itemIDS) {
+                ItemEntity itemEntity = session.get(ItemEntity.class, id);
+                if (itemEntity != null) {
+                    supplierEntity.getItemList().add(itemEntity);
+
+                    if (!itemEntity.getSupplierList().contains(supplierEntity)) {
+                        itemEntity.getSupplierList().add(supplierEntity);
+                    }
+                }
+            }
+            session.merge(supplierEntity);
+        } catch (HibernateException e) {
+            return false;
+        } finally {
+            closeSession();
+        }
+        return true;
     }
     @Override
-    public boolean delete(String ID) {
-        return false;
+    public boolean delete(String id) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        try {
+            SupplierEntity supplierEntity = entityManager.find(SupplierEntity.class, id);
+            if (supplierEntity != null) {
+                List<ItemEntity> items = new ArrayList<>(supplierEntity.getItemList());
+                for (ItemEntity item : items) {
+                    item.getSupplierList().remove(supplierEntity);
+                    entityManager.merge(item);
+                }
+                supplierEntity.getItemList().clear();
+                entityManager.merge(supplierEntity);
+                entityManager.remove(supplierEntity);
+            }
+            entityTransaction.commit();
+        } catch (Exception e) {
+            entityTransaction.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            entityManager.close();
+        }
+        return true;
     }
 }

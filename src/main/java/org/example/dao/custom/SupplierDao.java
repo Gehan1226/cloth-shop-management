@@ -10,7 +10,7 @@ public interface SupplierDao extends SuperDao {
     List<Supplier> retrieveAll();
     Supplier retrieveLastRow();
     boolean save(SupplierEntity supplierEntity,List<String> itemIDS) ;
-    boolean update(SupplierEntity dto);
+    boolean update(SupplierEntity dto,List<String> itemIDS);
     boolean delete(String ID);
     Supplier retrieve(String supplierID);
 }

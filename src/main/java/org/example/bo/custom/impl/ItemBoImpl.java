@@ -46,8 +46,10 @@ public class ItemBoImpl implements ItemBo {
     public boolean updateItem(Item item,List<String> supllierIDS){
         return itemDao.update(new ModelMapper().map(item, ItemEntity.class),supllierIDS);
     }
+    @Override
     public boolean deleteItem(String itemID){
         return itemDao.delete(itemID);
     }
+
 
 }

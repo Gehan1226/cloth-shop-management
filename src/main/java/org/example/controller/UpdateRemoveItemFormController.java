@@ -45,7 +45,7 @@ public class UpdateRemoveItemFormController implements Initializable {
     private ItemBo itemBo = BoFactory.getInstance().getBo(BoType.ITEM);
     private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
     private SupplierBo supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
-    private List<String> allIDS;
+    private List<String> allSupplierIDSNames;
     private List<String> cmbValues;
     private List<String> selectedSuplierIDS = new ArrayList<>();
     private String currentItemID;
@@ -58,7 +58,7 @@ public class UpdateRemoveItemFormController implements Initializable {
         String[] sizesArr = {"XSMALL","SMALL","MEDIUM","LARGE","X LARGE","2X LARGE","3X LARGE","4X LARGE"};
         cmbSize.getItems().addAll(sizesArr);
         cmbValues = supplierBo.getAllIDSAndNames();
-        allIDS = supplierBo.getAllIDSAndNames();
+        allSupplierIDSNames = supplierBo.getAllIDSAndNames();
         String[] categoriesArr = {"Ladies","Gents","Kids"};
         cmbCategorie.getItems().addAll(categoriesArr);
     }
@@ -135,10 +135,7 @@ public class UpdateRemoveItemFormController implements Initializable {
                 String[] temp = {sup.getSupID(),sup.getFirstName()+" "+sup.getLastName()};
                 tblSupplier.getItems().add(temp);
                 selectedSuplierIDS.add(sup.getSupID());
-
-                if (cmbValues.contains(temp[0]+" - "+temp[1])){
-                    cmbValues.remove(temp[0]+" - "+temp[1]);
-                }
+                cmbValues.remove(temp[0]+" - "+temp[1]);
             }
             cmbSupplierID.getItems().addAll(cmbValues);
         }

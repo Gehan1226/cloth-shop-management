@@ -119,16 +119,33 @@ public class ItemDaoImpl implements ItemDao {
         return item;
     }
     @Override
-    public boolean update(ItemEntity itemEntity,List<String> suplierIDS) {
+    public boolean update(ItemEntity dto,List<String> suplierIDS) {
         try {
             beginSession();
-            ItemEntity itemEntity1 = session.get(ItemEntity.class, itemEntity.getItemId());
-            itemEntity1.setItemName(itemEntity.getItemName());
+
+            ItemEntity itemEntity = session.get(ItemEntity.class, dto.getItemId());
+            itemEntity.setItemName(dto.getItemName());
+            itemEntity.setCategorie(dto.getCategorie());
+            itemEntity.setItemImagePath(dto.getItemImagePath());
+            itemEntity.setPrice(dto.getPrice());
+            itemEntity.setQty(dto.getQty());
+            itemEntity.setSize(dto.getSize());
+
             for (String id : suplierIDS){
                 SupplierEntity supplierEntity = session.get(SupplierEntity.class, id);
-                supplierEntity.getItemList().add(itemEntity1);
+                List<ItemEntity> itemList = supplierEntity.getItemList();
+                boolean isItem = false;
+                for (ItemEntity entity : itemList){
+                    if (entity.getItemId().equals(dto.getItemId())){
+                        isItem = true;
+                        break;
+                    }
+                }
+                if (!isItem){
+                    supplierEntity.getItemList().add(itemEntity);
+                }
             }
-            session.merge(itemEntity1);
+            session.merge(itemEntity);
         } catch (HibernateException e) {
             return false;
         } finally {
