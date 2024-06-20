@@ -55,6 +55,7 @@ public class ItemDaoImpl implements ItemDao {
             closeSession();
         }
         if (itemEntity != null) {
+            itemEntity.setOrderList(null);
             itemEntity.setSupplierList(null);
         }
         return itemEntity != null ? (new ModelMapper().map(itemEntity, Item.class)) : null;

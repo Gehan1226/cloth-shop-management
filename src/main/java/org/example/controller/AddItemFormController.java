@@ -37,7 +37,7 @@ public class AddItemFormController implements Initializable {
     public JFXComboBox cmbSupplierID;
     public Text txtItemID;
     public JFXButton btnSave;
-    public TableView<String[]> tblSuppliers = new TableView<>();;
+    public TableView<String[]> tblSuppliers = new TableView<>();
     public TableColumn<String[], String> colSupplierID;
     public TableColumn<String[], String> colSupplierName;
     public JFXComboBox cmbCategorie;

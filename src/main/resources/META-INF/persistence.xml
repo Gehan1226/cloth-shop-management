@@ -8,6 +8,8 @@
         <class>com.example.hibernate.pojo.Movie</class>
         <class>org.example.entity.ItemEntity</class>
         <class>org.example.entity.SupplierEntity</class>
+        <class>org.example.entity.OrderEntity</class>
+        <class>org.example.entity.CustomerEntity</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>

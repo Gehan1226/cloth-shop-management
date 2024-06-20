@@ -50,6 +50,10 @@ public class ItemBoImpl implements ItemBo {
     public boolean deleteItem(String itemID){
         return itemDao.delete(itemID);
     }
+    @Override
+    public List<Item> getAllItems(){
+        return itemDao.retrieveAll();
+    }
 
 
 }

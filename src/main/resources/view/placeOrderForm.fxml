@@ -57,7 +57,7 @@
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
             <JFXTextField fx:id="txtCustomerEmail" layoutX="34.0" layoutY="58.0" prefHeight="34.0" prefWidth="342.0" promptText="Customer Email" />
-            <JFXComboBox fx:id="cmbItem" layoutX="34.0" layoutY="166.0" prefHeight="26.0" prefWidth="222.0" promptText="Select Item" />
+            <JFXComboBox fx:id="cmbItem" layoutX="34.0" layoutY="166.0" onAction="#btnCmbSelectItemOnAction" prefHeight="26.0" prefWidth="222.0" promptText="Select Item" />
             <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -70,28 +70,29 @@
             </Text>
             <JFXTextField fx:id="txtCustomerName" layoutX="34.0" layoutY="7.0" prefHeight="34.0" prefWidth="342.0" promptText="Customer Name" />
             <JFXTextField fx:id="txtCustomerMobileNumber" layoutX="34.0" layoutY="111.0" onKeyReleased="#txtMobileNoOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Customer Mobile Number" />
-            <JFXRadioButton fx:id="btnCreditCard" layoutX="33.0" layoutY="244.0" text="Credit Card" />
-            <JFXRadioButton fx:id="btnCash" layoutX="177.0" layoutY="244.0" text="Cash" />
-            <Text layoutX="34.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Type :">
+            <JFXRadioButton fx:id="btnCreditCard" layoutX="33.0" layoutY="313.0" text="Credit Card" />
+            <JFXRadioButton fx:id="btnCash" layoutX="177.0" layoutY="313.0" text="Cash" />
+            <Text layoutX="34.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Type :">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Text>
-            <JFXButton layoutX="269.0" layoutY="172.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
+            <JFXButton layoutX="281.0" layoutY="200.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="327.0" layoutY="172.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear " textFill="#f2f0f0">
+            <JFXButton layoutX="346.0" layoutY="200.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear " textFill="#f2f0f0">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </JFXButton>
+            <JFXComboBox fx:id="cmbQuantity" layoutX="34.0" layoutY="214.0" prefHeight="26.0" prefWidth="222.0" promptText="Select Quantity" />
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton layoutX="94.0" layoutY="14.0" onAction="#btnPlaceOrder" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Place Order" textFill="#f2eeee">
+            <JFXButton layoutX="94.0" layoutY="54.0" onAction="#btnPlaceOrder" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Place Order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -150,6 +151,30 @@
               </columns>
             </TableView>
             <Text fill="#0728ed" layoutX="98.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Items" wrappingWidth="121.2196044921875">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fill="#7e4a4a" layoutX="113.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="55.19999999999982">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtPrice" fill="#2b2a2a" layoutX="171.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="152.834228515625">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
+         <children>
+            <Text layoutX="97.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
+               <font>
+                  <Font name="System Bold" size="17.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtDate" layoutX="152.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2000/2/22" wrappingWidth="159.99999999999997">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
