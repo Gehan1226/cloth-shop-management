@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.example.dto.Employee;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +20,7 @@ import java.util.List;
 public class OrderEntity {
     @Id
     private String orderID;
-    private Date orderDate;
+    private LocalDate orderDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private CustomerEntity customer;
@@ -28,4 +31,7 @@ public class OrderEntity {
             inverseJoinColumns = { @JoinColumn(name = "itemId") }
     )
     private List<ItemEntity> itemList;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "empID")
+    private EmployeeEntity employee;
 }

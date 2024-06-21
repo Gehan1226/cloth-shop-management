@@ -86,7 +86,8 @@ public class UserRegistrationFormController implements Initializable {
                     txtMobileNumber.getText(),
                     cmbProvince.getSelectionModel().getSelectedItem().toString(),
                     cmbDistrict.getSelectionModel().getSelectedItem().toString(),
-                    txtEmail.getText()
+                    txtEmail.getText(),
+                    new ArrayList<>()
             );
             employeeBo.save(employee);
         }

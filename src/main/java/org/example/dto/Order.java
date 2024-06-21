@@ -2,7 +2,7 @@ package org.example.dto;
 
 import lombok.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @AllArgsConstructor
@@ -11,7 +11,8 @@ import java.util.List;
 @Setter
 public class Order {
     private String orderID;
-    private Date orderDate;
+    private LocalDate orderDate;
     private Customer customer;
     private List<Item> itemList;
+    private Employee employee;
 }

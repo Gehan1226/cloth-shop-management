@@ -20,6 +20,7 @@ import org.example.dto.Employee;
 import org.example.util.BoType;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeUpdateRemoveFormController implements Initializable {
@@ -88,7 +89,8 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
                     txtMobileNumber.getText(),
                     cmbProvince.getSelectionModel().getSelectedItem().toString(),
                     cmbDistrict.getSelectionModel().getSelectedItem().toString(),
-                    txtEmail.getText()
+                    txtEmail.getText(),
+                    new ArrayList<>()
             );
             if (employeeBo.replace(employee)){
                 txtEmpID.setText("");
@@ -118,7 +120,8 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
                 txtMobileNumber.getText(),
                 cmbProvince.getSelectionModel().getSelectedItem().toString(),
                 cmbDistrict.getSelectionModel().getSelectedItem().toString(),
-                txtEmail.getText()
+                txtEmail.getText(),
+                new ArrayList<>()
         );
         boolean isDeletedEmployee = employeeBo.deleteEmployee(employee);
         boolean isDeletedUserAccount  = userBo.deleteUserAccount(employee);

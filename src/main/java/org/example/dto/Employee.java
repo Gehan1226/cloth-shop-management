@@ -2,6 +2,8 @@ package org.example.dto;
 
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,5 +18,5 @@ public class Employee {
     private String province;
     private String district;
     private String email;
-
+    private List<Order> orderList;
 }

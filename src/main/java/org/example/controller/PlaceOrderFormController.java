@@ -9,6 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
@@ -16,16 +17,21 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.OrderBo;
+import org.example.dto.Customer;
+import org.example.dto.Employee;
 import org.example.dto.Item;
+import org.example.dto.Order;
 import org.example.util.BoType;
 import java.net.URL;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class PlaceOrderFormController implements Initializable {
+    public static String employeeID = "E1";
     public JFXTextField txtCustomerEmail;
     public JFXComboBox cmbItem;
     public Text txtEmailValidation;
@@ -61,6 +67,10 @@ public class PlaceOrderFormController implements Initializable {
         colSize.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[2]));
         colQuantity.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[3]));
         colPrice.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue()[4]));
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        btnCash.setToggleGroup(toggleGroup);
+        btnCreditCard.setToggleGroup(toggleGroup);
 
         txtOrderID.setText(orderBo.genarateOrderID());
         itemList = itemBo.getAllItems();
@@ -123,6 +133,31 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     public void btnPlaceOrder(ActionEvent actionEvent) {
+        boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
+                txtCustomerName.getText(),
+                txtCustomerEmail.getText(),
+                txtCustomerMobileNumber.getText()
+        );
+        //boolean isSelecteType = btnCreditCard.isSelected() || btnCreditCard.isSelected();
+        if (isAllFieldsNotEmpty && !selectedItemIDs.isEmpty()){
+            Customer customer = new Customer(
+                    txtCustomerName.getText(),
+                    txtCustomerEmail.getText(),
+                    txtCustomerMobileNumber.getText(),
+                    new ArrayList<>()
+            );
+            Order order = new Order(
+                    txtOrderID.getText(),
+                    LocalDate.now(),
+                    customer,
+                    new ArrayList<>(),
+                    null
+            );
+            System.out.println(orderBo.saveOrder(order,selectedItemIDs,employeeID));
+
+
+        }
+
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -156,6 +191,4 @@ public class PlaceOrderFormController implements Initializable {
         cmbQuantity.setDisable(true);
     }
 
-    public void btnCmbSelectItemOnMouseClicked(MouseEvent mouseEvent) {
-    }
 }
