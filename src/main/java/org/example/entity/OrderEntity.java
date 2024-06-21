@@ -21,6 +21,7 @@ public class OrderEntity {
     @Id
     private String orderID;
     private LocalDate orderDate;
+    private Double fullPrice;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private CustomerEntity customer;

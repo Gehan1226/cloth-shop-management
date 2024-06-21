@@ -1,5 +1,8 @@
 package org.example.dao.custom.impl;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.example.dao.custom.OrderDao;
 import org.example.dto.Employee;
 import org.example.dto.Item;
@@ -21,6 +24,8 @@ import java.util.List;
 public class OrderDaoImpl implements OrderDao {
     private Session session;
     private Transaction transaction;
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
+    EntityManager entityManager = emf.createEntityManager();
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         transaction = session.beginTransaction();
@@ -75,6 +80,29 @@ public class OrderDaoImpl implements OrderDao {
             return false;
         }
         finally {
+            closeSession();
+        }
+        return true;
+    }
+    public boolean deleteOrder(String orderId) {
+        try {
+            beginSession();
+
+            OrderEntity order = entityManager.find(OrderEntity.class, orderId);
+            if (order != null) {
+                entityManager.remove(order);
+            }
+
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            return false;
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
+            }
             closeSession();
         }
         return true;

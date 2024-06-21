@@ -149,15 +149,17 @@ public class PlaceOrderFormController implements Initializable {
             Order order = new Order(
                     txtOrderID.getText(),
                     LocalDate.now(),
+                    fullPrice,
                     customer,
                     new ArrayList<>(),
                     null
             );
-            System.out.println(orderBo.saveOrder(order,selectedItemIDs,employeeID));
-
-
+            if (orderBo.saveOrder(order,selectedItemIDs,employeeID)){
+                new Alert(Alert.AlertType.INFORMATION, "Order Place Successfully !").show();
+                return;
+            }
+            new Alert(Alert.AlertType.ERROR, "Order Place Failed !").show();
         }
-
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -190,5 +192,4 @@ public class PlaceOrderFormController implements Initializable {
         new Alert(Alert.AlertType.INFORMATION, "This Item is already selected.").show();
         cmbQuantity.setDisable(true);
     }
-
 }

@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.TableColumn?>
@@ -27,9 +25,9 @@
    <rowConstraints>
       <RowConstraints maxHeight="100.79999084472657" minHeight="10.0" prefHeight="94.39999694824219" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="86.39999389648438" minHeight="10.0" prefHeight="64.6" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="356.9999633789063" minHeight="10.0" prefHeight="323.39997558593745" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="39.4000244140625" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="18.199975585937523" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="376.2" minHeight="10.0" prefHeight="325.59995727539064" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="277.4000305175781" minHeight="0.0" prefHeight="22.00004882812499" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="160.59998168945316" minHeight="10.0" prefHeight="75.59995117187498" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
       <JFXButton onAction="#btnMainmenuOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #0B60B0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="🏠 Main Menu" textFill="#f2eeee" GridPane.valignment="TOP">
@@ -42,7 +40,7 @@
       </JFXButton>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2">
          <children>
-            <Text layoutX="97.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Place Order" wrappingWidth="198.4000488281249">
+            <Text layoutX="104.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cancel Order" wrappingWidth="222.39999999999986">
                <font>
                   <Font name="System Bold" size="34.0" />
                </font>
@@ -56,8 +54,6 @@
       </AnchorPane>
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <JFXTextField fx:id="txtCustomerEmail" layoutX="34.0" layoutY="64.0" onKeyReleased="#txtEmailOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Customer Email" />
-            <JFXComboBox fx:id="cmbItem" layoutX="34.0" layoutY="166.0" onAction="#btnCmbSelectItemOnAction" prefHeight="26.0" prefWidth="342.0" promptText="Select Item" />
             <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -68,31 +64,76 @@
                   <Font name="System Bold Italic" size="13.0" />
                </font>
             </Text>
-            <JFXTextField fx:id="txtCustomerName" layoutX="34.0" layoutY="7.0" prefHeight="34.0" prefWidth="342.0" promptText="Customer Name" />
-            <JFXTextField fx:id="txtCustomerMobileNumber" layoutX="34.0" layoutY="111.0" onKeyReleased="#txtMobileNoOnKeyReleased" prefHeight="34.0" prefWidth="342.0" promptText="Customer Mobile Number" />
-            <JFXRadioButton fx:id="btnCreditCard" layoutX="33.0" layoutY="298.0" text="Credit Card" />
-            <JFXRadioButton fx:id="btnCash" layoutX="179.0" layoutY="298.0" text="Cash" />
-            <Text layoutX="34.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Type :">
+            <Text layoutX="32.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Type :">
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font size="13.0" />
                </font>
             </Text>
-            <JFXButton layoutX="290.0" layoutY="216.0" onAction="#btnAddOnAction" style="-fx-background-color: #1679AB;" text=" Add" textFill="#f2f0f0">
+            <Text fx:id="txtPayementType" fill="#6a36cf" layoutX="148.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cash" wrappingWidth="80.8492431640625">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
-            </JFXButton>
-            <JFXButton layoutX="352.0" layoutY="216.0" onAction="#btnClearOnAction" style="-fx-background-color: #D45079;" text="🔄 Clear " textFill="#f2f0f0">
+            </Text>
+            <Text layoutX="34.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Date :">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtOrderDate" layoutX="125.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2000/2/22" wrappingWidth="159.99999999999997">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
-            </JFXButton>
-            <JFXComboBox fx:id="cmbQuantity" layoutX="34.0" layoutY="214.0" prefHeight="26.0" prefWidth="222.0" promptText="Select Quantity" />
+            </Text>
+            <Text layoutX="33.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Name :">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="152.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtCustomername" layoutX="148.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="example customer" wrappingWidth="197.5999999999999">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="33.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Email:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtCustomerEmail" layoutX="148.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="example @gmail.com" wrappingWidth="241.59993896484366">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="34.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Mobile number:">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtCustomerMobileNumber" layoutX="205.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000000000000000" wrappingWidth="197.5999999999999">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="35.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Cost:" wrappingWidth="62.3609619140625">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Text>
+            <Text fx:id="txtFullPrice" layoutX="106.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="000000000000000" wrappingWidth="197.5999999999999">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+      <AnchorPane prefHeight="51.0" prefWidth="520.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
          <children>
-            <JFXButton layoutX="94.0" layoutY="41.0" onAction="#btnPlaceOrder" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #03c04A;" text="Place Order" textFill="#f2eeee">
+            <JFXButton layoutX="166.0" layoutY="37.0" onAction="#btncancelorder" prefHeight="43.0" prefWidth="187.0" style="-fx-background-color: #5F7BDE;" text="Cancel Order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -109,16 +150,12 @@
       </JFXButton>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
-            <Text layoutX="83.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order ID">
+            <JFXTextField fx:id="txtorderID" layoutX="36.0" layoutY="26.0" prefHeight="34.0" prefWidth="187.0" promptText="Enter Order ID" />
+            <JFXButton layoutX="260.0" layoutY="21.0" onAction="#btnSearch" prefHeight="43.0" prefWidth="129.0" style="-fx-background-color: #03c04A;" text="Search" textFill="#f2eeee">
                <font>
-                  <Font name="System Bold" size="17.0" />
+                  <Font name="System Bold" size="15.0" />
                </font>
-            </Text>
-            <Text fx:id="txtOrderID" layoutX="159.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="#0001" wrappingWidth="152.834228515625">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
+            </JFXButton>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -143,44 +180,21 @@
       <AnchorPane prefHeight="293.0" prefWidth="176.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <children>
             <TableView fx:id="tblItem" layoutX="-80.0" layoutY="35.0" prefHeight="230.0" prefWidth="471.0">
-              <columns>
-                <TableColumn fx:id="colItemID" editable="false" prefWidth="58.399967193603516" resizable="false" text="Item ID" />
-                <TableColumn fx:id="colItemName" editable="false" prefWidth="141.60003280639648" resizable="false" text="Item Name" />
+               <columns>
+                  <TableColumn fx:id="colItemID" editable="false" prefWidth="58.399967193603516" resizable="false" text="Item ID" />
+                  <TableColumn fx:id="colItemName" editable="false" prefWidth="141.60003280639648" resizable="false" text="Item Name" />
                   <TableColumn fx:id="colSize" editable="false" prefWidth="79.99989318847656" resizable="false" text="Size" />
                   <TableColumn fx:id="colQuantity" editable="false" minWidth="0.0" prefWidth="84.0" resizable="false" text="Quantity" />
                   <TableColumn fx:id="colPrice" editable="false" minWidth="0.0" prefWidth="107.199951171875" resizable="false" text="Price" />
-              </columns>
+               </columns>
             </TableView>
             <Text fill="#0728ed" layoutX="98.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Items" wrappingWidth="121.2196044921875">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>
             </Text>
-            <Text fill="#7e4a4a" layoutX="113.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price :" wrappingWidth="55.19999999999982">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtPrice" fill="#2b2a2a" layoutX="171.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="152.834228515625">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3">
-         <children>
-            <Text layoutX="97.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date :">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtDate" layoutX="152.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2000/2/22" wrappingWidth="159.99999999999997">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Text>
-         </children>
-      </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" />
    </children>
 </GridPane>
