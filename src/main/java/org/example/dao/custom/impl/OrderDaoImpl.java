@@ -2,6 +2,7 @@ package org.example.dao.custom.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.example.dao.custom.OrderDao;
 import org.example.dto.Employee;
@@ -58,6 +59,22 @@ public class OrderDaoImpl implements OrderDao {
         }
         return orderEntity != null ? (new ModelMapper().map(orderEntity, Order.class)) : null;
     }
+    @Override
+    public Order retrieve(String orderID) {
+        Order order = null;
+        try {
+            beginSession();
+            OrderEntity orderEntity = session.get(OrderEntity.class, orderID);
+            if (orderEntity!=null){
+                order = new ModelMapper().map(orderEntity,Order.class);
+            }
+        } catch (HibernateException e) {
+            throw new RuntimeException("Error executing Hibernate query", e);
+        } finally {
+            closeSession();
+        }
+        return order;
+    }
     public boolean save(OrderEntity order, List<String> itemIds, String employeeId) {
         try {
             beginSession();
@@ -84,29 +101,27 @@ public class OrderDaoImpl implements OrderDao {
         }
         return true;
     }
-    public boolean deleteOrder(String orderId) {
+    @Override
+    public boolean delete(String orderId) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
         try {
             beginSession();
 
             OrderEntity order = entityManager.find(OrderEntity.class, orderId);
             if (order != null) {
                 entityManager.remove(order);
-            }
-
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
+                entityTransaction.commit();
+                return true;
+            } else {
+                System.out.println("Deleted");
                 transaction.rollback();
+                return false;
             }
+        } catch (Exception e) {
             return false;
         } finally {
-            if (entityManager != null) {
-                entityManager.close();
-            }
             closeSession();
         }
-        return true;
     }
-
-
 }

@@ -29,5 +29,14 @@ public class OrderBoImpl implements OrderBo {
         OrderEntity orderEntity = new ModelMapper().map(order, OrderEntity.class);
         return orderDao.save(orderEntity,itemIds,employeeId);
     }
+    @Override
+    public Order getOrder(String orderID){
+        return orderDao.retrieve(orderID);
+    }
+    @Override
+    public boolean deleteOrder(String orderID){
+        return orderDao.delete(orderID);
+    }
+
 
 }

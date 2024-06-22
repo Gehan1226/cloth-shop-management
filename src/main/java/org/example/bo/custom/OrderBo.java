@@ -8,4 +8,6 @@ import java.util.List;
 public interface OrderBo extends SuperBo {
     String genarateOrderID();
     boolean saveOrder(Order order, List<String> itemIds, String employeeId);
+    Order getOrder(String orderID);
+    boolean deleteOrder(String orderID);
 }
