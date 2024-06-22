@@ -6,7 +6,6 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.example.dao.custom.ItemDao;
 import org.example.dto.Item;
-import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
@@ -40,47 +39,52 @@ public class ItemDaoImpl implements ItemDao {
             session.close();
         }
     }
-
     @Override
     public Item retrieveLastRow() {
-        ItemEntity itemEntity;
+        Item item = null;
         try {
             beginSession();
             Query<ItemEntity> query = session.createQuery("from ItemEntity order by id DESC", ItemEntity.class);
             query.setMaxResults(1);
-            itemEntity = query.uniqueResult();
+            ItemEntity itemEntity = query.uniqueResult();
+            if (itemEntity != null) {
+                itemEntity.setOrderList(null);
+                itemEntity.setSupplierList(null);
+                item = new ModelMapper().map(itemEntity, Item.class);
+            }
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieveLastRow method in itemDao", e);
         } finally {
             closeSession();
         }
-        if (itemEntity != null) {
-            itemEntity.setOrderList(null);
-            itemEntity.setSupplierList(null);
-        }
-        return itemEntity != null ? (new ModelMapper().map(itemEntity, Item.class)) : null;
+        return item;
     }
 
     @Override
     public boolean save(ItemEntity itemEntity, List<String> supplierIDS) {
         try {
             beginSession();
+            session.persist(itemEntity);
+
             if (!supplierIDS.isEmpty()) {
-                for (int i = 0; i < supplierIDS.size(); i++) {
-                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierIDS.get(i));
-                    supplierEntity.getItemList().add(itemEntity);
-                    session.persist(itemEntity);
-                    session.persist(supplierEntity);
+                for (String supplierID : supplierIDS) {
+                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierID);
+                    if (supplierEntity != null) {
+                        supplierEntity.getItemList().add(itemEntity);
+                        session.persist(supplierEntity);
+                    }
                 }
-            } else {
-                session.persist(itemEntity);
             }
+            transaction.commit();
+            return true;
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
         }
-        return true;
     }
 
     @Override
@@ -96,7 +100,7 @@ public class ItemDaoImpl implements ItemDao {
             }
             return itemList;
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieveAll method in itemDao", e);
         } finally {
             closeSession();
         }
@@ -113,7 +117,7 @@ public class ItemDaoImpl implements ItemDao {
                 item = new ModelMapper().map(itemEntity, Item.class);
             }
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieve method in itemDao", e);
         } finally {
             closeSession();
         }
@@ -125,34 +129,31 @@ public class ItemDaoImpl implements ItemDao {
             beginSession();
 
             ItemEntity itemEntity = session.get(ItemEntity.class, dto.getItemId());
-            itemEntity.setItemName(dto.getItemName());
-            itemEntity.setCategorie(dto.getCategorie());
-            itemEntity.setItemImagePath(dto.getItemImagePath());
-            itemEntity.setPrice(dto.getPrice());
-            itemEntity.setQty(dto.getQty());
-            itemEntity.setSize(dto.getSize());
+            if (itemEntity!=null){
+                new ModelMapper().map(dto, itemEntity);
 
-            for (String id : suplierIDS){
-                SupplierEntity supplierEntity = session.get(SupplierEntity.class, id);
-                List<ItemEntity> itemList = supplierEntity.getItemList();
-                boolean isItem = false;
-                for (ItemEntity entity : itemList){
-                    if (entity.getItemId().equals(dto.getItemId())){
-                        isItem = true;
-                        break;
+                for (String id : suplierIDS) {
+                    SupplierEntity supplierEntity = session.get(SupplierEntity.class, id);
+                    if (supplierEntity != null) {
+                        List<ItemEntity> itemList = supplierEntity.getItemList();
+                        if (!itemList.contains(itemEntity)) {
+                            itemList.add(itemEntity);
+                        }
                     }
                 }
-                if (!isItem){
-                    supplierEntity.getItemList().add(itemEntity);
-                }
+                session.merge(itemEntity);
+                transaction.commit();
+                return true;
             }
-            session.merge(itemEntity);
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
         }
-        return true;
+        return false;
     }
     @Override
     public boolean delete(String id) {
@@ -173,7 +174,6 @@ public class ItemDaoImpl implements ItemDao {
             entityTransaction.commit();
         } catch (Exception e) {
             entityTransaction.rollback();
-            e.printStackTrace();
             return false;
         } finally {
             entityManager.close();

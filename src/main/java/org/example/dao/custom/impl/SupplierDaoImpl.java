@@ -49,64 +49,69 @@ public class SupplierDaoImpl implements SupplierDao {
             for (SupplierEntity entity : resultList) {
                 supplierList.add(new ModelMapper().map(entity, Supplier.class));
             }
+            return supplierList;
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieveAll method in supplierDao", e);
         } finally {
             closeSession();
         }
-        return supplierList;
     }
     @Override
     public Supplier retrieve(String supplierID) {
-        SupplierEntity supplierEntity = null;
+        Supplier supplier = null;
         try {
             beginSession();
-            supplierEntity = session.get(SupplierEntity.class, supplierID);
-            return new ModelMapper().map(supplierEntity, Supplier.class);
+            SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierID);
+            if (supplierEntity!=null){
+                supplier = new ModelMapper().map(supplierEntity, Supplier.class);
+            }
+            return supplier;
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieve method in supplierDao ", e);
         } finally {
             closeSession();
         }
     }
     @Override
     public Supplier retrieveLastRow() {
-        SupplierEntity supplierEntity;
+        Supplier supplier = null;
         try {
             beginSession();
             Query<SupplierEntity> query = session.createQuery("from SupplierEntity order by id DESC", SupplierEntity.class);
             query.setMaxResults(1);
-            supplierEntity = query.uniqueResult();
+            SupplierEntity supplierEntity = query.uniqueResult();
+            if (supplierEntity != null) {
+                supplierEntity.setItemList(null);
+                supplier = new ModelMapper().map(supplierEntity, Supplier.class);
+            }
+            return supplier;
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieveLastRow method in supplierDao", e);
         } finally {
             closeSession();
         }
-        if (supplierEntity != null) {
-            supplierEntity.setItemList(null);
-        }
-        return supplierEntity != null ? (new ModelMapper().map(supplierEntity, Supplier.class)) : null;
     }
     @Override
     public boolean save(SupplierEntity supplierEntity,List<String> itemIDS) {
         try {
             beginSession();
             if (!itemIDS.isEmpty()) {
-                for (int i = 0; i < itemIDS.size(); i++) {
-                    ItemEntity itemEntity = session.get(ItemEntity.class, itemIDS.get(i));
-                    supplierEntity.getItemList().add(itemEntity);
-                    session.persist(supplierEntity);
-                    session.persist(itemEntity);
+                for (String itemID : itemIDS) {
+                    ItemEntity itemEntity = session.get(ItemEntity.class, itemID);
+                    if (itemEntity != null) {
+                        supplierEntity.getItemList().add(itemEntity);
+                        session.persist(itemEntity);
+                    }
                 }
-            } else {
-                session.persist(supplierEntity);
             }
+            session.persist(supplierEntity);
+            transaction.commit();
+            return true;
         } catch (HibernateException e) {
             return false;
         } finally {
             closeSession();
         }
-        return true;
     }
     @Override
     public boolean update(SupplierEntity dto,List<String> itemIDS) {
@@ -114,29 +119,30 @@ public class SupplierDaoImpl implements SupplierDao {
             beginSession();
 
             SupplierEntity supplierEntity = session.get(SupplierEntity.class, dto.getSupID());
-            supplierEntity.setFirstName(dto.getFirstName());
-            supplierEntity.setLastName(dto.getLastName());
-            supplierEntity.setEmail(dto.getEmail());
-            supplierEntity.setCompany(dto.getCompany());
-            supplierEntity.setMobileNumber(dto.getMobileNumber());
-            supplierEntity.getItemList().clear();
-
-            for (String id : itemIDS) {
-                ItemEntity itemEntity = session.get(ItemEntity.class, id);
-                if (itemEntity != null) {
-                    supplierEntity.getItemList().add(itemEntity);
-                    if (!itemEntity.getSupplierList().contains(supplierEntity)) {
-                        itemEntity.getSupplierList().add(supplierEntity);
+            if (supplierEntity != null){
+                new ModelMapper().map(dto,supplierEntity);
+                for (String id : itemIDS) {
+                    ItemEntity itemEntity = session.get(ItemEntity.class, id);
+                    if (itemEntity != null) {
+                        supplierEntity.getItemList().add(itemEntity);
+                        if (!itemEntity.getSupplierList().contains(supplierEntity)) {
+                            itemEntity.getSupplierList().add(supplierEntity);
+                        }
                     }
                 }
+                session.merge(supplierEntity);
+                transaction.commit();
+                return true;
             }
-            session.merge(supplierEntity);
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
         }
-        return true;
+        return false;
     }
     @Override
     public boolean delete(String id) {
@@ -157,7 +163,6 @@ public class SupplierDaoImpl implements SupplierDao {
             entityTransaction.commit();
         } catch (Exception e) {
             entityTransaction.rollback();
-            e.printStackTrace();
             return false;
         } finally {
             entityManager.close();

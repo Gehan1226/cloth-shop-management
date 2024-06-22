@@ -104,17 +104,7 @@ public class UpdateRemoveItemFormController implements Initializable {
                     null
             );
             if (itemBo.updateItem(item,selectedSuplierIDS)){
-                txtItemID.setText(itemBo.genarateItemID());
-                txtItemName.setText("");
-                txtPrice.setText("");
-                txtQTY.setText("");
-                cmbCategorie.getSelectionModel().clearSelection();
-                cmbSupplierID.getSelectionModel().clearSelection();
-                cmbSize.getSelectionModel().clearSelection();
-                imagePath = null;
-                imgCloth.setImage(null);
-                selectedSuplierIDS.clear();
-                tblSupplier.getItems().clear();
+                clearFields();
                 new Alert(Alert.AlertType.INFORMATION, "✅ Item Update Successfully !").show();
                 return;
             }
@@ -126,6 +116,7 @@ public class UpdateRemoveItemFormController implements Initializable {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         if(itemBo.deleteItem(currentItemID)){
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "✅ Item Delete Successfully !").show();
             return;
         }
@@ -169,6 +160,19 @@ public class UpdateRemoveItemFormController implements Initializable {
             imagePath = file.toURI().toString();
             imgCloth.setImage(new Image(imagePath));
         }
+    }
+    private void clearFields(){
+        txtItemID.setText(itemBo.genarateItemID());
+        txtItemName.setText("");
+        txtPrice.setText("");
+        txtQTY.setText("");
+        cmbCategorie.getSelectionModel().clearSelection();
+        cmbSupplierID.getSelectionModel().clearSelection();
+        cmbSize.getSelectionModel().clearSelection();
+        imagePath = null;
+        imgCloth.setImage(null);
+        selectedSuplierIDS.clear();
+        tblSupplier.getItems().clear();
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
