@@ -5,7 +5,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,6 +26,7 @@ import org.example.dto.Supplier;
 import org.example.util.BoType;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +34,7 @@ import java.util.ResourceBundle;
 
 public class AddItemFormController implements Initializable {
     public static Stage primaryStage;
+    public static boolean isAdmin;
     public JFXTextField txtItemName;
     public JFXTextField txtQTY;
     public JFXTextField txtPrice;
@@ -66,7 +71,7 @@ public class AddItemFormController implements Initializable {
     }
     private void addListenerTxtPrice(){
         txtPrice.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*([\\.]\\d*)?")) {
+            if (!newValue.matches("\\d*([.]\\d*)?")) {
                 txtPrice.setText(oldValue);
             }
         });
@@ -78,14 +83,13 @@ public class AddItemFormController implements Initializable {
             }
         });
     }
-    public void btnMainmenuOnAction(ActionEvent actionEvent) {
-    }
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         boolean isAllFieldsNotEmpty = dataValidationBo.isAllFieldsNotEmpty(
                 txtItemName.getText(),
                 txtPrice.getText(),
-                txtQTY.getText()
+                txtQTY.getText(),
+                imagePath
         );
         if (isAllFieldsNotEmpty && !cmbSize.getSelectionModel().isEmpty()){
             Item item = new Item(
@@ -100,25 +104,22 @@ public class AddItemFormController implements Initializable {
                     new ArrayList<>()
             );
            if(itemBo.saveItem(item, suplierIDS)){
+               txtItemID.setText(itemBo.genarateItemID());
+               txtItemName.setText("");
+               txtPrice.setText("");
+               txtQTY.setText("");
+               cmbCategorie.getSelectionModel().clearSelection();
+               cmbSupplierID.getSelectionModel().clearSelection();
+               cmbSize.getSelectionModel().clearSelection();
+               imagePath = null;
+               suplierIDS.clear();
+               tblSuppliers.getItems().clear();
                new Alert(Alert.AlertType.INFORMATION, "✅ Item Saved!").show();
                 return;
            }
             new Alert(Alert.AlertType.ERROR, "❌ Item Save Failed!").show();
         }
     }
-
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSupplierListOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
-    }
-
 
     public void btnAddOnAction(ActionEvent actionEvent) {
         if (cmbSupplierID.getValue() != null){
@@ -146,6 +147,49 @@ public class AddItemFormController implements Initializable {
         File file = fileChooser.showOpenDialog(primaryStage);
         if (file != null) {
             imagePath = file.toURI().toString();
+        }
+    }
+
+    public void btnMainmenuOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            HomePageFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
+    }
+
+    public void btnDashboardOnAction(ActionEvent actionEvent) {
+        String path = isAdmin ? "view/adminDashboard.fxml": "view/userDashboardForm.fxml";
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource(path);
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            EmployeeUpdateRemoveFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
+    }
+
+    public void btnUpdateRemoveItemOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/updateItemForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            EmployeeUpdateRemoveFormController.primaryStage = stage;
+        } catch (IOException e) {
         }
     }
 }

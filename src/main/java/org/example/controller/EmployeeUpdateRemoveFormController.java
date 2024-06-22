@@ -175,12 +175,6 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
         new Alert(Alert.AlertType.ERROR, "❌ Wrong ID").show();
     }
 
-    public void btnSearchUserOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUserListOnAction(ActionEvent actionEvent) {
-    }
-
     public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
         boolean isValidEmail = dataValidationBo.isValidEmail(txtEmail.getText());
         if (!isValidEmail){
@@ -202,4 +196,10 @@ public class EmployeeUpdateRemoveFormController implements Initializable {
         btnSave.setDisable(false);
         txtmobileNumberValid.setVisible(false);
     }
+    public void btnSearchUserOnAction(ActionEvent actionEvent) {
+    }
+
+    public void btnUserListOnAction(ActionEvent actionEvent) {
+    }
 }
+
