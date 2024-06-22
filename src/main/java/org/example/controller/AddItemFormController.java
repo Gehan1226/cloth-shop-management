@@ -174,12 +174,18 @@ public class AddItemFormController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-            EmployeeUpdateRemoveFormController.primaryStage = stage;
+            if (isAdmin){
+                AdminDashboardFormController.primaryStage = stage;
+                return;
+            }
+            UserDashboardFormController.primaryStage = stage;
+
         } catch (IOException e) {
         }
     }
 
     public void btnUpdateRemoveItemOnAction(ActionEvent actionEvent) {
+        UpdateRemoveItemFormController.isAdmin = isAdmin;
         try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/updateItemForm.fxml");

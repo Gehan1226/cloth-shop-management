@@ -44,6 +44,7 @@ public class AdminDashboardFormController {
     }
 
     public void btnAddItemOnAction(ActionEvent actionEvent) {
+        AddItemFormController.isAdmin = true;
         Stage stage = loadScreen("view/addItemForm.fxml");
         AddItemFormController.primaryStage = stage;
     }

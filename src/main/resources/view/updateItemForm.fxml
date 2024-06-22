@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="1025.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UpdateRemoveItemFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="683.0" prefWidth="1078.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UpdateRemoveItemFormController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="177.6000274658203" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="278.199951171875" minWidth="10.0" prefWidth="130.60001220703126" />
@@ -55,7 +55,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <JFXTextField fx:id="txtItemName" layoutX="44.0" layoutY="155.0" prefHeight="34.0" prefWidth="322.0" promptText="Item Name " />
+            <JFXTextField fx:id="txtItemName" layoutX="126.0" layoutY="155.0" prefHeight="34.0" prefWidth="279.0" />
             <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="245.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -66,13 +66,9 @@
                   <Font name="System Bold Italic" size="13.0" />
                </font>
             </Text>
-            <ImageView fx:id="imgCloth" fitHeight="150.0" fitWidth="200.0" layoutX="144.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../asset/images/114-1140383_tshirt-clothing-black-and-white-clip-art-free-removebg-preview.png" />
-               </image>
-            </ImageView>
-            <JFXTextField fx:id="txtPrice" layoutX="44.0" layoutY="212.0" prefHeight="34.0" prefWidth="322.0" promptText="Price per One" />
-            <JFXTextField fx:id="txtQTY" layoutX="44.0" layoutY="265.0" prefHeight="34.0" prefWidth="322.0" promptText="QTY on hand " />
+            <ImageView fx:id="imgCloth" fitHeight="150.0" fitWidth="200.0" layoutX="155.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+            <JFXTextField fx:id="txtPrice" layoutX="126.0" layoutY="212.0" prefHeight="34.0" prefWidth="279.0" />
+            <JFXTextField fx:id="txtQTY" layoutX="126.0" layoutY="266.0" prefHeight="34.0" prefWidth="290.0" />
             <JFXComboBox fx:id="cmbSize" layoutX="42.0" layoutY="330.0" prefHeight="26.0" prefWidth="147.0" promptText="Select Size" />
             <JFXComboBox fx:id="cmbCategorie" layoutX="226.0" layoutY="330.0" prefHeight="26.0" prefWidth="138.0" promptText="Select Categorie" />
             <JFXComboBox fx:id="cmbSupplierID" layoutX="44.0" layoutY="381.0" prefHeight="26.0" prefWidth="187.0" promptText="Select Supplier ID" />
@@ -82,11 +78,26 @@
                </font>
             </JFXButton>
 
-            <JFXButton layoutX="44.0" layoutY="14.0" onAction="#btnChangeImgOnAction" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #1679AB;" text="Change Image" textFill="#f7f5f5">
+            <JFXButton layoutX="42.0" layoutY="62.0" onAction="#btnChangeImgOnAction" prefHeight="26.0" prefWidth="90.0" style="-fx-background-color: #1679AB;" text="Change Image" textFill="#f7f5f5">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
+            <Text layoutX="23.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Item Name:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price per once:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
+            <Text layoutX="23.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="QTY On Hand:">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -123,17 +134,17 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <JFXButton layoutX="11.0" onAction="#btnSearchSupplierOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" onAction="#btnAddSupplierOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Add Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnSupplierListOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Supplier List" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="55.0" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Supplier List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnUpdateRemoveOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnSupplierUpdateRemoveOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
@@ -142,13 +153,13 @@
       </AnchorPane>
       <AnchorPane prefHeight="342.0" prefWidth="198.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
          <children>
-            <TableView fx:id="tblSupplier" editable="true" layoutX="-22.0" layoutY="188.0" prefHeight="226.0" prefWidth="271.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css">
+            <TableView fx:id="tblSupplier" editable="true" layoutX="8.0" layoutY="192.0" prefHeight="226.0" prefWidth="271.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css">
                <columns>
                   <TableColumn fx:id="colSupplierID" prefWidth="95.20000839233398" text="Supplier ID" />
                   <TableColumn fx:id="colSupplierName" prefWidth="174.4000274658203" text="Supplier Name" />
                </columns>
             </TableView>
-            <Text fill="#2a587b" layoutX="76.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers" wrappingWidth="75.2342529296875">
+            <Text fill="#2a587b" layoutX="106.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Suppliers" wrappingWidth="75.2342529296875">
                <font>
                   <Font name="System Bold" size="17.0" />
                </font>

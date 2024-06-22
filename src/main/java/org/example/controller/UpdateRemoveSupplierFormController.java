@@ -25,6 +25,7 @@ import java.util.ResourceBundle;
 
 public class UpdateRemoveSupplierFormController implements Initializable {
     public static Stage primaryStage;
+    public static boolean isAdmin;
     public JFXTextField txtFisrstName;
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;

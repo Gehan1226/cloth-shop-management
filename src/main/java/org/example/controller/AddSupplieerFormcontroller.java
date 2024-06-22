@@ -26,6 +26,7 @@ import java.util.ResourceBundle;
 
 public class AddSupplieerFormcontroller implements Initializable {
     public static Stage primaryStage;
+    public static boolean isAdmin;
     public JFXTextField txtFirstName;
     public JFXTextField txtCompany;
     public Text txtEmailValidation;

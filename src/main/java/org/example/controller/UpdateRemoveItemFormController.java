@@ -5,13 +5,17 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
@@ -21,6 +25,8 @@ import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,7 @@ import java.util.ResourceBundle;
 
 public class UpdateRemoveItemFormController implements Initializable {
     public static Stage primaryStage;
+    public static boolean isAdmin;
     public JFXTextField txtItemName;
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;
@@ -49,6 +56,7 @@ public class UpdateRemoveItemFormController implements Initializable {
     private List<String> cmbValues;
     private List<String> selectedSuplierIDS = new ArrayList<>();
     private String currentItemID;
+    private String imagePath;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,8 +69,6 @@ public class UpdateRemoveItemFormController implements Initializable {
         allSupplierIDSNames = supplierBo.getAllIDSAndNames();
         String[] categoriesArr = {"Ladies","Gents","Kids"};
         cmbCategorie.getItems().addAll(categoriesArr);
-    }
-    public void btnMainmenuOnAction(ActionEvent actionEvent) {
     }
 
     public void btnAddOnAction(ActionEvent actionEvent) {
@@ -98,11 +104,24 @@ public class UpdateRemoveItemFormController implements Initializable {
                     null
             );
             if (itemBo.updateItem(item,selectedSuplierIDS)){
+                txtItemID.setText(itemBo.genarateItemID());
+                txtItemName.setText("");
+                txtPrice.setText("");
+                txtQTY.setText("");
+                cmbCategorie.getSelectionModel().clearSelection();
+                cmbSupplierID.getSelectionModel().clearSelection();
+                cmbSize.getSelectionModel().clearSelection();
+                imagePath = null;
+                imgCloth.setImage(null);
+                selectedSuplierIDS.clear();
+                tblSupplier.getItems().clear();
                 new Alert(Alert.AlertType.INFORMATION, "✅ Item Update Successfully !").show();
                 return;
             }
             new Alert(Alert.AlertType.ERROR, "❌ Item Update Failed!").show();
+            return;
         }
+        new Alert(Alert.AlertType.INFORMATION, "Please Fill All Field!").show();
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
@@ -111,9 +130,6 @@ public class UpdateRemoveItemFormController implements Initializable {
             return;
         }
         new Alert(Alert.AlertType.ERROR, "❌ Item Delete Failed!").show();
-    }
-
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
     }
 
     public void btnSearchOnAction(ActionEvent actionEvent) {
@@ -139,18 +155,82 @@ public class UpdateRemoveItemFormController implements Initializable {
                 cmbValues.remove(temp[0]+" - "+temp[1]);
             }
             cmbSupplierID.getItems().addAll(cmbValues);
+            return;
+        }
+        new Alert(Alert.AlertType.ERROR, "❌ Item Not Found!").show();
+    }
+    public void btnChangeImgOnAction(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        File file = fileChooser.showOpenDialog(primaryStage);
+        if (file != null) {
+            imagePath = file.toURI().toString();
+            imgCloth.setImage(new Image(imagePath));
         }
     }
-    public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
 
+    public void btnDashboardOnAction(ActionEvent actionEvent) {
+        String path = isAdmin ? "view/adminDashboard.fxml": "view/userDashboardForm.fxml";
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource(path);
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            if (isAdmin){
+                AdminDashboardFormController.primaryStage = stage;
+                return;
+            }
+            UserDashboardFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
-    public void btnSupplierListOnAction(ActionEvent actionEvent) {
+    public void btnMainmenuOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            HomePageFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
+    public void btnAddSupplierOnAction(ActionEvent actionEvent) {
+        AddSupplieerFormcontroller.isAdmin = true;
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/addSupplierForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            AddSupplieerFormcontroller.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
-    public void btnChangeImgOnAction(ActionEvent actionEvent) {
+    public void btnSupplierUpdateRemoveOnAction(ActionEvent actionEvent) {
+        UpdateRemoveSupplierFormController.isAdmin = true;
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/updateSupplierForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            UpdateRemoveSupplierFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 }
