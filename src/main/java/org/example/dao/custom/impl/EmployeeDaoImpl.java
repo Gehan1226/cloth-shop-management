@@ -41,7 +41,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity where email = :email", EmployeeEntity.class);
             query.setParameter("email", email);
             List<EmployeeEntity> employeeEntityList = query.getResultList();
-            employeeList.add(new ModelMapper().map(employeeEntityList.get(0), Employee.class));
+            if (!employeeEntityList.isEmpty()){
+                employeeList.add(new ModelMapper().map(employeeEntityList.get(0), Employee.class));
+            }
         }catch (HibernateException e){
             throw new RuntimeException("Error executing Hibernate query", e);
         }finally {
@@ -87,6 +89,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         } finally {
             closeSession();
         }
+        System.out.println(employeeEntity);
         return employeeEntity != null ? (new ModelMapper().map(employeeEntity,Employee.class)) : null;
     }
     @Override

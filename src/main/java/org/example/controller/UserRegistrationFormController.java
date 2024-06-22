@@ -95,6 +95,17 @@ public class UserRegistrationFormController implements Initializable {
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/userDashboardForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            UserDashboardFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
     public void btnSearchUserOnAction(ActionEvent actionEvent) {

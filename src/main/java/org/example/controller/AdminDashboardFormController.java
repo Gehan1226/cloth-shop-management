@@ -49,22 +49,22 @@ public class AdminDashboardFormController {
     }
 
     public void btnItemUpdateRemoveOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/updateItemForm.fxml.fxml");
+        Stage stage = loadScreen("view/updateItemForm.fxml");
         UpdateRemoveItemFormController.primaryStage = stage;
     }
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/addSupplierForm.fxml.fxml.fxml");
+        Stage stage = loadScreen("view/addSupplierForm.fxml");
         AddSupplieerFormcontroller.primaryStage = stage;
     }
 
     public void btnCancelOrderOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/cancelOrderForm.fxml.fxml");
+        Stage stage = loadScreen("view/cancelOrderForm.fxml");
         CancelOrderFormController.primaryStage = stage;
     }
 
     public void btnSpplierUpdateRemoveOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/addSupplierForm.fxml");
+        Stage stage = loadScreen("view/updateSupplierForm.fxml");
         UpdateRemoveSupplierFormController.primaryStage = stage;
     }
 }

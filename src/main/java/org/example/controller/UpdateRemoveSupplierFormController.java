@@ -136,5 +136,4 @@ public class UpdateRemoveSupplierFormController implements Initializable {
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
     }
 
-
 }

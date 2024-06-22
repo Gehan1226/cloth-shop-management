@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -42,16 +43,27 @@ public class UserDashboardFormController {
     }
 
     public void btnItemUpdateRemoveOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/updateItemForm.fxml.fxml");
+        Stage stage = loadScreen("view/updateItemForm.fxml");
         UpdateRemoveItemFormController.primaryStage = stage;
     }
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
-        Stage stage = loadScreen("view/addSupplierForm.fxml.fxml.fxml");
+        Stage stage = loadScreen("view/addSupplierForm.fxml");
         AddSupplieerFormcontroller.primaryStage = stage;
     }
 
     public void btnSupplierUpdateRemoveOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/updateSupplierForm.fxml");
+        UpdateRemoveSupplierFormController.primaryStage = stage;
+    }
 
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/placeOrderForm.fxml");
+        PlaceOrderFormController.primaryStage = stage;
+    }
+
+    public void btnCancelorderOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/cancelOrderForm.fxml");
+        CancelOrderFormController.primaryStage = stage;
     }
 }

@@ -135,7 +135,7 @@
                   <Image url="@../asset/images/R%20(5).png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="365.0" layoutY="139.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Search Order" textFill="#f2eeee">
+            <JFXButton layoutX="365.0" layoutY="139.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Search Order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -145,7 +145,7 @@
                   <Image url="@../asset/images/OIP__7_-removebg-preview.png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="365.0" layoutY="208.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Order List" textFill="#f2eeee">
+            <JFXButton layoutX="365.0" layoutY="208.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Order List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
