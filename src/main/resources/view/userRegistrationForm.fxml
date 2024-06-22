@@ -105,12 +105,12 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <JFXButton layoutX="11.0" onAction="#btnSearchUserOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search user" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search user" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnUserListOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="User List" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="55.0" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="User List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

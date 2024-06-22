@@ -45,7 +45,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
                 employeeList.add(new ModelMapper().map(employeeEntityList.get(0), Employee.class));
             }
         }catch (HibernateException e){
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error in retrieveByEmail method", e);
         }finally {
             closeSession();
         }
@@ -57,6 +57,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
             beginSession();
             session.persist(dto);
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
@@ -65,62 +68,51 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
     @Override
     public Employee retrieve(String id){
-        EmployeeEntity employeeEntity;
+        Employee employee = null;
         try {
             beginSession();
-            employeeEntity = session.get(EmployeeEntity.class, id);
+            EmployeeEntity employeeEntity = session.get(EmployeeEntity.class, id);
+            if (employeeEntity != null){
+                employee = new ModelMapper().map(employeeEntity, Employee.class);
+            }
         }catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieving employee with id: " + id, e);
         } finally {
             closeSession();
         }
-        return employeeEntity != null ? new ModelMapper().map(employeeEntity, Employee.class):null;
+        return employee;
     }
     @Override
     public Employee retrieveLastRow() {
-        EmployeeEntity employeeEntity;
+        Employee employee;
         try {
             beginSession();
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity order by id DESC", EmployeeEntity.class);
             query.setMaxResults(1);
-            employeeEntity= query.uniqueResult();
+            EmployeeEntity employeeEntity= query.uniqueResult();
+            employee = new ModelMapper().map(employeeEntity, Employee.class);
         }catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error retrieveLastRow method ", e);
         } finally {
             closeSession();
         }
-        System.out.println(employeeEntity);
-        return employeeEntity != null ? (new ModelMapper().map(employeeEntity,Employee.class)) : null;
+        return employee;
     }
     @Override
     public boolean update(EmployeeEntity employeeEntity){
-        String hql = "update EmployeeEntity " +
-                     "set firstName = :value1," +
-                        " lastName = :value2," +
-                        " nic = :value3," +
-                        " mobileNumber = :value4," +
-                         "province = :value5," +
-                        "district = :value6 ," +
-                        "email = :value7 " +
-                     "where empID = :primaryKeyValue";
         try {
             beginSession();
-            MutationQuery mutationQuery = session.createMutationQuery(hql);
-            mutationQuery.setParameter("value1",employeeEntity.getFirstName());
-            mutationQuery.setParameter("value2",employeeEntity.getLastName());
-            mutationQuery.setParameter("value3",employeeEntity.getNic());
-            mutationQuery.setParameter("value4",employeeEntity.getMobileNumber());
-            mutationQuery.setParameter("value5",employeeEntity.getProvince());
-            mutationQuery.setParameter("value6",employeeEntity.getDistrict());
-            mutationQuery.setParameter("value7",employeeEntity.getEmail());
-            mutationQuery.setParameter("primaryKeyValue",employeeEntity.getEmpID());
-            mutationQuery.executeUpdate();
+            session.merge(employeeEntity);
+            transaction.commit();
+            return true;
         }catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
         }
-        return true;
     }
     @Override
     public boolean delete(String empID) {
@@ -130,6 +122,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
             mutationQuery.setParameter("primaryKeyValue",empID);
             mutationQuery.executeUpdate();
         }catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();

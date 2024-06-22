@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -36,27 +37,27 @@ public class UserRegistrationFormController implements Initializable {
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;
     public Text txtEmpID;
-    private DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
+    private final DataValidationBo dataValidationBo = BoFactory.getInstance().getBo(BoType.VALIDATE);
+    private final EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
     private boolean isValidEmail;
     private boolean isValidMobileNo;
-    private EmployeeBo employeeBo = BoFactory.getInstance().getBo(BoType.EMPLOYEE);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         txtEmpID.setText(employeeBo.genarateEmployeeID());
-        String[] provinceArr = {"Central","Eastern","North Central","Northern","North West","Sabaragamuwa","Southern","Uva","Western"};
+        String[] provinceArr = {"Central", "Eastern", "North Central", "Northern", "North West", "Sabaragamuwa", "Southern", "Uva", "Western"};
         String[] districtArr = {
-                "Ampara","Anuradhapura","Badulla","Batticaloa","Colombo",
-                "Galle","Gampaha","Hambantota","Jaffna","Kalutara",
-                "Kandy","Kegalle","Kilinochchi","Kurunegala","Mannar",
-                "Matale","Matara","Monaragala","Mullaitivu","Nuwara Eliya",
-                "Polonnaruwa","Puttalam","Ratnapura","Trincomalee","Vavuniya"
+                "Ampara", "Anuradhapura", "Badulla", "Batticaloa", "Colombo",
+                "Galle", "Gampaha", "Hambantota", "Jaffna", "Kalutara",
+                "Kandy", "Kegalle", "Kilinochchi", "Kurunegala", "Mannar",
+                "Matale", "Matara", "Monaragala", "Mullaitivu", "Nuwara Eliya",
+                "Polonnaruwa", "Puttalam", "Ratnapura", "Trincomalee", "Vavuniya"
         };
         cmbProvince.getItems().addAll(provinceArr);
         cmbDistrict.getItems().addAll(districtArr);
     }
 
-        public void btnMainmenuOnAction(ActionEvent actionEvent) {
+    public void btnMainmenuOnAction(ActionEvent actionEvent) {
         try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
@@ -66,8 +67,8 @@ public class UserRegistrationFormController implements Initializable {
             stage.setScene(new Scene(parent));
             stage.show();
             HomePageFormController.primaryStage = stage;
-        } catch (IOException e) {}
-
+        } catch (IOException e) {
+        }
     }
 
     public void btnRegisterOnAction(ActionEvent actionEvent) {
@@ -77,7 +78,7 @@ public class UserRegistrationFormController implements Initializable {
                 txtNicNo.getText()
         );
         boolean isSelectedcmbBoxes = !cmbProvince.getSelectionModel().isEmpty() && !cmbDistrict.getSelectionModel().isEmpty();
-        if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && isSelectedcmbBoxes){
+        if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && isSelectedcmbBoxes) {
             Employee employee = new Employee(
                     txtEmpID.getText(),
                     txtFirstName.getText(),
@@ -89,9 +90,18 @@ public class UserRegistrationFormController implements Initializable {
                     txtEmail.getText(),
                     new ArrayList<>()
             );
-            employeeBo.save(employee);
+            if (employeeBo.save(employee)) {
+                txtEmpID.setText(employeeBo.genarateEmployeeID());
+                txtFirstName.setText("");
+                txtLastName.setText("");
+                txtMobileNumber.setText("");
+                txtEmail.setText("");
+                txtNicNo.setText("");
+                new Alert(Alert.AlertType.INFORMATION, "✅ User Registration Successfully !").show();
+                return;
+            }
+            new Alert(Alert.AlertType.ERROR, "❌ User Registration Failed!").show();
         }
-
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -107,35 +117,37 @@ public class UserRegistrationFormController implements Initializable {
         } catch (IOException e) {
         }
     }
-
-    public void btnSearchUserOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUserListOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
-    }
-
     public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
-        if (! dataValidationBo.isValidEmail(txtEmail.getText())){
+        if (!dataValidationBo.isValidEmail(txtEmail.getText())) {
             txtEmailValidation.setVisible(true);
-            isValidEmail=false;
+            isValidEmail = false;
             return;
         }
         txtEmailValidation.setVisible(false);
-        isValidEmail=true;
+        isValidEmail = true;
     }
 
     public void txtMobileNoOnKeyReleased(KeyEvent keyEvent) {
-        if (! dataValidationBo.isValidMobileNumber(txtMobileNumber.getText())){
+        if (!dataValidationBo.isValidMobileNumber(txtMobileNumber.getText())) {
             txtMobileNumberValidation.setVisible(true);
-            isValidMobileNo=false;
+            isValidMobileNo = false;
             return;
         }
         txtMobileNumberValidation.setVisible(false);
-        isValidMobileNo=true;
+        isValidMobileNo = true;
     }
 
-
+    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/employeeUpdateRemovePageForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            EmployeeUpdateRemoveFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
+    }
 }
