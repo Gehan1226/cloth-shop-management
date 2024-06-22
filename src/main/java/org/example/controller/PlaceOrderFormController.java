@@ -13,6 +13,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
@@ -31,7 +32,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class PlaceOrderFormController implements Initializable {
-    public static String employeeID = "E1";
+    public static Stage primaryStage;
+    public static String employeeID;
     public JFXTextField txtCustomerEmail;
     public JFXComboBox cmbItem;
     public Text txtEmailValidation;

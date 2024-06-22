@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.OrderBo;
 import org.example.dto.Order;
@@ -18,8 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CancelOrderFormController implements Initializable {
-    public Text txtEmailValidation;
-    public Text txtMobileNumberValidation;
+    public static Stage primaryStage;
     public Text txtPayementType;
     public Text txtOrderDate;
     public Text txtCustomername;

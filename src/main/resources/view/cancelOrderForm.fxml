@@ -54,16 +54,6 @@
       </AnchorPane>
       <AnchorPane prefHeight="232.0" prefWidth="406.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Text fx:id="txtEmailValidation" fill="#ef0c0c" layoutX="269.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong email pattern " visible="false" wrappingWidth="138.4000000000001">
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Text>
-            <Text fx:id="txtMobileNumberValidation" fill="#e40a0a" layoutX="262.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Mobile Number" visible="false" wrappingWidth="152.834228515625">
-               <font>
-                  <Font name="System Bold Italic" size="13.0" />
-               </font>
-            </Text>
             <Text layoutX="32.0" layoutY="208.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Payement Type :">
                <font>
                   <Font size="13.0" />

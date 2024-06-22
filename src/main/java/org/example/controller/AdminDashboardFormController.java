@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.net.URL;
 
@@ -59,6 +58,13 @@ public class AdminDashboardFormController {
         AddSupplieerFormcontroller.primaryStage = stage;
     }
 
+    public void btnCancelOrderOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/cancelOrderForm.fxml.fxml");
+        CancelOrderFormController.primaryStage = stage;
+    }
+
     public void btnSpplierUpdateRemoveOnAction(ActionEvent actionEvent) {
+        Stage stage = loadScreen("view/addSupplierForm.fxml");
+        UpdateRemoveSupplierFormController.primaryStage = stage;
     }
 }

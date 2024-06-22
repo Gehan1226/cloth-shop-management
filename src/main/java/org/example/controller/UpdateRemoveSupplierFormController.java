@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class UpdateRemoveSupplierFormController implements Initializable {
+    public static Stage primaryStage;
     public JFXTextField txtFisrstName;
     public Text txtEmailValidation;
     public Text txtMobileNumberValidation;

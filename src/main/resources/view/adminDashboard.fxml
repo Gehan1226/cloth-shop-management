@@ -125,7 +125,7 @@
             </JFXButton>
             <Separator layoutX="119.0" layoutY="68.0" orientation="VERTICAL" prefHeight="200.0" />
             <Separator layoutX="345.0" layoutY="71.0" orientation="VERTICAL" prefHeight="200.0" />
-            <JFXButton layoutX="362.0" layoutY="66.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Place Order" textFill="#f2eeee">
+            <JFXButton layoutX="362.0" layoutY="66.0" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Place Order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
@@ -155,7 +155,7 @@
                   <Image url="@../asset/images/R%20(8).png" />
                </image>
             </ImageView>
-            <JFXButton layoutX="365.0" layoutY="275.0" onAction="#btnMainmenuOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Update or Cancel Order" textFill="#f2eeee">
+            <JFXButton layoutX="365.0" layoutY="275.0" onAction="#btnCancelOrderOnAction" prefHeight="46.0" prefWidth="187.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Cancel order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
