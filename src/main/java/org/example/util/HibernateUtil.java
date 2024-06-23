@@ -1,5 +1,8 @@
 package org.example.util;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,6 +27,11 @@ public class HibernateUtil {
 
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
+    }
+
+    public static EntityManager createEntityManager(){
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
+        return emf.createEntityManager();
     }
 
 

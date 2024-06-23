@@ -95,16 +95,18 @@ public class SupplierDaoImpl implements SupplierDao {
     public boolean save(SupplierEntity supplierEntity,List<String> itemIDS) {
         try {
             beginSession();
+            session.persist(supplierEntity);
+
             if (!itemIDS.isEmpty()) {
-                for (String itemID : itemIDS) {
-                    ItemEntity itemEntity = session.get(ItemEntity.class, itemID);
-                    if (itemEntity != null) {
-                        supplierEntity.getItemList().add(itemEntity);
-                        session.persist(itemEntity);
+                for (String id : itemIDS) {
+                    ItemEntity itemEntity = session.get(ItemEntity.class, id);
+                    if (itemEntity != null){
+                        System.out.println("KKK");
+                        itemEntity.getSupplierList().add(supplierEntity);
+                        session.persist(supplierEntity);
                     }
                 }
             }
-            session.persist(supplierEntity);
             transaction.commit();
             return true;
         } catch (HibernateException e) {

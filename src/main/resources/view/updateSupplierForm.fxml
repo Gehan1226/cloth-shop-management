@@ -112,19 +112,14 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
          <children>
-            <JFXButton layoutX="11.0" onAction="#btnSearchSupplierOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Search Supplier" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" onAction="#btnAddSupplierOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Add Supplier" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="55.0" onAction="#btnSupplierListOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Supplier List" textFill="#f2eeee">
+            <JFXButton layoutX="11.0" layoutY="55.0" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Supplier List" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="15.0" />
-               </font>
-            </JFXButton>
-            <JFXButton layoutX="11.0" layoutY="112.0" onAction="#btnUpdateRemoveOnAction" prefHeight="43.0" prefWidth="160.0" style="-fx-background-color: #253A5A;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Update or remove Supplier" textFill="#f2eeee">
-               <font>
-                  <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
          </children>

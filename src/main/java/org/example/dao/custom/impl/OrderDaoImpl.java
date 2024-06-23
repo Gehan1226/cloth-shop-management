@@ -25,8 +25,7 @@ import java.util.List;
 public class OrderDaoImpl implements OrderDao {
     private Session session;
     private Transaction transaction;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
-    EntityManager entityManager = emf.createEntityManager();
+
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
         transaction = session.beginTransaction();
@@ -42,22 +41,23 @@ public class OrderDaoImpl implements OrderDao {
     }
     @Override
     public Order retrieveLastRow() {
-        OrderEntity orderEntity;
+        Order order=null;
         try {
             beginSession();
             Query<OrderEntity> query = session.createQuery("from OrderEntity order by id DESC", OrderEntity.class);
             query.setMaxResults(1);
-            orderEntity = query.uniqueResult();
+            OrderEntity orderEntity = query.uniqueResult();
+            if (orderEntity != null) {
+                orderEntity.setCustomer(null);
+                orderEntity.setItemList(null);
+                order = new ModelMapper().map(orderEntity, Order.class);
+            }
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error executing retrieveLastRow method in orderDao", e);
         } finally {
             closeSession();
         }
-        if (orderEntity != null) {
-            orderEntity.setCustomer(null);
-            orderEntity.setItemList(null);
-        }
-        return orderEntity != null ? (new ModelMapper().map(orderEntity, Order.class)) : null;
+        return order;
     }
     @Override
     public Order retrieve(String orderID) {
@@ -69,7 +69,7 @@ public class OrderDaoImpl implements OrderDao {
                 order = new ModelMapper().map(orderEntity,Order.class);
             }
         } catch (HibernateException e) {
-            throw new RuntimeException("Error executing Hibernate query", e);
+            throw new HibernateException("Error executing retrieve method in orderDao", e);
         } finally {
             closeSession();
         }
@@ -103,6 +103,7 @@ public class OrderDaoImpl implements OrderDao {
     }
     @Override
     public boolean delete(String orderId) {
+        EntityManager entityManager = HibernateUtil.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {

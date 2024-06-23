@@ -23,8 +23,6 @@ import java.util.Optional;
 public class ItemDaoImpl implements ItemDao {
     private Session session;
     private Transaction transaction;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
-    EntityManager entityManager = emf.createEntityManager();
 
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -48,8 +46,8 @@ public class ItemDaoImpl implements ItemDao {
             query.setMaxResults(1);
             ItemEntity itemEntity = query.uniqueResult();
             if (itemEntity != null) {
-                itemEntity.setOrderList(null);
-                itemEntity.setSupplierList(null);
+//                itemEntity.setOrderList(null);
+//                itemEntity.setSupplierList(null);
                 item = new ModelMapper().map(itemEntity, Item.class);
             }
         } catch (HibernateException e) {
@@ -95,8 +93,7 @@ public class ItemDaoImpl implements ItemDao {
             Query<ItemEntity> query = session.createQuery("from ItemEntity", ItemEntity.class);
             List<ItemEntity> resultList = query.getResultList();
             for (ItemEntity entity : resultList) {
-                entity.setSupplierList(null);
-                itemList.add(new ModelMapper().map(entity, Item.class));
+              itemList.add(new ModelMapper().map(entity, Item.class));
             }
             return itemList;
         } catch (HibernateException e) {
@@ -157,6 +154,7 @@ public class ItemDaoImpl implements ItemDao {
     }
     @Override
     public boolean delete(String id) {
+        HibernateUtil.createEntityManager()
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
         try {

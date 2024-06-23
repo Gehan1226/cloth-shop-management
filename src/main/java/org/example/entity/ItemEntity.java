@@ -2,6 +2,8 @@ package org.example.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -19,7 +21,7 @@ public class ItemEntity {
     private String categorie;
     private String itemImagePath;
     @ManyToMany(mappedBy = "itemList")
-    private List<SupplierEntity> supplierList;
+    private List<SupplierEntity> supplierList = new ArrayList<>();;
     @ManyToMany(mappedBy = "itemList")
     private List<OrderEntity> orderList ;
 }

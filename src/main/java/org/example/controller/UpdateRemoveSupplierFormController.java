@@ -4,7 +4,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -18,6 +21,7 @@ import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -54,9 +58,6 @@ public class UpdateRemoveSupplierFormController implements Initializable {
         allItemIDSNames = itemBo.getAllIDSAndNames();
     }
 
-    public void btnMainmenuOnAction(ActionEvent actionEvent) {
-    }
-
     public void btnAddOnAction(ActionEvent actionEvent) {
         if (cmbItemIDS.getValue() != null) {
             Object selectedItem = cmbItemIDS.getSelectionModel().getSelectedItem();
@@ -89,6 +90,7 @@ public class UpdateRemoveSupplierFormController implements Initializable {
                     null
             );
             if (supplierBo.updateSupplier(supplier,selectedItemIDS)){
+                clearFields();
                 new Alert(Alert.AlertType.INFORMATION, "✅ Supplier Update Successfully !").show();
                 return;
             }
@@ -98,13 +100,24 @@ public class UpdateRemoveSupplierFormController implements Initializable {
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         if(supplierBo.deleteSupplier(currentSupplierID)){
+            clearFields();
             new Alert(Alert.AlertType.INFORMATION, "✅ Supplier Delete Successfully !").show();
             return;
         }
         new Alert(Alert.AlertType.ERROR, "❌ Supplier Delete Failed!").show();
     }
 
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
+    private void clearFields(){
+        txtSupplierID.setText("");
+        txtFisrstName.setText("");
+        txtLastName.setText("");
+        txtEmail.setText("");
+        txtCompany.setText("");
+        txtMobileNumber.setText("");
+        cmbItemIDS.getItems().removeAll();
+        cmbItemIDS.getItems().addAll(allItemIDSNames);
+        tblItem.getItems().clear();
+        selectedItemIDS.clear();
     }
 
     public void btnSearchOnAction(ActionEvent actionEvent) {
@@ -127,14 +140,51 @@ public class UpdateRemoveSupplierFormController implements Initializable {
             cmbItemIDS.getItems().addAll(cmbValues);
         }
     }
+    public void btnDashboardOnAction(ActionEvent actionEvent) {
+        String path = isAdmin ? "view/adminDashboard.fxml": "view/userDashboardForm.fxml";
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource(path);
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            if (isAdmin){
+                AdminDashboardFormController.primaryStage = stage;
+                return;
+            }
+            UserDashboardFormController.primaryStage = stage;
 
-    public void btnSearchSupplierOnAction(ActionEvent actionEvent) {
+        } catch (IOException e) {
+        }
+    }
+    public void btnMainmenuOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            HomePageFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
-    public void btnSupplierListOnAction(ActionEvent actionEvent) {
+    public void btnAddSupplierOnAction(ActionEvent actionEvent) {
+        AddSupplieerFormcontroller.isAdmin = isAdmin;
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/addSupplierForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            HomePageFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
-
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
-    }
-
 }

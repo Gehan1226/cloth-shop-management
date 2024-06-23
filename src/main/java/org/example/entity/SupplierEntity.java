@@ -28,5 +28,5 @@ public class SupplierEntity {
             joinColumns = { @JoinColumn(name = "supID") },
             inverseJoinColumns = { @JoinColumn(name = "itemId") }
     )
-    private List<ItemEntity> itemList = new ArrayList<>();
+    private List<ItemEntity> itemList= new ArrayList<>();;
 }
