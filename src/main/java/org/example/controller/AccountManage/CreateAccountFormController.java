@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.AccountManage;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -13,9 +13,8 @@ import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
-import org.example.bo.custom.EmployeeBo;
 import org.example.bo.custom.UserBo;
-import org.example.dao.custom.EmployeeDao;
+import org.example.controller.HomePageFormController;
 import org.example.dto.User;
 import org.example.util.BoType;
 

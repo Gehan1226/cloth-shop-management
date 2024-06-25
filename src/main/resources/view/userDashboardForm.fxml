@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="969.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.UserDashboardFormController">
+<GridPane id="gridpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="622.0" prefWidth="975.0" stylesheets="@../asset/loginpage&amp;createaccount%20.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.User.UserDashboardFormController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.4000244140625" minWidth="10.0" prefWidth="112.80001220703124" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="456.4000244140625" minWidth="0.0" prefWidth="0.0" />
@@ -21,9 +21,9 @@
    </columnConstraints>
    <rowConstraints>
       <RowConstraints maxHeight="154.79999389648438" minHeight="10.0" prefHeight="128.4" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="341.6" minHeight="10.0" prefHeight="341.6" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="432.8" minHeight="10.0" prefHeight="432.8" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="68.5999755859375" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="48.60001220703123" minHeight="7.800024414062477" prefHeight="13.399999999999977" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="48.60001220703123" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="48.60001220703123" minHeight="7.800024414062477" prefHeight="13.399999999999977" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
@@ -51,7 +51,7 @@
             <Separator layoutX="225.0" layoutY="100.0" prefHeight="2.0" prefWidth="314.0" style="-fx-background-color: #31363F;" />
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="206.0" prefWidth="554.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <AnchorPane prefHeight="395.0" prefWidth="706.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <children>
             <Text layoutX="21.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Product Management" wrappingWidth="169.630859375">
                <font>
@@ -93,7 +93,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
-            <Separator layoutX="228.0" layoutY="68.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Separator layoutX="228.0" layoutY="68.0" orientation="VERTICAL" prefHeight="246.0" prefWidth="6.0" />
             <JFXButton layoutX="271.0" layoutY="67.0" onAction="#btnPlaceOrderOnAction" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="        Place Order" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -164,7 +164,7 @@
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
-            <Separator layoutX="482.0" layoutY="71.0" orientation="VERTICAL" prefHeight="200.0" />
+            <Separator layoutX="482.0" layoutY="71.0" orientation="VERTICAL" prefHeight="246.0" prefWidth="6.0" />
             <JFXButton layoutX="21.0" layoutY="127.0" prefHeight="43.0" prefWidth="158.0" style="-fx-background-color: #31363F;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="       Search Product" textFill="#f2eeee">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -175,6 +175,27 @@
                   <Image url="@../asset/images/548-5489482_download-icons-checklist-computer-black-text-white-checklist-removebg-preview.png" />
                </image>
             </ImageView>
+            <JFXButton layoutX="22.0" layoutY="372.0" onAction="#btnPrintEmployeeReport" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #5A72A0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Print Employee Report" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="200.0" layoutY="372.0" onAction="#btnInventoryReportOnAction" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #5A72A0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Print Inventory Report" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton layoutX="374.0" layoutY="372.0" onAction="#btnSupplierReportOnAction" prefHeight="46.0" prefWidth="158.0" style="-fx-background-color: #5A72A0;" stylesheets="@../asset/loginpage&amp;createaccount%20.css" text="Print Supplier Report" textFill="#f2eeee">
+               <font>
+                  <Font name="System Bold" size="13.0" />
+               </font>
+            </JFXButton>
+            <Separator layoutX="26.0" layoutY="316.0" prefHeight="3.0" prefWidth="677.0" />
+            <Text layoutX="26.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Print Reports" wrappingWidth="124.83087158203125">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="4">

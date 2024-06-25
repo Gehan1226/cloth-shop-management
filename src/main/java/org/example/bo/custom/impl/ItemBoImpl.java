@@ -7,11 +7,14 @@ import org.example.dao.Daofactory;
 import org.example.dao.custom.ItemDao;
 import org.example.dao.custom.SupplierDao;
 import org.example.dao.custom.UserDao;
+import org.example.dto.Employee;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.util.BoType;
 import org.example.util.DaoType;
+import org.example.util.EmployeeReport;
+import org.example.util.InventoryReport;
 import org.modelmapper.ModelMapper;
 
 import java.util.ArrayList;
@@ -54,6 +57,9 @@ public class ItemBoImpl implements ItemBo {
     public List<Item> getAllItems(){
         return itemDao.retrieveAll();
     }
-
-
+    @Override
+    public boolean genarateInventoryReport(){
+        List<Item> itemList = itemDao.retrieveAll();
+        return InventoryReport.genarateInventoryReport(itemList);
+    }
 }

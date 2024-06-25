@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Employee;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -15,13 +15,15 @@ import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.EmployeeBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Employee;
 import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class UserRegistrationFormController implements Initializable {
@@ -104,19 +106,6 @@ public class UserRegistrationFormController implements Initializable {
         }
     }
 
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
-        try {
-            primaryStage.close();
-            URL fxmlLocation = getClass().getClassLoader().getResource("view/userDashboardForm.fxml");
-            FXMLLoader loader = new FXMLLoader(fxmlLocation);
-            Parent parent = loader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(parent));
-            stage.show();
-            UserDashboardFormController.primaryStage = stage;
-        } catch (IOException e) {
-        }
-    }
     public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
         if (!dataValidationBo.isValidEmail(txtEmail.getText())) {
             txtEmailValidation.setVisible(true);
@@ -135,6 +124,19 @@ public class UserRegistrationFormController implements Initializable {
         }
         txtMobileNumberValidation.setVisible(false);
         isValidMobileNo = true;
+    }
+    public void btnDashboardOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/adminDashboard.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            AdminDashboardFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 
     public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {

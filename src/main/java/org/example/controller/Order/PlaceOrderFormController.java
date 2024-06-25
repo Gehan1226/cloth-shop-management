@@ -1,28 +1,33 @@
-package org.example.controller;
+package org.example.controller.Order;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.OrderBo;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Customer;
-import org.example.dto.Employee;
 import org.example.dto.Item;
 import org.example.dto.Order;
 import org.example.util.BoType;
+
+import java.io.IOException;
 import java.net.URL;
 
 import java.text.DecimalFormat;
@@ -33,7 +38,7 @@ import java.util.ResourceBundle;
 
 public class PlaceOrderFormController implements Initializable {
     public static Stage primaryStage;
-    public static String employeeID;
+    public static String employeeID = "E1";
     public JFXTextField txtCustomerEmail;
     public JFXComboBox cmbItem;
     public Text txtEmailValidation;
@@ -61,6 +66,7 @@ public class PlaceOrderFormController implements Initializable {
     private List<String> selectedItemIDs = new ArrayList<>();
     private DecimalFormat decimalFormat = new DecimalFormat("#,###.00");
     private double fullPrice;
+    private List<Integer> itemQtyList = new ArrayList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,26 +88,23 @@ public class PlaceOrderFormController implements Initializable {
         }
     }
 
-    public void btnMainmenuOnAction(ActionEvent actionEvent) {
-    }
-
     public void txtMobileNoOnKeyReleased(KeyEvent keyEvent) {
-        if (! dataValidationBo.isValidMobileNumber(txtCustomerMobileNumber.getText())){
-            txtMobileNumberValidation.setVisible(true);
-            isValidMobileNo=false;
-            return;
-        }
-        txtMobileNumberValidation.setVisible(false);
-        isValidMobileNo=true;
+//        if (! dataValidationBo.isValidMobileNumber(txtCustomerMobileNumber.getText())){
+//            txtMobileNumberValidation.setVisible(true);
+//            isValidMobileNo=false;
+//            return;
+//        }
+//        txtMobileNumberValidation.setVisible(false);
+//        isValidMobileNo=true;
     }
     public void txtEmailOnKeyReleased(KeyEvent keyEvent) {
-        if (! dataValidationBo.isValidEmail(txtCustomerEmail.getText())){
-            txtEmailValidation.setVisible(true);
-            isValidEmail=false;
-            return;
-        }
-        txtEmailValidation.setVisible(false);
-        isValidEmail=true;
+//        if (! dataValidationBo.isValidEmail(txtCustomerEmail.getText())){
+//            txtEmailValidation.setVisible(true);
+//            isValidEmail=false;
+//            return;
+//        }
+//        txtEmailValidation.setVisible(false);
+//        isValidEmail=true;
     }
 
     public void btnAddOnAction(ActionEvent actionEvent) {
@@ -118,6 +121,9 @@ public class PlaceOrderFormController implements Initializable {
                     cmbQuantity.getSelectionModel().getSelectedItem().toString(),
                     formattedNumber
             };
+
+            int qty = Integer.parseInt(cmbQuantity.getSelectionModel().getSelectedItem().toString());
+            itemQtyList.add(qty);
             tblItem.getItems().add(rowData);
             selectedItemIDs.add(item.getItemId());
             cmbItem.getSelectionModel().clearSelection();
@@ -126,12 +132,17 @@ public class PlaceOrderFormController implements Initializable {
             fullPrice += price;
             String fomatedFullPrice = decimalFormat.format(fullPrice);
             txtPrice.setText(fomatedFullPrice);
+
         }
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
         tblItem.getItems().clear();
         selectedItemIDs.clear();
+        cmbQuantity.setDisable(false);
+        txtPrice.setText("0");
+        fullPrice = 0;
+        itemQtyList.clear();
     }
 
     public void btnPlaceOrder(ActionEvent actionEvent) {
@@ -140,8 +151,16 @@ public class PlaceOrderFormController implements Initializable {
                 txtCustomerEmail.getText(),
                 txtCustomerMobileNumber.getText()
         );
-        //boolean isSelecteType = btnCreditCard.isSelected() || btnCreditCard.isSelected();
-        if (isAllFieldsNotEmpty && !selectedItemIDs.isEmpty()){
+
+        //------------------------------------------------------------
+        ArrayList<String> data = new ArrayList<>();
+        data.add(txtCustomerName.getText());
+        data.add(txtCustomerEmail.getText());
+        data.add( txtCustomerMobileNumber.getText());
+        //------------------------------------------------------------
+
+        boolean isSelecteType = btnCreditCard.isSelected() || btnCash.isSelected();
+        if (isAllFieldsNotEmpty && !selectedItemIDs.isEmpty() && isSelecteType){
             Customer customer = new Customer(
                     txtCustomerName.getText(),
                     txtCustomerEmail.getText(),
@@ -152,28 +171,29 @@ public class PlaceOrderFormController implements Initializable {
                     txtOrderID.getText(),
                     LocalDate.now(),
                     fullPrice,
+                    btnCreditCard.isSelected() ? "Credit Card":"Cash",
                     customer,
                     new ArrayList<>(),
-                    null
+                    null,
+                    data,
+                    itemQtyList
             );
             if (orderBo.saveOrder(order,selectedItemIDs,employeeID)){
+                txtOrderID.setText(orderBo.genarateOrderID());
+                txtCustomerName.setText("");
+                txtCustomerEmail.setText("");
+                txtPrice.setText("");
+                txtPrice.setText("");
+                txtCustomerMobileNumber.setText("");
+                cmbItem.getSelectionModel().clearSelection();
+                cmbQuantity.getSelectionModel().clearSelection();
                 new Alert(Alert.AlertType.INFORMATION, "Order Place Successfully !").show();
                 return;
             }
             new Alert(Alert.AlertType.ERROR, "Order Place Failed !").show();
+            return;
         }
-    }
-
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSearchUserOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUserListOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnUpdateRemoveOnAction(ActionEvent actionEvent) {
+        new Alert(Alert.AlertType.ERROR, "Please Fill All Field !").show();
     }
 
     public void btnCmbSelectItemOnAction(ActionEvent actionEvent) {
@@ -193,5 +213,48 @@ public class PlaceOrderFormController implements Initializable {
         }
         new Alert(Alert.AlertType.INFORMATION, "This Item is already selected.").show();
         cmbQuantity.setDisable(true);
+    }
+
+    public void btnMainmenuOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/home_page_from.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            HomePageFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
+    }
+
+    public void btnDashboardOnAction(ActionEvent actionEvent) {
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/userDashboardForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            UserDashboardFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
+    }
+
+    public void btnCancelOrderOnAction(ActionEvent actionEvent) {
+        CancelOrderFormController.isAdmin = false;
+        try {
+            primaryStage.close();
+            URL fxmlLocation = getClass().getClassLoader().getResource("view/cancelOrderForm.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+            Parent parent = loader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(parent));
+            stage.show();
+            CancelOrderFormController.primaryStage = stage;
+        } catch (IOException e) {
+        }
     }
 }

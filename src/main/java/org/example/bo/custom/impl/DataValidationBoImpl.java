@@ -15,10 +15,14 @@ public class DataValidationBoImpl implements DataValidationBo {
     }
     @Override
     public boolean isAllFieldsNotEmpty(String... values) {
-        for (int i=0;i< values.length;i++){
-            if(values[i].isEmpty())return false;
+        try {
+            for (int i = 0; i < values.length; i++) {
+                if (values[i].isEmpty()) return false;
+            }
+            return true;
+        }catch (NullPointerException e){
+            return false;
         }
-        return true;
     }
     @Override
     public boolean isValidEmail(String email) {

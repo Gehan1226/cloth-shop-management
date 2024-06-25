@@ -13,4 +13,5 @@ public interface ItemBo extends SuperBo {
     boolean updateItem(Item item,List<String> supllierIDS);
     boolean deleteItem(String itemID);
     List<Item> getAllItems();
+    boolean genarateInventoryReport();
 }

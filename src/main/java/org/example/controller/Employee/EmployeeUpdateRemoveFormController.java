@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Employee;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -16,6 +16,8 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.EmployeeBo;
 import org.example.bo.custom.UserBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
 import org.example.dto.Employee;
 import org.example.util.BoType;
 import java.io.IOException;
@@ -24,7 +26,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class EmployeeUpdateRemoveFormController implements Initializable {
-
     public JFXTextField txtFirstName;
     public JFXTextField txtEmail;
     public JFXTextField txtLastName;

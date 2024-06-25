@@ -13,7 +13,12 @@ public class Order {
     private String orderID;
     private LocalDate orderDate;
     private Double fullPrice;
+    private String payementType;
     private Customer customer;
     private List<Item> itemList;
     private Employee employee;
+    private List<String> data;
+    private List<Integer> itemQtyList;
 }
+
+

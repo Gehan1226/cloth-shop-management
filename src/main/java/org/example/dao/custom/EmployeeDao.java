@@ -13,4 +13,5 @@ public interface EmployeeDao extends SuperDao {
     Employee retrieve(String id);
     boolean update(EmployeeEntity employeeEntity);
     boolean delete(String empID);
+    List<Employee> retrieveAll();
 }

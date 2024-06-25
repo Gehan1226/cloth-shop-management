@@ -22,6 +22,7 @@ public class OrderEntity {
     private String orderID;
     private LocalDate orderDate;
     private Double fullPrice;
+    private String payementType;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customerID")
     private CustomerEntity customer;
@@ -35,4 +36,6 @@ public class OrderEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "empID")
     private EmployeeEntity employee;
+    private List<String> data;
+    private List<Integer> itemQtyList;
 }

@@ -2,7 +2,9 @@ package org.example.dao.custom.impl;
 
 import org.example.dao.custom.EmployeeDao;
 import org.example.dto.Employee;
+import org.example.dto.Item;
 import org.example.entity.EmployeeEntity;
+import org.example.entity.ItemEntity;
 import org.example.util.HibernateUtil;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -82,13 +84,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
     @Override
     public Employee retrieveLastRow() {
-        Employee employee;
+        Employee employee = null;
         try {
             beginSession();
             Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity order by id DESC", EmployeeEntity.class);
             query.setMaxResults(1);
             EmployeeEntity employeeEntity= query.uniqueResult();
-            employee = new ModelMapper().map(employeeEntity, Employee.class);
+            if (employeeEntity!=null){
+                employee = new ModelMapper().map(employeeEntity, Employee.class);
+            }
         }catch (HibernateException e) {
             throw new HibernateException("Error retrieveLastRow method ", e);
         } finally {
@@ -128,5 +132,22 @@ public class EmployeeDaoImpl implements EmployeeDao {
             closeSession();
         }
         return true;
+    }
+    @Override
+    public List<Employee> retrieveAll() {
+        try {
+            List<Employee> employeeList = new ArrayList<>();
+            beginSession();
+            Query<EmployeeEntity> query = session.createQuery("from EmployeeEntity", EmployeeEntity.class);
+            List<EmployeeEntity> resultList = query.getResultList();
+            for (EmployeeEntity entity : resultList) {
+                employeeList.add(new ModelMapper().map(entity, Employee.class));
+            }
+            return employeeList;
+        } catch (HibernateException e) {
+            throw new HibernateException("Error retrieveAll method in itemDao", e);
+        } finally {
+            closeSession();
+        }
     }
 }

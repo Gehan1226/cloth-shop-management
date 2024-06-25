@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Employee;
 
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
@@ -10,6 +10,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.EmployeeBo;
+import org.example.controller.AccountManage.ChangePasswordFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Employee;
 import org.example.util.BoType;
 

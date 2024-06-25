@@ -53,7 +53,7 @@ public class UserBoImpl implements UserBo {
     @Override
     public boolean sendOTPTo(String email) {
         String body = "Your OTP Code - " + genarateOTP();
-        return EmailUtil.sendEmail(email, body);
+        return EmailUtil.sendEmail(email,"Clothify Shop OTP Verification !", body,null);
     }
 
     @Override

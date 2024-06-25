@@ -1,13 +1,16 @@
 package org.example.util;
 
 
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import javax.mail.internet.*;
+import java.io.File;
 import java.util.Properties;
 
 public class EmailUtil {
-    public static Boolean sendEmail(String toEmail, String body) {
+    public static Boolean sendEmail(String toEmail,String subject, String body, String filePath) {
         String from = "example1226custom@gmail.com";
         String host = "smtp.gmail.com";
 
@@ -31,11 +34,29 @@ public class EmailUtil {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(from));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toEmail));
-            message.setSubject("Clothify Shop OTP Verification !");
+            message.setSubject(subject);
             message.setText(body);
-            System.out.println("sending...");
+
+            BodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setText(body);
+
+            // Create a multipart message for attachment
+            Multipart multipart = new MimeMultipart();
+
+            // Set text message part
+            multipart.addBodyPart(messageBodyPart);
+
+            // Part two is the attachment
+            messageBodyPart = new MimeBodyPart();
+            DataSource source = new FileDataSource(filePath);
+            messageBodyPart.setDataHandler(new DataHandler(source));
+            messageBodyPart.setFileName(new File(filePath).getName());
+            multipart.addBodyPart(messageBodyPart);
+
+            // Send the complete message parts
+            message.setContent(multipart);
+
             Transport.send(message);
-            System.out.println("Sent message successfully....");
             return true;
         } catch (MessagingException mex) {
             System.out.println("Error");

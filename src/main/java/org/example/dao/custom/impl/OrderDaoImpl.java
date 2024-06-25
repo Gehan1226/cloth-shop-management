@@ -67,6 +67,7 @@ public class OrderDaoImpl implements OrderDao {
             OrderEntity orderEntity = session.get(OrderEntity.class, orderID);
             if (orderEntity!=null){
                 order = new ModelMapper().map(orderEntity,Order.class);
+                System.out.println(order.getCustomer());
             }
         } catch (HibernateException e) {
             throw new HibernateException("Error executing retrieve method in orderDao", e);
@@ -75,20 +76,28 @@ public class OrderDaoImpl implements OrderDao {
         }
         return order;
     }
-    public boolean save(OrderEntity order, List<String> itemIds, String employeeId) {
+    public boolean save(OrderEntity order,CustomerEntity customerEntity, List<String> itemIds, String employeeId) {
         try {
             beginSession();
-            session.persist(order.getCustomer());
+            session.persist(customerEntity);
+            order.setCustomer(customerEntity);
+            session.persist(order);
+
             EmployeeEntity employee = session.get(EmployeeEntity.class, employeeId);
             order.setEmployee(employee);
+            session.merge(order);
 
             List<ItemEntity> items = new ArrayList<>();
-            for (String itemId : itemIds) {
-                ItemEntity item = session.get(ItemEntity.class, itemId);
+            for (int i=0;i<itemIds.size();i++) {
+                ItemEntity item = session.get(ItemEntity.class, itemIds.get(i));
+                item.getOrderList().add(order);
+                item.setQty(item.getQty() - order.getItemQtyList().get(i));
+                session.merge(item);
                 items.add(item);
             }
+
             order.setItemList(items);
-            session.persist(order);
+            session.merge(order);
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {
@@ -114,15 +123,15 @@ public class OrderDaoImpl implements OrderDao {
                 entityManager.remove(order);
                 entityTransaction.commit();
                 return true;
-            } else {
-                System.out.println("Deleted");
-                transaction.rollback();
-                return false;
             }
         } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
         }
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.AccountManage;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -14,6 +14,9 @@ import javafx.stage.Stage;
 import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.UserBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.util.BoType;
 
 import java.io.IOException;

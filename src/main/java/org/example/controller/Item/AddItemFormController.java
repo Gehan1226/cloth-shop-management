@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Item;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,8 +12,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -21,8 +19,10 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.SupplierBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Item;
-import org.example.dto.Supplier;
 import org.example.util.BoType;
 
 import java.io.File;
@@ -194,7 +194,7 @@ public class AddItemFormController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-            EmployeeUpdateRemoveFormController.primaryStage = stage;
+            UpdateRemoveItemFormController.primaryStage = stage;
         } catch (IOException e) {
         }
     }

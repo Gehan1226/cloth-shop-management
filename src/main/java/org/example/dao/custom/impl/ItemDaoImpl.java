@@ -6,6 +6,7 @@ import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import org.example.dao.custom.ItemDao;
 import org.example.dto.Item;
+import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.HibernateUtil;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ItemDaoImpl implements ItemDao {
     private Session session;
@@ -69,10 +71,11 @@ public class ItemDaoImpl implements ItemDao {
                     SupplierEntity supplierEntity = session.get(SupplierEntity.class, supplierID);
                     if (supplierEntity != null) {
                         supplierEntity.getItemList().add(itemEntity);
-                        session.persist(supplierEntity);
+                        session.merge(supplierEntity);
                     }
                 }
             }
+            session.merge(itemEntity);
             transaction.commit();
             return true;
         } catch (HibernateException e) {
@@ -105,13 +108,21 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item retrieve(String id) {
-        ItemEntity itemEntity = null;
         Item item = null;
         try {
             beginSession();
-            itemEntity = session.get(ItemEntity.class, id);
+            ItemEntity itemEntity = session.get(ItemEntity.class, id);
             if (itemEntity != null) {
                 item = new ModelMapper().map(itemEntity, Item.class);
+                String hql = "SELECT s FROM SupplierEntity s JOIN s.itemList i WHERE i.itemId = :itemId";
+                Query<SupplierEntity> query = session.createQuery(hql, SupplierEntity.class);
+                query.setParameter("itemId", id);
+                List<SupplierEntity> supplierEntities = query.getResultList();
+
+                List<Supplier> suppliers = supplierEntities.stream()
+                        .map(supplierEntity -> new ModelMapper().map(supplierEntity, Supplier.class))
+                        .collect(Collectors.toList());
+                item.setSupplierList(suppliers);
             }
         } catch (HibernateException e) {
             throw new HibernateException("Error retrieve method in itemDao", e);
@@ -154,28 +165,14 @@ public class ItemDaoImpl implements ItemDao {
     }
     @Override
     public boolean delete(String id) {
-        HibernateUtil.createEntityManager()
+        EntityManager entityManager = HibernateUtil.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
-        try {
-            ItemEntity itemEntity = entityManager.find(ItemEntity.class, id);
-            if (itemEntity != null) {
-                List<SupplierEntity> suppliers = new ArrayList<>(itemEntity.getSupplierList());
-                for (SupplierEntity supplier : suppliers) {
-                    supplier.getItemList().remove(itemEntity);
-                    entityManager.merge(supplier);
-                }
-                itemEntity.getSupplierList().clear();
-                entityManager.merge(itemEntity);
-                entityManager.remove(itemEntity);
-            }
-            entityTransaction.commit();
-        } catch (Exception e) {
-            entityTransaction.rollback();
-            return false;
-        } finally {
-            entityManager.close();
-        }
+        String hql = "DELETE FROM ItemEntity WHERE itemId = :itemId";
+        entityManager.createQuery(hql)
+                .setParameter("itemId", id)
+                .executeUpdate();
+        entityTransaction.commit();
         return true;
     }
 }

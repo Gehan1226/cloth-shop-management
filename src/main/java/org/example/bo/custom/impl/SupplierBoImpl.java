@@ -9,6 +9,8 @@ import org.example.dto.Supplier;
 import org.example.entity.ItemEntity;
 import org.example.entity.SupplierEntity;
 import org.example.util.DaoType;
+import org.example.util.InventoryReport;
+import org.example.util.SupplierReport;
 import org.hibernate.HibernateException;
 import org.modelmapper.ModelMapper;
 
@@ -51,6 +53,11 @@ public class SupplierBoImpl implements SupplierBo {
     @Override
     public boolean deleteSupplier(String id){
         return supplierDao.delete(id);
+    }
+    @Override
+    public boolean genarateSupplierReport(){
+        List<Supplier> supplierList = supplierDao.retrieveAll();
+        return SupplierReport.genarateSupplierReport(supplierList);
     }
 
 }

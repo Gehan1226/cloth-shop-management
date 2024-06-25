@@ -7,6 +7,7 @@ import org.example.dao.custom.EmployeeDao;
 import org.example.dto.Employee;
 import org.example.entity.EmployeeEntity;
 import org.example.util.DaoType;
+import org.example.util.EmployeeReport;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;
@@ -50,5 +51,9 @@ public class EmployeeBoImpl implements EmployeeBo {
     public boolean deleteEmployee(Employee employee) {
         return employeeDao.delete(employee.getEmpID());
     }
-
+    @Override
+    public boolean genarateEmployeeReport(){
+        List<Employee> employeeList = employeeDao.retrieveAll();
+        return EmployeeReport.genarateEmployeeReport(employeeList);
+    }
 }

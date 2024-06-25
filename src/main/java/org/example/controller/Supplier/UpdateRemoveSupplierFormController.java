@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Supplier;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
@@ -17,6 +17,10 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.SupplierBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.Supplier.AddSupplieerFormcontroller;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
@@ -87,7 +91,7 @@ public class UpdateRemoveSupplierFormController implements Initializable {
                     txtCompany.getText(),
                     txtEmail.getText(),
                     txtMobileNumber.getText(),
-                    null
+                    new ArrayList<>()
             );
             if (supplierBo.updateSupplier(supplier,selectedItemIDS)){
                 clearFields();
@@ -123,6 +127,8 @@ public class UpdateRemoveSupplierFormController implements Initializable {
     public void btnSearchOnAction(ActionEvent actionEvent) {
         Supplier supplier = supplierBo.retrieveById(txtSupplierID.getText());
         if (supplier != null) {
+            new Alert(Alert.AlertType.INFORMATION, "✅ Supplier Found!").show();
+            txtSupplierID.setText(supplier.getSupID());
             currentSupplierID = supplier.getSupID();
             txtFisrstName.setText(supplier.getFirstName());
             txtLastName.setText(supplier.getLastName());
@@ -138,7 +144,10 @@ public class UpdateRemoveSupplierFormController implements Initializable {
                 cmbValues.remove(temp[0] + " - " + temp[1]);
             }
             cmbItemIDS.getItems().addAll(cmbValues);
+            return;
         }
+        clearFields();
+        new Alert(Alert.AlertType.INFORMATION, "❌ Supplier Not Found!").show();
     }
     public void btnDashboardOnAction(ActionEvent actionEvent) {
         String path = isAdmin ? "view/adminDashboard.fxml": "view/userDashboardForm.fxml";
@@ -183,7 +192,7 @@ public class UpdateRemoveSupplierFormController implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-            HomePageFormController.primaryStage = stage;
+            AddSupplieerFormcontroller.primaryStage = stage;
         } catch (IOException e) {
         }
     }

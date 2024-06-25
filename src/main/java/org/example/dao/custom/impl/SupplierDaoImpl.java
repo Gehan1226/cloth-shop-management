@@ -22,8 +22,6 @@ import java.util.List;
 public class SupplierDaoImpl implements SupplierDao {
     private Session session;
     private Transaction transaction;
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("org.example.movie_catalog");
-    EntityManager entityManager = emf.createEntityManager();
 
     private void beginSession() {
         session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -101,15 +99,18 @@ public class SupplierDaoImpl implements SupplierDao {
                 for (String id : itemIDS) {
                     ItemEntity itemEntity = session.get(ItemEntity.class, id);
                     if (itemEntity != null){
-                        System.out.println("KKK");
                         itemEntity.getSupplierList().add(supplierEntity);
-                        session.persist(supplierEntity);
+                        session.merge(itemEntity);
                     }
                 }
             }
+            session.merge(supplierEntity);
             transaction.commit();
             return true;
         } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
             return false;
         } finally {
             closeSession();
@@ -126,16 +127,16 @@ public class SupplierDaoImpl implements SupplierDao {
                 for (String id : itemIDS) {
                     ItemEntity itemEntity = session.get(ItemEntity.class, id);
                     if (itemEntity != null) {
-                        supplierEntity.getItemList().add(itemEntity);
                         if (!itemEntity.getSupplierList().contains(supplierEntity)) {
                             itemEntity.getSupplierList().add(supplierEntity);
+                            supplierEntity.getItemList().add(itemEntity);
                         }
                     }
                 }
-                session.merge(supplierEntity);
-                transaction.commit();
-                return true;
             }
+            session.merge(supplierEntity);
+            transaction.commit();
+            return true;
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
@@ -144,31 +145,27 @@ public class SupplierDaoImpl implements SupplierDao {
         } finally {
             closeSession();
         }
-        return false;
     }
     @Override
     public boolean delete(String id) {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
-        try {
-            SupplierEntity supplierEntity = entityManager.find(SupplierEntity.class, id);
-            if (supplierEntity != null) {
-                List<ItemEntity> items = new ArrayList<>(supplierEntity.getItemList());
-                for (ItemEntity item : items) {
-                    item.getSupplierList().remove(supplierEntity);
-                    entityManager.merge(item);
-                }
-                supplierEntity.getItemList().clear();
-                entityManager.merge(supplierEntity);
-                entityManager.remove(supplierEntity);
-            }
+        EntityTransaction entityTransaction = null;
+        try (EntityManager entityManager = HibernateUtil.createEntityManager()) {
+            entityTransaction = entityManager.getTransaction();
+            entityTransaction.begin();
+
+            String hql = "DELETE FROM SupplierEntity WHERE supID = :supId";
+            entityManager.createQuery(hql)
+                    .setParameter("supId", id)
+                    .executeUpdate();
+
             entityTransaction.commit();
-        } catch (Exception e) {
-            entityTransaction.rollback();
+            return true;
+        } catch (HibernateException e) {
+            if (entityTransaction != null && entityTransaction.isActive()) {
+                entityTransaction.rollback();
+            }
+            e.printStackTrace();  // Consider logging the exception
             return false;
-        } finally {
-            entityManager.close();
         }
-        return true;
     }
 }

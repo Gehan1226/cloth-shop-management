@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Item;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -21,6 +21,11 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.SupplierBo;
+import org.example.controller.*;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.Supplier.AddSupplieerFormcontroller;
+import org.example.controller.Supplier.UpdateRemoveSupplierFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Item;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
@@ -126,6 +131,8 @@ public class UpdateRemoveItemFormController implements Initializable {
     public void btnSearchOnAction(ActionEvent actionEvent) {
         Item item = itemBo.retrieveById(txtItemID.getText());
         if (item != null){
+            clearFields();
+            txtItemID.setText(item.getItemId());
             currentItemID = item.getItemId();
             txtItemName.setText(item.getItemName());
             txtPrice.setText(item.getPrice()+"");
@@ -145,7 +152,9 @@ public class UpdateRemoveItemFormController implements Initializable {
                 selectedSuplierIDS.add(sup.getSupID());
                 cmbValues.remove(temp[0]+" - "+temp[1]);
             }
+            cmbSupplierID.getItems().clear();
             cmbSupplierID.getItems().addAll(cmbValues);
+            new Alert(Alert.AlertType.INFORMATION, "Item  Found!").show();
             return;
         }
         new Alert(Alert.AlertType.ERROR, "❌ Item Not Found!").show();
@@ -162,7 +171,7 @@ public class UpdateRemoveItemFormController implements Initializable {
         }
     }
     private void clearFields(){
-        txtItemID.setText(itemBo.genarateItemID());
+        txtItemID.setText("");
         txtItemName.setText("");
         txtPrice.setText("");
         txtQTY.setText("");
@@ -209,7 +218,7 @@ public class UpdateRemoveItemFormController implements Initializable {
     }
 
     public void btnAddSupplierOnAction(ActionEvent actionEvent) {
-        AddSupplieerFormcontroller.isAdmin = true;
+        AddSupplieerFormcontroller.isAdmin = isAdmin;
         try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/addSupplierForm.fxml");
@@ -224,7 +233,7 @@ public class UpdateRemoveItemFormController implements Initializable {
     }
 
     public void btnSupplierUpdateRemoveOnAction(ActionEvent actionEvent) {
-        UpdateRemoveSupplierFormController.isAdmin = true;
+        UpdateRemoveSupplierFormController.isAdmin = isAdmin;
         try {
             primaryStage.close();
             URL fxmlLocation = getClass().getClassLoader().getResource("view/updateSupplierForm.fxml");

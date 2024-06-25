@@ -1,4 +1,4 @@
-package org.example.controller;
+package org.example.controller.Supplier;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -19,6 +19,9 @@ import org.example.bo.BoFactory;
 import org.example.bo.custom.DataValidationBo;
 import org.example.bo.custom.ItemBo;
 import org.example.bo.custom.SupplierBo;
+import org.example.controller.Admin.AdminDashboardFormController;
+import org.example.controller.HomePageFormController;
+import org.example.controller.User.UserDashboardFormController;
 import org.example.dto.Supplier;
 import org.example.util.BoType;
 
@@ -101,7 +104,7 @@ public class AddSupplieerFormcontroller implements Initializable {
                 txtCompany.getText(),
                 txtMobileNumber.getText()
         );
-        if (allFieldsNotEmpty && isValidEmail && isValidMobileNo && !itemIDS.isEmpty()){
+        if (allFieldsNotEmpty && isValidEmail && isValidMobileNo){
             Supplier supplier = new Supplier(
                     txtSupplierID.getText(),
                     txtFirstName.getText(),
@@ -153,7 +156,6 @@ public class AddSupplieerFormcontroller implements Initializable {
                 return;
             }
             UserDashboardFormController.primaryStage = stage;
-
         } catch (IOException e) {
         }
     }
@@ -181,11 +183,7 @@ public class AddSupplieerFormcontroller implements Initializable {
             Stage stage = new Stage();
             stage.setScene(new Scene(parent));
             stage.show();
-            if (isAdmin){
-                AdminDashboardFormController.primaryStage = stage;
-                return;
-            }
-            UserDashboardFormController.primaryStage = stage;
+            UpdateRemoveSupplierFormController.primaryStage = stage;
 
         } catch (IOException e) {
         }
